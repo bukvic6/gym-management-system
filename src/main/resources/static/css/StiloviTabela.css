@@ -1,0 +1,29 @@
+table {
+	border-collapse: collapse;
+}
+
+caption {
+	font-size: 16pt
+}
+
+th, td {
+	border: 1px solid Gray;
+	padding: 5px;
+}
+
+td.broj {
+	text-align: right;
+}
+
+th {
+	color: white;
+	background-color: pink;
+}
+
+tr:nth-child(even) {
+	background-color: pink;
+}
+
+input[type="search"] {
+	width: 100%;
+}

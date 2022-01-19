@@ -1,0 +1,65 @@
+<!DOCTYPE html> 
+<html xmlns:th="http://www.thymeleaf.org">     
+	<head>     
+		<meta charset="UTF-8">     
+		<base th:href="@{/}"><!-- popuni href atribut vrednosšću context path-a -->
+		<title>Korisnici</title>     
+		<link rel="stylesheet"  type="text/css"  href="css/StiloviTabela.css"/>     
+	 	<link rel="stylesheet"  type="text/css" href="css/StiloviHorizontalniMeni.css"/>   
+	 </head>     
+	 <body>   
+   
+	 		<table>     
+	 			<caption>Korisnici</caption>     
+	 			<tr>      
+	 			    <th>Korisnicko ime</th> 
+	 				<th>Ime</th>     
+	 				<th>Prezime</th>     
+	 				<th>Email</th>   
+	 				<th>Lozinka</th> 
+	 				<th>Datum Rodjenja</th> 
+	 				<th>Broj Telefona</th> 
+	 				<th>Vreme Registracije</th> 
+	 				<th>Tip korisnika</th> 
+	 				<th>Adresa</th> 
+	 				<th></th>    
+	 			</tr>
+	 			<tr th:each="itKorisnik, status: ${korisnici}">  
+	 			    <td th:text="${itKorisnik.korisnickoIme}"></td>    
+	 				<td th:text="${itKorisnik.ime}"></td>    
+	 				<td th:text="${itKorisnik.prezime}"></td>    
+	 				<td th:text="${itKorisnik.email}"></td>   
+	 				<td th:text="${itKorisnik.lozinka}"></td>   
+	 				<td th:text="${itKorisnik.datRodj}"></td>   
+	 				<td th:text="${itKorisnik.brojTelefona}"></td>   
+	 				<td th:text="${itKorisnik.vremeRegistracije}"></td>  
+	 				<td th:text="${itKorisnik.tipKorisnika}"></td>  
+	 				<td th:text="${itKorisnik.adresa}"></td>   
+
+	 			</tr>
+	 		</table>
+	 			 		<table>     
+	 			<caption>Treninzi</caption>     
+	 			<tr>      
+	 			    <th>Naziv Treninga</th> 
+	 				<th>Opis</th>     
+	 				<th>Cena</th>   
+	 				<th>Vrsta treninga</th> 
+	 				<th>Nivo treninga</th> 
+	 				<th>Trajanje treninga</th> 
+	 				<th>Prosecna ocena</th> 
+
+	 				<th></th>    
+	 			</tr>
+	 			<tr th:each="itTrening, status: ${treninzi}">  
+	 			    <td th:text="${itTrening.naziv}"></td>    
+	 				<td th:text="${itTrening.opis}"></td>    
+	 				<td th:text="${itTrening.cena}"></td>   
+	 				<td th:text="${itTrening.vrstaTreninga}"></td>   
+	 				<td th:text="${itTrening.nivoTreninga}"></td>   
+	 				<td th:text="${itTrening.trajanjeTreninga}"></td>   
+	 				<td th:text="${itTrening.prosecnaOcena}"></td>  
+	 			</tr>
+	 		</table>
+	 </body>   
+ </html>	

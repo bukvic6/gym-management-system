@@ -1,0 +1,36 @@
+<!DOCTYPE html> 
+<html xmlns:th="http://www.thymeleaf.org">     
+	<head>     
+		<meta charset="UTF-8">     
+		<base th:href="@{/}"><!-- popuni href atribut vrednosšću context path-a -->
+		<title>Treninzi</title>     
+		<link rel="stylesheet"  type="text/css"  href="css/StiloviTabela.css"/>     
+	 	<link rel="stylesheet"  type="text/css" href="css/StiloviHorizontalniMeni.css"/>   
+	 </head>     
+	 <body>   
+   
+	 		<table>     
+	 			<caption>Treninzi</caption>     
+	 			<tr>      
+	 			    <th>Naziv Treninga</th> 
+	 				<th>Opis</th>     
+	 				<th>Cena</th>   
+	 				<th>Vrsta treninga</th> 
+	 				<th>Nivo treninga</th> 
+	 				<th>Trajanje treninga</th> 
+	 				<th>Prosecna ocena</th> 
+
+	 				<th></th>    
+	 			</tr>
+	 			<tr th:each="itTrening, status: ${treninzi}">  
+	 			    <td th:text="${itTrening.naziv}"></td>    
+	 				<td th:text="${itTrening.opis}"></td>    
+	 				<td th:text="${itTrening.cena}"></td>   
+	 				<td th:text="${itTrening.vrstaTreninga}"></td>   
+	 				<td th:text="${itTrening.nivoTreninga}"></td>   
+	 				<td th:text="${itTrening.trajanjeTreninga}"></td>   
+	 				<td th:text="${itTrening.prosecnaOcena}"></td>  
+	 			</tr>
+	 		</table>
+	 </body>   
+ </html>	
