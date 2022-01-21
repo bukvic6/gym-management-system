@@ -126,16 +126,22 @@ public class KorisnikController implements ServletContextAware {
 
 		
 	}
-//
-//	@PostMapping(value = "/registracija")
-//	public void registracija(@RequestParam(required = true) String korisnickoIme,@RequestParam(required = true) String email, @RequestParam(required = true) String sifra,
-//			@RequestParam(required = true) String ime, @RequestParam(required = true) String prezime,@RequestParam(required = true) String datRodj,@RequestParam(required = true) String brojTelefona,
-//			HttpSession session, HttpServletResponse response) throws IOException {
-// 
-//		Korisnik korisnik = new Korisnik(korisnickoIme,ime, prezime, email, sifra, datRodj,brojTelefona,);
-//		korisnikService.save(korisnik);
-//		response.sendRedirect(bURL + "korisnici");
-//	}
+	@GetMapping(value="/registracija")
+	public String create(HttpServletResponse response){
+		return "registracija"; // stranica za dodavanje knjige
+	}
+
+	@PostMapping(value = "/registracija")
+	public void registracija(@RequestParam(required = true) String korisnickoIme,@RequestParam(required = true) String email, @RequestParam(required = true) String sifra,
+			@RequestParam(required = true) String ime, @RequestParam(required = true) String prezime,@RequestParam(required = true) String datRodj,@RequestParam(required = true) String adresa,@RequestParam(required = true) String brojTelefona,
+			HttpSession session, HttpServletResponse response) throws IOException {
+		TipKorisnika tipkorisnika = TipKorisnika.POLAZNIK;
+		String vremeRegistracija = "29-20-1010";
+ 
+		Korisnik korisnik = new Korisnik(korisnickoIme,ime, prezime, email, sifra, datRodj,brojTelefona,tipkorisnika,vremeRegistracija,adresa);
+		korisnikService.save(korisnik);
+		response.sendRedirect(bURL + "index.html");
+	}
 
 
 }

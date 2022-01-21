@@ -3,6 +3,7 @@ package ftn.OsnoveWebProgramiranja.dao;
 import java.util.List;
 
 import ftn.OsnoveWebProgramiranja.model.Korisnik;
+import ftn.OsnoveWebProgramiranja.model.Trening;
 
 public interface KorisnikDAO {
 	
@@ -10,11 +11,11 @@ public interface KorisnikDAO {
 
 	Korisnik findOne(String email, String sifra);
 
-	Korisnik findOne(Long id);
+	public int save(Korisnik korisnik);
 
-	Korisnik findOne(String email);
 
-//	int save(Korisnik korisnik);
+
+
 	
 	
 

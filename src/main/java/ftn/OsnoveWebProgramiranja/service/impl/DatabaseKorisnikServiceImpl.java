@@ -15,16 +15,7 @@ public class DatabaseKorisnikServiceImpl implements KorisnikService{
 
 	@Autowired
 	private KorisnikDAO korisnikDAO;
-	
-	@Override
-	public Korisnik findOneById(Long id) {
-		return korisnikDAO.findOne(id);
-	}
 
-	@Override
-	public Korisnik findOne(String email) {
-		return korisnikDAO.findOne(email);
-	}
 
 
 	@Override
@@ -36,10 +27,10 @@ public class DatabaseKorisnikServiceImpl implements KorisnikService{
 	public List<Korisnik> findAll() {
 		return korisnikDAO.findAll();
 	}
-//
-//	@Override
-//	public Korisnik save(Korisnik korisnik) {
-//		korisnikDAO.save(korisnik);
-//		return korisnik;
-//	}
+
+	@Override
+	public Korisnik save(Korisnik korisnik) {
+		korisnikDAO.save(korisnik);
+		return korisnik;
+	}
 }

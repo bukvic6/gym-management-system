@@ -1,16 +1,21 @@
-<!DOCTYPE html>    
- <html>    
- <head>    
- 	<meta charset="UTF-8">    
- 	<base href="bURL">    
- 	<title>Dodaj trening</title>    
- 	<link rel="stylesheet" type="text/css" href="css/StiloviForma.css"/>    
- 	<link rel="stylesheet" type="text/css" href="css/StiloviHorizontalniMeni.css"/>  
- </head>    
- <body>    
-
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8" />
+	<base th:href="@{/}"><!-- popuni href atribut vrednosšću context path-a -->
+	<link rel="stylesheet"  type="text/css"  href="css/StiloviTabela.css"/>     
+	<link rel="stylesheet" type="text/css" href="css/StiloviForma.css"/>
+	<link rel="stylesheet" type="text/css" href="css/StiloviHorizontalniMeni.css"/>
+	<base href="bURL">
+	<title>Registracija</title>
+</head>
+<body>
+ 	<ul>    
+ 		<li><a href="treninzi">Povratak</a></li>    
+ 
+ 	</ul>    
  	<form method="post" action="add">    
- 		<table>    
+ 		<table>   
  			<caption>Dodaj Trening</caption>    
  			<tr><th>Naziv:</th><td><input type="text" value="" name="naziv"/></td></tr>    
  			<tr><th>Opis:</th><td><input type="text" value="" name="opis"/></td></tr>   
@@ -21,7 +26,7 @@
  			<tr><th>Prosecna Ocena:</th><td><input type="number" min="1" name="prosecnaOcena"/></td></tr>   
  			<tr><th></th><td><input type="submit" value="Dodaj"/></td>    
  		</table>    
- 	</form>   
- 	<br/>  
- </body>  
- </html>  	
+ 	</form> 
+</body>
+</html>
+  	

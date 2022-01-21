@@ -1,0 +1,17 @@
+table.horizontalni-meni {
+	margin-top: 20px;
+}
+table.horizontalni-meni ul {
+	display: inline;
+	padding: 0;
+}
+table.horizontalni-meni li {
+	float: left;
+	padding: 5px;
+	margin: 2px;
+	display: inline;
+	background-color: White;
+}
+table.horizontalni-meni td {
+	background-color: pink;
+}

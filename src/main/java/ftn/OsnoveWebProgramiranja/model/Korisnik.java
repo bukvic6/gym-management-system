@@ -41,6 +41,22 @@ public class Korisnik {
 	}
 
 
+	public Korisnik(String korisnickoIme2, String ime2, String prezime2, String email2, String sifra, String datRodj2,
+			String brojTelefona2, TipKorisnika tipkorisnika2, String vremeRegistracija, String adresa2) {
+	
+		this.korisnickoIme = korisnickoIme2;
+		this.ime = ime2;
+		this.prezime = prezime2;
+		this.email = email2;
+		this.lozinka = sifra;
+		this.datRodj = datRodj2;
+		this.brojTelefona = brojTelefona2;
+		this.tipKorisnika = tipkorisnika2;
+		this.adresa = adresa2;
+		
+	}
+
+
 
 
 
