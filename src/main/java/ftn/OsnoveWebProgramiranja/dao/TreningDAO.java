@@ -8,4 +8,7 @@ public interface TreningDAO {
 
 	List<Trening> findAll();
 
+
+	public int save(Trening trening);
+
 }

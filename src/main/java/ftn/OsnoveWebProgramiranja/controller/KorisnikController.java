@@ -114,11 +114,11 @@ public class KorisnikController implements ServletContextAware {
 		}
 		if(korisnik.getTipKorisnika().equals(TipKorisnika.ADMINISTRATOR)) {
 			session.setAttribute(KORISNIK_KEY, korisnik);
-			response.sendRedirect(bURL + "knjige");
+			response.sendRedirect(bURL + "treninzi");
 		}
 		if(korisnik.getTipKorisnika().equals(TipKorisnika.POLAZNIK)) {
 			session.setAttribute(KORISNIK_KEY, korisnik);
-			response.sendRedirect(bURL + "treninzi");
+			response.sendRedirect(bURL + "korisnici");
 		}
 
 

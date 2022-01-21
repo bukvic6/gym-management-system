@@ -9,4 +9,6 @@ public interface TreningService {
 
 	List<Trening> findAll();
 
+	Trening save(Trening trening);
+
 }

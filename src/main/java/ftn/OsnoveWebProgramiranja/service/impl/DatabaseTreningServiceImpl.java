@@ -21,6 +21,13 @@ public class DatabaseTreningServiceImpl implements TreningService {
 	public List<Trening> findAll() {
 		return treningDAO.findAll();
 	}
+
+
+	@Override
+	public Trening save(Trening trening) {
+		treningDAO.save(trening);
+		return trening;
+	}
 	
 	
 

@@ -10,14 +10,24 @@ public class Trening {
 	private String cena;
 	private VrstaTreninga vrstaTreninga;
 	private NivoTreninga nivoTreninga;
-	private Long trajanjeTreninga;
-	private Long prosecnaOcena;
-	public Trening(Long id2, String naziv2, String opis2, TipTreninga tipTreninga, String cena2,
-			VrstaTreninga vrstaTreninga2, NivoTreninga nivoTreninga2, Long trajanjeTreninga2,Long prosecnaOcena2) {
+	private int trajanjeTreninga;
+	private int prosecnaOcena;
+
+	public Trening(String naziv2, String opis2, String cena2, NivoTreninga nivotr, VrstaTreninga vrstatr,
+			int trajanjeTreninga2, int prosecnaOcena2) {
+		this.naziv = naziv2;
+		this.opis = opis2;
+		this.cena = cena2;
+		this.vrstaTreninga = vrstatr;
+		this.nivoTreninga = nivotr;
+		this.trajanjeTreninga = trajanjeTreninga2;
+		this.prosecnaOcena = prosecnaOcena2;
+	}
+	public Trening(Long id2, String naziv2, String opis2, String cena2, VrstaTreninga vrstaTreninga2,
+			NivoTreninga nivoTreninga2, int trajanjeTreninga2, int prosecnaOcena2) {
 		this.id = id2;
 		this.naziv = naziv2;
 		this.opis = opis2;
-		this.tipTreniga = tipTreninga;
 		this.cena = cena2;
 		this.vrstaTreninga = vrstaTreninga2;
 		this.nivoTreninga = nivoTreninga2;
@@ -66,16 +76,16 @@ public class Trening {
 	public void setNivoTreninga(NivoTreninga nivoTreninga) {
 		this.nivoTreninga = nivoTreninga;
 	}
-	public Long getTrajanjeTreninga() {
+	public int getTrajanjeTreninga() {
 		return trajanjeTreninga;
 	}
-	public void setTrajanjeTreninga(Long trajanjeTreninga) {
+	public void setTrajanjeTreninga(int trajanjeTreninga) {
 		this.trajanjeTreninga = trajanjeTreninga;
 	}
-	public Long getProsecnaOcena() {
+	public int getProsecnaOcena() {
 		return prosecnaOcena;
 	}
-	public void setProsecnaOcena(Long prosecnaOcena) {
+	public void setProsecnaOcena(int prosecnaOcena) {
 		this.prosecnaOcena = prosecnaOcena;
 	}
 	

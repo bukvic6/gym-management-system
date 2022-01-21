@@ -16,7 +16,7 @@ import ftn.OsnoveWebProgramiranja.model.Trening;
 import ftn.OsnoveWebProgramiranja.service.TreningService;
 
 @Controller
-@RequestMapping(value = "/treninzi")
+@RequestMapping(value = "/korisnici")
 public class PolaznikController implements ServletContextAware{
 	
 	
@@ -24,8 +24,7 @@ public class PolaznikController implements ServletContextAware{
 	private ServletContext servletContext;
 	private String bURL;
 	
-	@Autowired
-	private TreningService treningService;
+
 	
 	@PostConstruct
 	public void init() {	
@@ -36,15 +35,7 @@ public class PolaznikController implements ServletContextAware{
 	public void setServletContext(ServletContext servletContext) {
 		this.servletContext = servletContext;
 	} 
-	@GetMapping
-	public ModelAndView index() {
-		List<Trening> treninzi = treningService.findAll();	
-		// podaci sa nazivom template-a
-		ModelAndView rezultat = new ModelAndView("treninzi"); // naziv template-a
-		rezultat.addObject("treninzi", treninzi); // podatak koji se šalje template-u
 
-		return rezultat; // prosleđivanje zahteva zajedno sa podacima template-u
-	}
 	
 	
 	
