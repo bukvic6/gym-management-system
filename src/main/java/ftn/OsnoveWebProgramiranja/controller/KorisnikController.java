@@ -126,7 +126,7 @@ public class KorisnikController implements ServletContextAware {
 	}
 	@GetMapping(value="/registracija")
 	public String create(HttpServletResponse response){
-		return "registracija"; // stranica za dodavanje knjige
+		return "registracija"; 
 	}
 
 	@PostMapping(value = "/registracija")
@@ -135,6 +135,7 @@ public class KorisnikController implements ServletContextAware {
 			HttpSession session, HttpServletResponse response) throws IOException {
 		TipKorisnika tipkorisnika = TipKorisnika.POLAZNIK;
 		String vremeRegistracija = "29-20-1010";
+//		LocalDateTime vremeregistracije = LocalDateTime.now();
  
 		Korisnik korisnik = new Korisnik(korisnickoIme,ime, prezime, email, sifra, datRodj,brojTelefona,tipkorisnika,vremeRegistracija,adresa);
 		korisnikService.save(korisnik);

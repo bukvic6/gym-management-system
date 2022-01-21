@@ -49,16 +49,16 @@ public class AdminController implements ServletContextAware{
 	@GetMapping
 	public ModelAndView indexdd() {
 		List<Trening> treninzi = treningService.findAll();	
-		// podaci sa nazivom template-a
-		ModelAndView rezultat = new ModelAndView("treninzi"); // naziv template-a
-		rezultat.addObject("treninzi", treninzi); // podatak koji se šalje template-u
+		
+		ModelAndView rezultat = new ModelAndView("treninzi"); 
+		rezultat.addObject("treninzi", treninzi); 
 
-		return rezultat; // prosleđivanje zahteva zajedno sa podacima template-u
+		return rezultat; 
 	}
 	
 	@GetMapping(value="/add")
 	public String create(HttpServletResponse response){
-		return "dodajTrening"; // stranica za dodavanje knjige
+		return "dodajTrening";
 	}
 
 	@SuppressWarnings("unused")
