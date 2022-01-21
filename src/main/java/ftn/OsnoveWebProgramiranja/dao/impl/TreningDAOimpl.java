@@ -20,10 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 import ftn.OsnoveWebProgramiranja.dao.TreningDAO;
-import ftn.OsnoveWebProgramiranja.model.Korisnik;
 import ftn.OsnoveWebProgramiranja.model.NivoTreninga;
-import ftn.OsnoveWebProgramiranja.model.TipKorisnika;
-import ftn.OsnoveWebProgramiranja.model.TipTreninga;
 import ftn.OsnoveWebProgramiranja.model.Trening;
 import ftn.OsnoveWebProgramiranja.model.VrstaTreninga;
 

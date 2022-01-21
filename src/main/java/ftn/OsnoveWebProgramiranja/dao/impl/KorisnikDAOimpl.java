@@ -22,7 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ftn.OsnoveWebProgramiranja.dao.KorisnikDAO;
 import ftn.OsnoveWebProgramiranja.model.Korisnik;
 import ftn.OsnoveWebProgramiranja.model.TipKorisnika;
-import ftn.OsnoveWebProgramiranja.model.Trening;
+
 
 @Repository
 public class KorisnikDAOimpl implements KorisnikDAO{

@@ -1,7 +1,5 @@
 package ftn.OsnoveWebProgramiranja.model;
 
-import java.time.LocalDateTime;
-
 public class Korisnik {
 	private Long id;
 	private String korisnickoIme;
