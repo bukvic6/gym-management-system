@@ -1,0 +1,47 @@
+<!DOCTYPE html> 
+<html xmlns:th="http://www.thymeleaf.org">     
+	<head>     
+		<meta charset="UTF-8">     
+		<base th:href="@{/}"><!-- popuni href atribut vrednosšću context path-a -->
+		<title>Treninzi</title>     
+		<link rel="stylesheet"  type="text/css"  href="css/StiloviTabela.css"/>     
+	 	<link rel="stylesheet"  type="text/css" href="css/StiloviHorizontalniMeni.css"/>   
+	 </head>     
+	 <body>   
+  
+
+ 			<table>   
+ 			<caption>Profil</caption>    
+ 			<tr th:each="itKorisnik, status: ${korisnik}">
+ 			<th>Ime:</th>
+ 			<td><input type="text" th:value="${itKorisnik.ime}"  name="ime"></td>
+ 			</tr>    
+ 			<tr th:each="itKorisnik, status: ${korisnik}">
+ 			<th>Prezime:</th>
+ 			<td><input type="text" th:value="${itKorisnik.prezime}" name="prezime" /></td>
+ 			</tr>   
+ 			<tr th:each="itKorisnik, status: ${korisnik}">
+ 			<th>Korisnicko ime:</th>
+ 			<td><input type="text" th:value="${itKorisnik.korisnickoIme}" name="korisnickoIme"/></td>
+ 			</tr>   
+ 			<tr th:each="itKorisnik, status: ${korisnik}">
+ 			<th>Email:</th>
+ 			<td><input type="text" th:value="${itKorisnik.email}" name="email"/></td>
+ 			</tr>   
+ 			<tr th:each="itKorisnik, status: ${korisnik}">
+ 			<th>Adresa:</th>
+ 			<td><input type="text" th:value="${itKorisnik.adresa}" name="adresa"/></td>
+ 			</tr>   
+ 			<tr th:each="itKorisnik, status: ${korisnik}">
+ 			<th>Broj telefona:</th>
+ 			<td><input type="text" th:value="${itKorisnik.brojTelefona}" name="telefon"/></td>
+ 			</tr>    
+ 			  
+ 
+  
+ 			   
+ 		</table>   
+
+
+	 </body>   
+ </html>

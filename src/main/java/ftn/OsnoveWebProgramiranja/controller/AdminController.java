@@ -6,6 +6,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.ServletContextAware;
 import org.springframework.web.servlet.ModelAndView;
 
+import ftn.OsnoveWebProgramiranja.model.Korisnik;
 import ftn.OsnoveWebProgramiranja.model.NivoTreninga;
 import ftn.OsnoveWebProgramiranja.model.Trening;
 import ftn.OsnoveWebProgramiranja.model.VrstaTreninga;
@@ -55,6 +57,17 @@ public class AdminController implements ServletContextAware{
 
 		return rezultat; 
 	}
+	
+	@GetMapping(value="/profil")
+	public ModelAndView profil(HttpSession session) {
+		Korisnik ulogovani = (Korisnik) session.getAttribute(KorisnikController.KORISNIK_KEY);
+
+		ModelAndView rezultat = new ModelAndView("profil"); 
+		rezultat.addObject("korisnik", ulogovani); 
+
+		return rezultat; 
+	}
+	
 	
 	@GetMapping(value="/add")
 	public String create(HttpServletResponse response){
