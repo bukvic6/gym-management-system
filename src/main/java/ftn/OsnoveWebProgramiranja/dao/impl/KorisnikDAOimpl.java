@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -46,7 +48,8 @@ public class KorisnikDAOimpl implements KorisnikDAO{
 			String datRodj = resultSet.getString(index++);
 			
 			String brojTelefona = resultSet.getString(index++);
-			String vremeRegistracije = resultSet.getString(index++);
+			LocalDate vremeRegistracije = resultSet.getTimestamp(index++).toLocalDateTime().toLocalDate();
+			
 			String tip = resultSet.getString(index++);
 			TipKorisnika tipKorisnika = TipKorisnika.valueOf(tip);
 			String adresa = resultSet.getString(index++);
@@ -86,6 +89,21 @@ public class KorisnikDAOimpl implements KorisnikDAO{
 		
 		return rowCallbackHandler.getKorisnici().get(0);
 	}
+	
+	@Override
+	public Korisnik findOne(Long id) {
+		String sql = 
+				"SELECT * from korisnici WHERE id = ?";
+
+		KorisnikRowCallBackHandler rowCallbackHandler = new KorisnikRowCallBackHandler();
+		jdbcTemplate.query(sql, rowCallbackHandler, id);
+
+		
+		return rowCallbackHandler.getKorisnici().get(0);
+		
+	}
+	
+
 
 	@Override
 	public List<Korisnik> findAll() {
@@ -95,6 +113,7 @@ public class KorisnikDAOimpl implements KorisnikDAO{
 		
 		return rowCallbackHandler.getKorisnici();
 	}
+	
 	@Transactional
 	@Override
 	public int save(Korisnik korisnik) {
@@ -113,7 +132,7 @@ public class KorisnikDAOimpl implements KorisnikDAO{
 				preparedStatement.setString(index++, korisnik.getLozinka());
 				preparedStatement.setString(index++, korisnik.getDatRodj());
 				preparedStatement.setString(index++, korisnik.getBrojTelefona());
-				preparedStatement.setString(index++, korisnik.getVremeRegistracije());
+				preparedStatement.setTimestamp(index++,Timestamp.valueOf(korisnik.getVremeRegistracije().atStartOfDay()));
 				preparedStatement.setString(index++, korisnik.getTipKorisnika().toString());
 				preparedStatement.setString(index++, korisnik.getAdresa());
 				
@@ -127,7 +146,29 @@ public class KorisnikDAOimpl implements KorisnikDAO{
 		boolean uspeh = jdbcTemplate.update(preparedStatementCreator, keyHolder) == 1;
 		return uspeh?1:0;
 	}
+	@Transactional
+	@Override
+	public int delete(Long id) {
+		String sql = "DELETE FROM korisnici WHERE id = ?";
+		return jdbcTemplate.update(sql, id);
+	}
 	
+	
+	@Transactional
+	@Override
+	public int update(Korisnik korisnik) {
+		String sql = "UPDATE korisnici SET korisnickoIme = ?, ime = ?, prezime = ?, email = ? WHERE id = ?";
+		return jdbcTemplate.update(sql, korisnik.getKorisnickoIme(), korisnik.getIme(), korisnik.getPrezime(),korisnik.getEmail(), korisnik.getId());
+//		boolean uspeh = jdbcTemplate.update(sql, korisnik.getKorisnickoIme(), korisnik.getIme(), korisnik.getPrezime(),korisnik.getEmail(), korisnik.getId()) == 1;
+//		
+//		return uspeh?1:0;
+	}
+
+
+
+
+	
+
 
 
 

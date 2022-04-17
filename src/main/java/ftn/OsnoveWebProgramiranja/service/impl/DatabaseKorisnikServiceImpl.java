@@ -33,4 +33,26 @@ public class DatabaseKorisnikServiceImpl implements KorisnikService{
 		korisnikDAO.save(korisnik);
 		return korisnik;
 	}
+
+	@Override
+	public Korisnik delete(Long id) {
+		Korisnik korisnik = korisnikDAO.findOne(id);
+		if(korisnik != null) {
+			korisnikDAO.delete(id);
+		}
+		return korisnik;
+		
+	}
+
+	@Override
+	public Korisnik findOne(Long id) {
+		return korisnikDAO.findOne(id);
+	}
+
+	@Override
+	public Korisnik update(Korisnik korisnik) {
+		korisnikDAO.update(korisnik);
+		return korisnik;
+		
+	}
 }

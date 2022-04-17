@@ -3,7 +3,8 @@ package ftn.OsnoveWebProgramiranja.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.ServletContext;
@@ -134,10 +135,10 @@ public class KorisnikController implements ServletContextAware {
 			@RequestParam(required = true) String ime, @RequestParam(required = true) String prezime,@RequestParam(required = true) String datRodj,@RequestParam(required = true) String adresa,@RequestParam(required = true) String brojTelefona,
 			HttpSession session, HttpServletResponse response) throws IOException {
 		TipKorisnika tipkorisnika = TipKorisnika.POLAZNIK;
-		String vremeRegistracija = "29-20-1010";
-//		LocalDateTime vremeregistracije = LocalDateTime.now();
+		
+		LocalDate vremeregistracije = LocalDate.now();
  
-		Korisnik korisnik = new Korisnik(korisnickoIme,ime, prezime, email, sifra, datRodj,brojTelefona,tipkorisnika,vremeRegistracija,adresa);
+		Korisnik korisnik = new Korisnik(korisnickoIme,ime, prezime, email, sifra, datRodj,brojTelefona,tipkorisnika,vremeregistracije,adresa);
 		korisnikService.save(korisnik);
 		response.sendRedirect(bURL + "index.html");
 	}

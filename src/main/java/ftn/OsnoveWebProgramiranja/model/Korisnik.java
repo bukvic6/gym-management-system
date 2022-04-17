@@ -1,5 +1,7 @@
 package ftn.OsnoveWebProgramiranja.model;
 
+import java.time.LocalDate;
+
 public class Korisnik {
 	private Long id;
 	private String korisnickoIme;
@@ -10,10 +12,9 @@ public class Korisnik {
 	private String datRodj;
 	private String adresa;
 	private String brojTelefona;
-	private String vremeRegistracije;
+	private LocalDate vremeRegistracije;
 	private TipKorisnika tipKorisnika;
 
-	
 	public Korisnik() {}
 
 
@@ -22,7 +23,7 @@ public class Korisnik {
 
 
 	public Korisnik(long id2, String korisnickoIme2, String ime2, String prezime2, String email2, String lozinka2,
-			String datRodj2, String adresa2, String brojTelefona2, String vremeRegistracije2,
+			String datRodj2, String adresa2, String brojTelefona2, LocalDate vremeRegistracije2,
 			TipKorisnika tipKorisnika2) {
 		
 		this.id = id2;
@@ -40,7 +41,7 @@ public class Korisnik {
 
 
 	public Korisnik(String korisnickoIme2, String ime2, String prezime2, String email2, String sifra, String datRodj2,
-			String brojTelefona2, TipKorisnika tipkorisnika2, String vremeRegistracija, String adresa2) {
+			String brojTelefona2, TipKorisnika tipkorisnika2, LocalDate vremeRegistracija, String adresa2) {
 	
 		this.korisnickoIme = korisnickoIme2;
 		this.ime = ime2;
@@ -50,7 +51,17 @@ public class Korisnik {
 		this.datRodj = datRodj2;
 		this.brojTelefona = brojTelefona2;
 		this.tipKorisnika = tipkorisnika2;
+		this.vremeRegistracije = vremeRegistracija;
 		this.adresa = adresa2;
+		
+	}
+	public Korisnik(long id2,String korisnickoIme2, String ime2, String prezime2, String email2) {
+	
+		this.id = id2;
+		this.korisnickoIme = korisnickoIme2;
+		this.ime = ime2;
+		this.prezime = prezime2;
+		this.email = email2;
 		
 	}
 
@@ -125,6 +136,17 @@ public class Korisnik {
 	public void setPrezime(String prezime) {
 		this.prezime = prezime;
 	}
+	
+	public LocalDate getVremeRegistracije() {
+		return vremeRegistracije;
+	}
+
+
+
+	public void setVremeRegistracije(LocalDate vremeRegistracije) {
+		this.vremeRegistracije = vremeRegistracije;
+	}
+	
 
 
 
@@ -217,22 +239,6 @@ public class Korisnik {
 	}
 
 
-
-
-
-
-	public String getVremeRegistracije() {
-		return vremeRegistracije;
-	}
-
-
-
-
-
-
-	public void setVremeRegistracije(String vremeRegistracije) {
-		this.vremeRegistracije = vremeRegistracije;
-	}
 
 
 

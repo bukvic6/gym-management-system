@@ -1,0 +1,46 @@
+<!DOCTYPE html> 
+<html xmlns:th="http://www.thymeleaf.org">     
+	<head>     
+		<meta charset="UTF-8">     
+		<base th:href="@{/}"><!-- popuni href atribut vrednosšću context path-a -->
+		<title>Profil</title>     
+		<link rel="stylesheet"  type="text/css"  href="css/StiloviTabela.css"/>     
+	 	<link rel="stylesheet"  type="text/css" href="css/StiloviHorizontalniMeni.css"/>   
+	 </head> 
+<body>
+	<form method="post" action="treninzi/edit">
+		<input type="hidden" name="id" th:value="${korisnik.id}"/><!-- popuni value atribut vrednošću -->
+		<table class="forma">
+			<caption>Korisnik</caption>
+<!-- 			<tr th:each="itKorisnik, status: ${korisnik}"> -->
+<!--  			<th>Ime:</th> -->
+<!--  			<td><input type="text" th:value="${itKorisnik.ime}"  name="ime"></td> -->
+<!--  			</tr>     -->
+<!--  			<tr th:each="itKorisnik, status: ${korisnik}"> -->
+<!--  			<th>Prezime:</th> -->
+<!--  			<td><input type="text" th:value="${itKorisnik.prezime}" name="prezime" /></td> -->
+<!--  			</tr>    -->
+<!--  			<tr th:each="itKorisnik, status: ${korisnik}"> -->
+<!--  			<th>Korisnicko ime:</th> -->
+<!--  			<td><input type="text" th:value="${itKorisnik.korisnickoIme}" name="korisnickoIme"/></td> -->
+<!--  			</tr>    -->
+<!--  			<tr th:each="itKorisnik, status: ${korisnik}"> -->
+<!--  			<th>Email:</th> -->
+<!--  			<td><input type="text" th:value="${itKorisnik.email}" name="email"/></td> -->
+<!--  			</tr>    -->
+<!--  			<tr th:each="itKorisnik, status: ${korisnik}"> -->
+<!--  			 			<th>Id:</th> -->
+<!--  			<td><input type="text" th:value="${itKorisnik.id}"  name="id"></td> -->
+<!--  			</tr>   -->
+			<tr th:each="itKorisnik, status: ${korisnik}">
+			<tr><th>Ime:</th><td><input type="text" th:value="${korisnik.ime}" name="ime"></td></tr>
+			<tr><th>Prezime:</th><td><input type="text" th:value="${korisnik.prezime}" name="prezime"></td></tr>
+			<tr><th>Korisnicko Ime:</th><td><input type="text" th:value="${korisnik.korisnickoIme}" name="korisnickoIme"></td></tr>
+			<tr><th>Email:</th><td><input type="text" th:value="${korisnik.email}" name="email"></td></tr>
+
+			
+			<tr><th></th><td><input type="submit" value="Izmeni"></td></tr>
+		</table>
+	</form>
+</body>
+</html>

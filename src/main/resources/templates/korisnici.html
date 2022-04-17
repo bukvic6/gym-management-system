@@ -25,7 +25,7 @@
 	 				<th></th>    
 	 			</tr>
 	 			<tr th:each="itKorisnik, status: ${korisnici}">  
-	 			    <td th:text="${itKorisnik.korisnickoIme}"></td>    
+	 			    <td ><a th:href="|treninzi/details?id=${itKorisnik.id}|"  th:text="${itKorisnik.korisnickoIme}"></a></td>    
 	 				<td th:text="${itKorisnik.ime}"></td>    
 	 				<td th:text="${itKorisnik.prezime}"></td>    
 	 				<td th:text="${itKorisnik.email}"></td>   
@@ -34,7 +34,13 @@
 	 				<td th:text="${itKorisnik.brojTelefona}"></td>   
 	 				<td th:text="${itKorisnik.vremeRegistracije}"></td>  
 	 				<td th:text="${itKorisnik.tipKorisnika}"></td>  
-	 				<td th:text="${itKorisnik.adresa}"></td>   
+	 				<td th:text="${itKorisnik.adresa}"></td>  
+	 				<td>    
+	 					<form method="post" action="treninzi/delete" >     
+	 						<input type="hidden"  name="id"  th:value="${itKorisnik.id}">     
+	 						<input type="submit"  value="Obriši" >    
+	 					</form>    
+	 				</td>   
 
 	 			</tr>
 	 		</table>
