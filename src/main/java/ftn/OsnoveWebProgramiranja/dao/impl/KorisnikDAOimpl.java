@@ -53,12 +53,13 @@ public class KorisnikDAOimpl implements KorisnikDAO{
 			String tip = resultSet.getString(index++);
 			TipKorisnika tipKorisnika = TipKorisnika.valueOf(tip);
 			String adresa = resultSet.getString(index++);
+			boolean aktivan = resultSet.getBoolean(index++);
 			
 			
 			Korisnik korisnik = korisnici.get(id);
 			if(korisnik == null) {
 				korisnik = new Korisnik(id,korisnickoIme,ime,prezime,email,lozinka,
-						datRodj,adresa,brojTelefona,vremeRegistracije,tipKorisnika);
+						datRodj,adresa,brojTelefona,vremeRegistracije,tipKorisnika,aktivan);
 				korisnici.put(korisnik.getId(), korisnik); // dodavanje u kolekciju
 
 			}
@@ -157,11 +158,10 @@ public class KorisnikDAOimpl implements KorisnikDAO{
 	@Transactional
 	@Override
 	public int update(Korisnik korisnik) {
-		String sql = "UPDATE korisnici SET korisnickoIme = ?, ime = ?, prezime = ?, email = ? WHERE id = ?";
-		return jdbcTemplate.update(sql, korisnik.getKorisnickoIme(), korisnik.getIme(), korisnik.getPrezime(),korisnik.getEmail(), korisnik.getId());
-//		boolean uspeh = jdbcTemplate.update(sql, korisnik.getKorisnickoIme(), korisnik.getIme(), korisnik.getPrezime(),korisnik.getEmail(), korisnik.getId()) == 1;
-//		
-//		return uspeh?1:0;
+		String sql = "UPDATE korisnici SET korisnickoIme = ?, ime = ?, prezime = ?, email = ?, tipKorisnika = ?, aktivan = ? WHERE id = ?";
+		boolean uspeh = jdbcTemplate.update(sql, korisnik.getKorisnickoIme(), korisnik.getIme(), korisnik.getPrezime(),korisnik.getEmail(),korisnik.getTipKorisnika().toString(),korisnik.isAktivan(), korisnik.getId()) == 1;
+		
+		return uspeh?1:0;
 	}
 
 

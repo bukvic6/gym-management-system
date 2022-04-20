@@ -14,6 +14,7 @@ public class Korisnik {
 	private String brojTelefona;
 	private LocalDate vremeRegistracije;
 	private TipKorisnika tipKorisnika;
+	private boolean aktivan;
 
 	public Korisnik() {}
 
@@ -24,7 +25,7 @@ public class Korisnik {
 
 	public Korisnik(long id2, String korisnickoIme2, String ime2, String prezime2, String email2, String lozinka2,
 			String datRodj2, String adresa2, String brojTelefona2, LocalDate vremeRegistracije2,
-			TipKorisnika tipKorisnika2) {
+			TipKorisnika tipKorisnika2, boolean aktivan) {
 		
 		this.id = id2;
 		this.korisnickoIme = korisnickoIme2;
@@ -37,6 +38,7 @@ public class Korisnik {
 		this.brojTelefona = brojTelefona2;
 		this.vremeRegistracije = vremeRegistracije2;
 		this.tipKorisnika = tipKorisnika2;
+		this.aktivan = aktivan;
 	}
 
 
@@ -72,6 +74,24 @@ public class Korisnik {
 
 	public Long getId() {
 		return id;
+	}
+
+
+
+
+
+
+	public boolean isAktivan() {
+		return aktivan;
+	}
+
+
+
+
+
+
+	public void setAktivan(boolean aktivan) {
+		this.aktivan = aktivan;
 	}
 
 

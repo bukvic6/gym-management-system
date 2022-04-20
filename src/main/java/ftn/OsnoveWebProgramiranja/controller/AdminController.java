@@ -125,6 +125,13 @@ public class AdminController implements ServletContextAware{
 				korisnik.setKorisnickoIme(korisnikEdited.getKorisnickoIme());
 			if(korisnikEdited.getEmail() != null && !korisnikEdited.getEmail().trim().equals(""))
 				korisnik.setEmail(korisnikEdited.getEmail());
+			if(korisnikEdited.getTipKorisnika() != null)
+				korisnik.setTipKorisnika(korisnikEdited.getTipKorisnika());
+			if(korisnikEdited.isAktivan() != true)
+				korisnik.setAktivan(korisnikEdited.isAktivan());
+					
+				
+
 		}
 		Korisnik sacuvaj = korisnikService.update(korisnik);
 		response.sendRedirect(bURL+"treninzi");
