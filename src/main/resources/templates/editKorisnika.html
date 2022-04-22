@@ -9,7 +9,7 @@
 	 </head> 
 <body>
 	<form method="post" action="treninzi/edit">
-		<input type="hidden" name="id" th:value="${korisnik.id}"/><!-- popuni value atribut vrednošću -->
+ 		<input type="hidden" name="id" th:value="${korisnik.id}"/>
 		<table class="forma">
 			<caption>Korisnik</caption>
 			<tr th:each="itKorisnik, status: ${korisnik}">

@@ -55,4 +55,10 @@ public class DatabaseKorisnikServiceImpl implements KorisnikService{
 		return korisnik;
 		
 	}
+
+	@Override
+	public Korisnik updateprofil(Korisnik korisnik) {
+		korisnikDAO.updateprofil(korisnik);
+		return korisnik;
+	}
 }

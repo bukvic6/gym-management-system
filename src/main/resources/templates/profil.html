@@ -10,6 +10,8 @@
 	 <body>   
   
 
+           <form method="post" action="treninzi/profil">
+           <input type="hidden" name="id" th:value="${korisnik.id}"/>
  			<table>   
  			<caption>Profil</caption>    
  			<tr th:each="itKorisnik, status: ${korisnik}">
@@ -35,12 +37,18 @@
  			<tr th:each="itKorisnik, status: ${korisnik}">
  			<th>Broj telefona:</th>
  			<td><input type="text" th:value="${itKorisnik.brojTelefona}" name="telefon"/></td>
- 			</tr>    
+ 			</tr>  
+ 			<tr th:each="itKorisnik, status: ${korisnik}">  
+ 			<th>Datum rodjenja:</th>
+ 			<td><input type="text" th:value="${itKorisnik.datRodj}" name="datRodj"/></td>
+ 			</tr>
+ 			<tr><th></th><td><input type="submit" value="Izmeni"></td></tr>
  			  
  
   
  			   
  		</table>   
+ 		</form>
 
 
 	 </body>   

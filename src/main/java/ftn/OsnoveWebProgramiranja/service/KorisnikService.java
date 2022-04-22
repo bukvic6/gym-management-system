@@ -16,5 +16,6 @@ public interface KorisnikService {
 	Korisnik delete(Long id);
 	Korisnik findOne(Long id);
 	Korisnik update(Korisnik korisnik);
+	Korisnik updateprofil(Korisnik korisnik);
 	
 }

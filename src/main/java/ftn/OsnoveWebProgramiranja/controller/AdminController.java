@@ -21,9 +21,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import ftn.OsnoveWebProgramiranja.model.Korisnik;
 import ftn.OsnoveWebProgramiranja.model.NivoTreninga;
+import ftn.OsnoveWebProgramiranja.model.Sala;
 import ftn.OsnoveWebProgramiranja.model.Trening;
 import ftn.OsnoveWebProgramiranja.model.VrstaTreninga;
 import ftn.OsnoveWebProgramiranja.service.KorisnikService;
+import ftn.OsnoveWebProgramiranja.service.SalaService;
 import ftn.OsnoveWebProgramiranja.service.TreningService;
 
 @Controller
@@ -36,6 +38,9 @@ public class AdminController implements ServletContextAware{
 	private String bURL;
 	
 
+	@Autowired
+	private SalaService salaService;
+	
 	@Autowired
 	private TreningService treningService;
 	
@@ -74,11 +79,13 @@ public class AdminController implements ServletContextAware{
 	}
 	
 	@GetMapping(value="/profil")
+	
 	public ModelAndView profil(HttpSession session) {
 		Korisnik ulogovani = (Korisnik) session.getAttribute(KorisnikController.KORISNIK_KEY);
+		Korisnik korisnik = korisnikService.findOne(ulogovani.getId());
 
 		ModelAndView rezultat = new ModelAndView("profil"); 
-		rezultat.addObject("korisnik", ulogovani); 
+		rezultat.addObject("korisnik", korisnik); 
 
 		return rezultat; 
 	}
@@ -87,6 +94,12 @@ public class AdminController implements ServletContextAware{
 	@GetMapping(value="/add")
 	public String create(HttpServletResponse response){
 		return "dodajTrening";
+	}
+	
+	
+	@GetMapping(value="/sale")
+	public String createSala(HttpServletResponse response){
+		return "sala";
 	}
 	
 	
@@ -129,11 +142,39 @@ public class AdminController implements ServletContextAware{
 				korisnik.setTipKorisnika(korisnikEdited.getTipKorisnika());
 			if(korisnikEdited.isAktivan() != true)
 				korisnik.setAktivan(korisnikEdited.isAktivan());
+			      else
+				    korisnik.setAktivan(true);
 					
 				
 
 		}
 		Korisnik sacuvaj = korisnikService.update(korisnik);
+		response.sendRedirect(bURL+"treninzi");
+		
+		
+		
+	}
+	@SuppressWarnings("unused")
+	@PostMapping(value="/profil")
+	public void editprofil(@ModelAttribute Korisnik profilEdited , HttpServletResponse response)
+			throws IOException{
+		Korisnik korisnik = korisnikService.findOne(profilEdited.getId());
+		if(korisnik != null) {
+			if(profilEdited.getIme() != null && !profilEdited.getIme().trim().equals(""))
+				korisnik.setIme(profilEdited.getIme());
+			if(profilEdited.getPrezime() != null && !profilEdited.getPrezime().trim().equals(""))
+				korisnik.setPrezime(profilEdited.getPrezime());
+			if(profilEdited.getKorisnickoIme() != null && !profilEdited.getKorisnickoIme().trim().equals(""))
+				korisnik.setKorisnickoIme(profilEdited.getKorisnickoIme());
+			if(profilEdited.getEmail() != null && !profilEdited.getEmail().trim().equals(""))
+				korisnik.setEmail(profilEdited.getEmail());
+			if(profilEdited.getTipKorisnika() != null)
+				korisnik.setTipKorisnika(profilEdited.getTipKorisnika());
+				
+				
+
+		}
+		Korisnik sacuvaj = korisnikService.updateprofil(korisnik);
 		response.sendRedirect(bURL+"treninzi");
 		
 		
@@ -152,6 +193,15 @@ public class AdminController implements ServletContextAware{
 		VrstaTreninga vrstatr = VrstaTreninga.valueOf(vrstaTreninga);
 		Trening trening = new Trening(naziv, opis, cena,nivotr,vrstatr,trajanjeTreninga,prosecnaOcena);
 		Trening saved = treningService.save(trening);
+		response.sendRedirect(bURL+"treninzi");
+	}
+	
+	@SuppressWarnings("unused")
+	@PostMapping(value="/addSala")
+	public void create(@RequestParam int kapacitet,
+			HttpServletResponse response) throws IOException {	
+		Sala sala = new Sala(kapacitet);
+		Sala saved = salaService.save(sala);
 		response.sendRedirect(bURL+"treninzi");
 	}
 

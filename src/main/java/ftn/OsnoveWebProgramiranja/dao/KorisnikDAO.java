@@ -19,6 +19,8 @@ public interface KorisnikDAO {
 
 	public int update(Korisnik korisnik);
 
+    public int updateprofil(Korisnik korisnik);
+
 
 
 

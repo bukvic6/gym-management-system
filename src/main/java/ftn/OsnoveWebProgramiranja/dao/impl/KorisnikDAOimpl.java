@@ -163,6 +163,16 @@ public class KorisnikDAOimpl implements KorisnikDAO{
 		
 		return uspeh?1:0;
 	}
+	
+	@Transactional
+	@Override
+	public int updateprofil(Korisnik korisnik) {
+		String sql = "UPDATE korisnici SET korisnickoIme = ?, ime = ?, prezime = ?, email = ?, tipKorisnika = ? WHERE id = ?";
+		boolean uspeh = jdbcTemplate.update(sql, korisnik.getKorisnickoIme(), korisnik.getIme(), korisnik.getPrezime(),korisnik.getEmail(),korisnik.getTipKorisnika().toString(), korisnik.getId()) == 1;
+		
+		return uspeh?1:0;
+	}
+
 
 
 
