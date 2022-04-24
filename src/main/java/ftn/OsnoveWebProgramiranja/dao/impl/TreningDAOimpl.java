@@ -47,11 +47,12 @@ public class TreningDAOimpl implements TreningDAO{
 			NivoTreninga nivoTreninga = NivoTreninga.valueOf(nivoTr);
 			Integer trajanjeTreninga = resultSet.getInt(index++);
 			Integer prosecnaOcena = resultSet.getInt(index++);
+			String trener = resultSet.getString(index++);
 			
 			
 			Trening trening = treninzi.get(id);
 			if(trening == null) {
-				trening = new Trening(id,naziv,opis,cena,vrstaTreninga,nivoTreninga,trajanjeTreninga,prosecnaOcena);
+				trening = new Trening(id,naziv,opis,cena,vrstaTreninga,nivoTreninga,trajanjeTreninga,prosecnaOcena, trener);
 				treninzi.put(trening.getId(), trening); // dodavanje u kolekciju
 
 			}
@@ -78,7 +79,7 @@ public class TreningDAOimpl implements TreningDAO{
 			
 			@Override
 			public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
-				String sql = "INSERT INTO treninzi (naziv, opis, cena, vrstaTr,nivoTr,trajanjeTreninga,prosecnaOcena) VALUES (?, ?,?,?,?,?,?)";
+				String sql = "INSERT INTO treninzi (naziv, opis, cena, vrstaTr,nivoTr,trajanjeTreninga,prosecnaOcena,trener) VALUES (?,?,?,?,?,?,?,?)";
 
 				PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 				int index = 1;
@@ -89,6 +90,7 @@ public class TreningDAOimpl implements TreningDAO{
 				preparedStatement.setString(index++, trening.getNivoTreninga().toString());
 				preparedStatement.setInt(index++, trening.getTrajanjeTreninga());
 				preparedStatement.setInt(index++, trening.getProsecnaOcena());
+				preparedStatement.setString(index++, trening.getTrener());
 
 				return preparedStatement;
 			}

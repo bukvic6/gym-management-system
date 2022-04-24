@@ -10,10 +10,25 @@
 	<title>Dodavanje sale</title>
 </head>
 <body>
- 	<ul>    
- 		<li><a href="treninzi">Povratak</a></li>    
- 
- 	</ul>    
+	 		<table>     
+	 			<caption>Sale</caption>     
+	 			<tr>      
+	 			    <th>Oznaka sale:</th> 
+	 				<th>Kapacitet:</th>     
+
+	 				<th></th>    
+	 			</tr>
+	 			<tr th:each="itSala, status: ${sala}">  
+	 			    <td th:text="${itSala.id}"></a></td>    
+	 				<td th:text="${itSala.kapacitet}"></td>
+	 				<td>    
+	 					<form method="post" action="sale/deleteSala" >     
+	 						<input type="hidden"  name="id"  th:value="${itSala.id}">     
+	 						<input type="submit"  value="Obriši" >    
+	 				</form>    
+	 				</td>   
+	 			</tr>  
+	 		</table>    
  	<form method="post" action="addSala">    
 		 
 		  <label for="kapacitet">Kapacitet:</label>
@@ -21,5 +36,10 @@
 		  <input type="submit" value="Dodaj"/>
 		 
  	</form> 
+ 	
+ 	<ul>    
+ 		<li><a href="treninzi">Povratak</a></li>    
+ 
+ 	</ul>  
 </body>
 </html>

@@ -7,7 +7,7 @@
 	<link rel="stylesheet" type="text/css" href="css/StiloviForma.css"/>
 	<link rel="stylesheet" type="text/css" href="css/StiloviHorizontalniMeni.css"/>
 	<base href="bURL">
-	<title>Registracija</title>
+	<title>Dodaj trening</title>
 </head>
 <body>
  	<ul>    
@@ -20,8 +20,26 @@
  			<tr><th>Naziv:</th><td><input type="text" value="" name="naziv"/></td></tr>    
  			<tr><th>Opis:</th><td><input type="text" value="" name="opis"/></td></tr>   
  			<tr><th>Cena:</th><td><input type="text" value="" name="cena" /></td></tr>   
- 			<tr><th>Vrsta Treninga:</th><td><input type="text" value="" name="vrstaTreninga" /></td></tr>   
- 			<tr><th>Nivo Treninga:</th><td><input type="text" value="" name="nivoTreninga" /></td></tr>   
+ 			<tr><th>Trener:</th><td><input type="text" value="" name="trener" /></td></tr>   
+ 			<tr><th>Vrsta Treninga:</th>
+ 			<td>
+ 			<select name="vrstaTreninga">
+	 			<option  value="POJEDINACNI">POJEDINACNI</option>
+	 			<option  value="GRUPNI">GRUPNI</option>
+	 			
+ 			</select>
+ 			</td>
+ 			</tr>   
+ 			<tr><th>Nivo Treninga:</th>
+ 			<td>
+ 			<select name="nivoTreninga">
+	 			<option value="AMATERSKI">AMATERSKI</option>
+	 			<option value="SREDNJI">SREDNJI</option>
+	 			<option value="NAPREDNI">NAPREDNI</option>
+	 			
+ 			</select>
+ 			</td>
+ 			</tr>  
  			<tr><th>Trajanje Treninga:</th><td><input type="number" min="1" name="trajanjeTreninga"/></td></tr>   
  			<tr><th>Prosecna Ocena:</th><td><input type="number" min="1" name="prosecnaOcena"/></td></tr>   
  			<tr><th></th><td><input type="submit" value="Dodaj"/></td>    

@@ -9,4 +9,6 @@ public interface SalaService {
 
 	Sala save(Sala sala);
 
+	Sala delete(Long id);
+
 }

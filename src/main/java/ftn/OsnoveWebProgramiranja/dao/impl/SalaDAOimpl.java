@@ -58,6 +58,17 @@ public class SalaDAOimpl implements SalaDAO {
 		return rowCallbackHandler.getSale();
 		
 	}
+	@Override
+	public Sala findOne(Long id) {
+		String sql = "select * from sala where id = ?";
+		
+		SalaRowCallBackHandler backHandler = new SalaRowCallBackHandler();
+		jdbcTemplate.query(sql, backHandler, id);
+		
+		return backHandler.getSale().get(0);
+	}
+	
+	
 	@Transactional
 	@Override
 	public int save(Sala sala) {
@@ -78,4 +89,10 @@ public class SalaDAOimpl implements SalaDAO {
 	GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
 	boolean uspeh = jdbcTemplate.update(preparedStatementCreator, keyHolder) == 1;
 	return uspeh?1:0;
-}}
+}
+	@Override
+	public int delete(Long id) {
+		String sql = "delete from sala where id = ?";
+	
+		return jdbcTemplate.update(sql, id);
+	}}

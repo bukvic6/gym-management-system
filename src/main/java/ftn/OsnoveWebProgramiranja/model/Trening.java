@@ -12,9 +12,11 @@ public class Trening {
 	private NivoTreninga nivoTreninga;
 	private int trajanjeTreninga;
 	private int prosecnaOcena;
+	private String trener;
 
-	public Trening(String naziv2, String opis2, String cena2, NivoTreninga nivotr, VrstaTreninga vrstatr,
-			int trajanjeTreninga2, int prosecnaOcena2) {
+
+	public Trening(String naziv2, String opis2, String cena2,VrstaTreninga vrstatr, NivoTreninga nivotr, 
+			int trajanjeTreninga2, int prosecnaOcena2, String trener) {
 		this.naziv = naziv2;
 		this.opis = opis2;
 		this.cena = cena2;
@@ -22,9 +24,10 @@ public class Trening {
 		this.nivoTreninga = nivotr;
 		this.trajanjeTreninga = trajanjeTreninga2;
 		this.prosecnaOcena = prosecnaOcena2;
+		this.trener = trener;
 	}
 	public Trening(Long id2, String naziv2, String opis2, String cena2, VrstaTreninga vrstaTreninga2,
-			NivoTreninga nivoTreninga2, int trajanjeTreninga2, int prosecnaOcena2) {
+			NivoTreninga nivoTreninga2, int trajanjeTreninga2, int prosecnaOcena2, String trener) {
 		this.id = id2;
 		this.naziv = naziv2;
 		this.opis = opis2;
@@ -33,7 +36,13 @@ public class Trening {
 		this.nivoTreninga = nivoTreninga2;
 		this.trajanjeTreninga = trajanjeTreninga2;
 		this.prosecnaOcena = prosecnaOcena2;
+		this.trener = trener;
 	}
+	public Trening(Long id2, String naziv2) {
+		this.id = id2;
+		this.naziv = naziv2;
+	}
+
 	public Long getId() {
 		return id;
 	}
@@ -87,6 +96,12 @@ public class Trening {
 	}
 	public void setProsecnaOcena(int prosecnaOcena) {
 		this.prosecnaOcena = prosecnaOcena;
+	}
+	public String getTrener() {
+		return trener;
+	}
+	public void setTrener(String trener) {
+		this.trener = trener;
 	}
 	
 	

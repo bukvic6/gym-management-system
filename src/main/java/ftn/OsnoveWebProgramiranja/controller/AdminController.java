@@ -89,17 +89,32 @@ public class AdminController implements ServletContextAware{
 
 		return rezultat; 
 	}
-
-	
 	@GetMapping(value="/add")
 	public String create(HttpServletResponse response){
 		return "dodajTrening";
 	}
 	
-	
 	@GetMapping(value="/sale")
-	public String createSala(HttpServletResponse response){
-		return "sala";
+	public ModelAndView sale() {
+	
+	List<Sala> sale = salaService.findAll();
+	ModelAndView rezultat = new ModelAndView("sala");
+	rezultat.addObject("sala", sale);
+	return rezultat;
+	}
+	
+	
+	@GetMapping(value="/addTermin")
+	public ModelAndView termini() {
+	
+        List<Trening> treninzi = treningService.findAll();	
+    	List<Sala> sale = salaService.findAll();
+
+		ModelAndView rezultat = new ModelAndView("dodajTermin"); 
+        rezultat.addObject("treninzi", treninzi); 
+        rezultat.addObject("sala", sale);
+        return rezultat;
+		
 	}
 	
 	
@@ -107,6 +122,14 @@ public class AdminController implements ServletContextAware{
 	@PostMapping(value = "/delete")
 	private void delete(@RequestParam Long id, HttpServletResponse response) throws IOException{
 		Korisnik obrisan = korisnikService.delete(id);
+		response.sendRedirect(bURL + "treninzi");	
+	}
+	
+	
+	@SuppressWarnings("unused")
+	@PostMapping(value = "sale/deleteSala")
+	private void deleteSala(@RequestParam Long id, HttpServletResponse response) throws IOException{
+		Sala obrisan = salaService.delete(id);
 		response.sendRedirect(bURL + "treninzi");	
 	}
 	
@@ -187,11 +210,10 @@ public class AdminController implements ServletContextAware{
 	@SuppressWarnings("unused")
 	@PostMapping(value="/add")
 	public void create(@RequestParam String naziv, @RequestParam String opis, 
-			@RequestParam String cena,@RequestParam String vrstaTreninga,@RequestParam String nivoTreninga, @RequestParam int trajanjeTreninga, @RequestParam int prosecnaOcena,
+			@RequestParam String cena,@RequestParam VrstaTreninga vrstaTreninga,@RequestParam NivoTreninga nivoTreninga, @RequestParam int trajanjeTreninga, @RequestParam int prosecnaOcena,
+			@RequestParam String trener,
 			HttpServletResponse response) throws IOException {	
-		NivoTreninga nivotr = NivoTreninga.valueOf(nivoTreninga);
-		VrstaTreninga vrstatr = VrstaTreninga.valueOf(vrstaTreninga);
-		Trening trening = new Trening(naziv, opis, cena,nivotr,vrstatr,trajanjeTreninga,prosecnaOcena);
+		Trening trening = new Trening(naziv, opis, cena,vrstaTreninga,nivoTreninga,trajanjeTreninga,prosecnaOcena,trener);
 		Trening saved = treningService.save(trening);
 		response.sendRedirect(bURL+"treninzi");
 	}

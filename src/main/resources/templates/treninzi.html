@@ -15,19 +15,21 @@
 	 		<table>     
 	 			<caption>Treninzi</caption>     
 	 			<tr>      
-	 			    <th>Naziv Treninga</th> 
-	 				<th>Opis</th>     
-	 				<th>Cena</th>   
-	 				<th>Vrsta treninga</th> 
-	 				<th>Nivo treninga</th> 
-	 				<th>Trajanje treninga</th> 
-	 				<th>Prosecna ocena</th> 
+	 			    <th>Naziv Treninga:</th> 
+	 				<th>Opis:</th>     
+	 				<th>Cena:</th>  
+	 				<th>Trener:</th> 
+	 				<th>Vrsta treninga:</th> 
+	 				<th>Nivo treninga:</th> 
+	 				<th>Trajanje treninga:</th> 
+	 				<th>Prosecna ocena:</th> 
 
 	 			</tr>
 	 			<tr th:each="itTrening, status: ${treninzi}">  
 	 			    <td th:text="${itTrening.naziv}"></td>    
 	 				<td th:text="${itTrening.opis}"></td>    
-	 				<td th:text="${itTrening.cena}"></td>   
+	 				<td th:text="${itTrening.cena}"></td>
+	 				<td th:text="${itTrening.trener}"></td>   
 	 				<td th:text="${itTrening.vrstaTreninga}"></td>   
 	 				<td th:text="${itTrening.nivoTreninga}"></td>   
 	 				<td th:text="${itTrening.trajanjeTreninga}"></td>   
@@ -35,7 +37,8 @@
 	 			</tr>
 	 		</table>
 	 			 	<ul>     
-	 		<li><a href="treninzi/add">Dodaj trening</a></li>     
+	 		<li><a href="treninzi/add">Dodaj trening</a></li>   
+	 		<li><a href="treninzi/addTermin">Dodaj termin</a></li>      
 	 	</ul>
 	 </body>   
  </html>	
