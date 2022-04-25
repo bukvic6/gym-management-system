@@ -11,4 +11,6 @@ public interface SalaService {
 
 	Sala delete(Long id);
 
+	Sala findOne(Long salaId);
+
 }

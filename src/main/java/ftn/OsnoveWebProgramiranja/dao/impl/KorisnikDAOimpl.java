@@ -136,9 +136,6 @@ public class KorisnikDAOimpl implements KorisnikDAO{
 				preparedStatement.setTimestamp(index++,Timestamp.valueOf(korisnik.getVremeRegistracije().atStartOfDay()));
 				preparedStatement.setString(index++, korisnik.getTipKorisnika().toString());
 				preparedStatement.setString(index++, korisnik.getAdresa());
-				
-				
-
 				return preparedStatement;
 			}
 

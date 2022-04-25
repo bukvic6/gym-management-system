@@ -27,6 +27,12 @@ public class DatabaseTreningServiceImpl implements TreningService {
 		treningDAO.save(trening);
 		return trening;
 	}
+
+
+	@Override
+	public Trening findOne(Long treningId) {
+		return treningDAO.findOne(treningId);
+	}
 	
 	
 

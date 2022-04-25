@@ -25,7 +25,7 @@
 	 				<th></th>    
 	 			</tr>
 	 			<tr th:each="itKorisnik, status: ${korisnici}">  
-	 			    <td ><a th:href="|treninzi/details?id=${itKorisnik.id}|"  th:text="${itKorisnik.korisnickoIme}"></a></td>    
+	 			    <td ><a th:href="|admin/details?id=${itKorisnik.id}|"  th:text="${itKorisnik.korisnickoIme}"></a></td>    
 	 				<td th:text="${itKorisnik.ime}"></td>    
 	 				<td th:text="${itKorisnik.prezime}"></td>    
 	 				<td th:text="${itKorisnik.email}"></td>   

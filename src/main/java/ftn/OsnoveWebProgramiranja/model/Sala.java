@@ -6,6 +6,11 @@ public class Sala {
 	private int kapacitet;
 	
 	public Sala() {}
+	public Sala(Long id) {
+		this.id = id;
+		
+		
+	}
 	
 	public Sala(Long id, int kapacitet) {
 		this.id = id;

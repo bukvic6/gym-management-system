@@ -11,4 +11,6 @@ public interface TreningService {
 
 	Trening save(Trening trening);
 
+	Trening findOne(Long treningId);
+
 }

@@ -20,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 import ftn.OsnoveWebProgramiranja.dao.TreningDAO;
+import ftn.OsnoveWebProgramiranja.model.Korisnik;
 import ftn.OsnoveWebProgramiranja.model.NivoTreninga;
 import ftn.OsnoveWebProgramiranja.model.Trening;
 import ftn.OsnoveWebProgramiranja.model.VrstaTreninga;
@@ -99,6 +100,17 @@ public class TreningDAOimpl implements TreningDAO{
 		GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
 		boolean uspeh = jdbcTemplate.update(preparedStatementCreator, keyHolder) == 1;
 		return uspeh?1:0;
+	}
+	@Override
+	public Trening findOne(Long treningId) {
+			String sql = 
+					"SELECT * from treninzi WHERE id = ?";
+
+			TreningRowCallBackHandler rowCallbackHandler = new TreningRowCallBackHandler();
+			jdbcTemplate.query(sql, rowCallbackHandler, treningId);
+
+			
+			return rowCallbackHandler.getTreninzi().get(0);
 	}
 	
 	

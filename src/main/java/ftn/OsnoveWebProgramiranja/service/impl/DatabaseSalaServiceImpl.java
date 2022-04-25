@@ -39,4 +39,10 @@ public class DatabaseSalaServiceImpl implements SalaService {
 		
 	}
 
+
+	@Override
+	public Sala findOne(Long salaId) {
+		return salaDAO.findOne(salaId);
+	}
+
 }

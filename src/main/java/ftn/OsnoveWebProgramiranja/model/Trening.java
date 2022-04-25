@@ -38,9 +38,9 @@ public class Trening {
 		this.prosecnaOcena = prosecnaOcena2;
 		this.trener = trener;
 	}
-	public Trening(Long id2, String naziv2) {
+	public Trening(Long id2) {
 		this.id = id2;
-		this.naziv = naziv2;
+		
 	}
 
 	public Long getId() {
