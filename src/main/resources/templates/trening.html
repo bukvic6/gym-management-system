@@ -1,0 +1,35 @@
+<!DOCTYPE html> 
+<html xmlns:th="http://www.thymeleaf.org">     
+	<head>     
+		<meta charset="UTF-8">     
+		<base th:href="@{/}"><!-- popuni href atribut vrednosšću context path-a -->
+		<title>Trening</title>     
+		<link rel="stylesheet"  type="text/css"  href="css/StiloviTabela.css"/>     
+	 	<link rel="stylesheet"  type="text/css" href="css/StiloviHorizontalniMeni.css"/>   
+	 </head> 
+<body>
+ 	<form method="post" action="add">    
+ 		<table class = "forma">   
+ 			<caption>Informacije o treningu</caption>    
+ 			<tr th:each="itTrening, status: ${trening}">
+ 			<th>Naziv:</th>
+ 			<td th:text="${itTrening.naziv}" name="naziv"/></td></tr>    
+ 			<tr th:each="itTrening, status: ${trening}">
+ 			<th>Opis:</th><td th:text="${itTrening.opis}" name="opis"></td></tr>   
+ 			<tr th:each="itTrening, status: ${trening}">
+ 			<th>Cena:</th><td th:text="${itTrening.cena}" name="cena"></td></tr>   
+ 			<tr th:each="itTrening, status: ${trening}">
+ 			<th>Trener:</th><td th:text="${itTrening.trener}" name="trener"></td></tr>   
+ 			<tr th:each="itTrening, status: ${trening}">
+ 			<th>Vrsta Treninga:</th><td th:text="${itTrening.vrstaTreninga}" name="vrstaTreninga"></td></tr>   
+ 			<tr th:each="itTrening, status: ${trening}">
+ 			<th>Nivo Treninga:</th><td th:text="${itTrening.nivoTreninga}" name="nivoTreninga"></td></td></tr>  
+ 			<tr  th:each="itTrening, status: ${trening}">
+ 			<th>Trajanje Treninga:</th><td th:text="${itTrening.trajanjeTreninga}" name="trajanjeTreninga"></td></tr>   
+ 			<tr  th:each="itTrening, status: ${trening}">
+ 			<th>Prosecna Ocena:</th><td th:text="${itTrening.prosecnaOcena}" name="prosecnaOcena"></td></td></tr>     
+ 		</table>    
+ 	</form> 
+
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html> 
+<html xmlns:th="http://www.thymeleaf.org">     
+	<head>     
+		<meta charset="UTF-8">     
+		<base th:href="@{/}"><!-- popuni href atribut vrednosšću context path-a -->
+		<title>Korisnik profil</title>     
+		<link rel="stylesheet"  type="text/css"  href="css/StiloviTabela.css"/>     
+	 	<link rel="stylesheet"  type="text/css" href="css/StiloviHorizontalniMeni.css"/>   
+	 </head>     
+	 <body>   
+	 <li><a href="korisnik/profil">Profil</a></li>  
+   
+	 		<table>     
+	 			<caption>Treninzi</caption>     
+	 			<tr>      
+	 			    <th>Naziv Treninga:</th> 
+	 				<th>Opis:</th>     
+	 				<th>Cena:</th>  
+	 				<th>Trener:</th> 
+	 				<th>Vrsta treninga:</th> 
+	 				<th>Nivo treninga:</th> 
+	 				<th>Trajanje treninga:</th> 
+	 				<th>Prosecna ocena:</th> 
+
+	 			</tr>
+	 			<tr th:each="itTrening, status: ${treninzi}">  
+	 			    <td ><a th:href="|korisnik/details?id=${itTrening.id}|" th:text="${itTrening.naziv}"></td>    
+	 				<td th:text="${itTrening.opis}"></td>    
+	 				<td th:text="${itTrening.cena}"></td>
+	 				<td th:text="${itTrening.trener}"></td>   
+	 				<td th:text="${itTrening.vrstaTreninga}"></td>   
+	 				<td th:text="${itTrening.nivoTreninga}"></td>   
+	 				<td th:text="${itTrening.trajanjeTreninga}"></td>   
+	 				<td th:text="${itTrening.prosecnaOcena}"></td>  
+	 			</tr>
+	 		</table>
+	 </body>   
+ </html>
