@@ -19,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 import ftn.OsnoveWebProgramiranja.model.Korisnik;
 import ftn.OsnoveWebProgramiranja.model.Trening;
 import ftn.OsnoveWebProgramiranja.service.KorisnikService;
+import ftn.OsnoveWebProgramiranja.service.TerminService;
 import ftn.OsnoveWebProgramiranja.service.TreningService;
 
 
@@ -37,6 +38,8 @@ public class PolaznikController implements ServletContextAware{
 	@Autowired
 	private KorisnikService korisnikService;
 	
+	@Autowired
+	private TerminService terminService;
 	
 
 	
@@ -75,6 +78,7 @@ public class PolaznikController implements ServletContextAware{
 	@ResponseBody
 	public ModelAndView details(@RequestParam Long id, HttpServletResponse httpServletResponse) {
 		Trening trening = treningService.findOne(id);
+		
 		ModelAndView rezultat = new ModelAndView("trening");
 		rezultat.addObject("trening",trening);
 		return rezultat;

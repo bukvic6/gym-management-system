@@ -4,6 +4,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -11,6 +14,7 @@ import org.springframework.jdbc.core.RowCallbackHandler;
 import org.springframework.stereotype.Repository;
 
 import ftn.OsnoveWebProgramiranja.dao.TerminDAO;
+import ftn.OsnoveWebProgramiranja.model.Korisnik;
 import ftn.OsnoveWebProgramiranja.model.NivoTreninga;
 import ftn.OsnoveWebProgramiranja.model.Sala;
 import ftn.OsnoveWebProgramiranja.model.TerminTreninga;
@@ -24,6 +28,7 @@ public class TerminDAOimpl implements TerminDAO{
 	private JdbcTemplate jdbcTemplate;
 	
 	private class TerminRowCallHandler implements RowCallbackHandler{
+		
 
 		@Override
 		public void processRow(ResultSet rs) throws SQLException {
@@ -61,6 +66,15 @@ public class TerminDAOimpl implements TerminDAO{
 		String sql = "INSERT INTO terminTreninga (treningId, salaId, vreme) VALUES (?, ?, ?)";
 		return jdbcTemplate.update(sql,termin.getTreningId().getId(),termin.getSalaId().getId(), termin.getDatum());
 	}
+	
+//	@Override
+//	public List<Termin> findAll() {
+//		String sql = "select * from termin where";
+//		TerminRowCallHandler rowCallbackHandler = new TerminRowCallHandler();
+//		jdbcTemplate.query(sql, rowCallbackHandler);
+//		
+//		return rowCallbackHandler.getKorisnici();
+//	}
 	
 
 }
