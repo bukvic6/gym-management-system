@@ -1,5 +1,6 @@
 package ftn.OsnoveWebProgramiranja.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -10,14 +11,18 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.ServletContextAware;
 import org.springframework.web.servlet.ModelAndView;
 
+import ftn.OsnoveWebProgramiranja.model.Komentar;
 import ftn.OsnoveWebProgramiranja.model.Korisnik;
+import ftn.OsnoveWebProgramiranja.model.Sala;
 import ftn.OsnoveWebProgramiranja.model.Trening;
+import ftn.OsnoveWebProgramiranja.service.KomentarService;
 import ftn.OsnoveWebProgramiranja.service.KorisnikService;
 import ftn.OsnoveWebProgramiranja.service.TerminService;
 import ftn.OsnoveWebProgramiranja.service.TreningService;
@@ -40,6 +45,9 @@ public class PolaznikController implements ServletContextAware{
 	
 	@Autowired
 	private TerminService terminService;
+	
+	@Autowired 
+	private KomentarService komentarService;
 	
 
 	
@@ -84,6 +92,13 @@ public class PolaznikController implements ServletContextAware{
 		return rezultat;
 	}
 	
+	@SuppressWarnings("unused")
+	@PostMapping(value = "/addKomentar")
+	public void create(@RequestParam int ocena,@RequestParam String textKomentara, HttpServletResponse response) throws IOException {
+		Komentar komentar = new Komentar(textKomentara,ocena);
+		Komentar saved = komentarService.save(komentar);
+		response.sendRedirect(bURL + "polaznik");
+	}
 	
 
 	

@@ -6,6 +6,8 @@ import java.time.LocalDate;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowCallbackHandler;
 import org.springframework.stereotype.Repository;
 
@@ -22,6 +24,10 @@ import ftn.OsnoveWebProgramiranja.model.VrstaTreninga;
 
 @Repository
 public class KomentarDAOimpl implements KomentarDAO {
+	
+	@Autowired
+	private JdbcTemplate jdbcTemplate;
+	
 	private class KomentarRowCallHandler implements RowCallbackHandler{
 
 		private Map<Long, Komentar> komentar = new LinkedHashMap<>();
@@ -76,6 +82,14 @@ public class KomentarDAOimpl implements KomentarDAO {
 			
 		}
 		
+	}
+	
+	@Override
+	public int save(Komentar komentar) {
+		String sql = "insert into komentari (id,textKomentata,ocena,datum,statusKomentara,autor,trening,anoniman) values(?,?,?,?,?,?,?,?)";
+		return jdbcTemplate.update(sql, komentar.getId(), komentar.getText(), komentar.getOcena(),
+				komentar.getDatum(), komentar.getStatus(), komentar.getAutor().getId()
+				,komentar.getTrening().getId(),komentar.isAnoniman());
 	}
 
 }

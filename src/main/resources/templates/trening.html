@@ -29,7 +29,20 @@
  			<tr  th:each="itTrening, status: ${trening}">
  			<th>Prosecna Ocena:</th><td th:text="${itTrening.prosecnaOcena}" name="prosecnaOcena"></td></td></tr>     
  		</table>    
- 	</form> 
+ 	</form>
+ 	<div>
+<form method="post" action="addKomentar">
+			
+				<caption>Dodavanje komentara</caption>
+				 	    
+ 			<tr><th>Komentar:</th><td><input type="text" value="" name="textKomentara"/></td></tr>  
+ 			<tr><th>Ocena:</th><td><input type="number" min="1" max= "5" name="ocena"/></td></tr>     
+
+
+				<tr><th></th><td><input type="submit" value="Dodaj"/></td></tr>
+			
+		</form>
+	</div> 
 
 </body>
 </html>
