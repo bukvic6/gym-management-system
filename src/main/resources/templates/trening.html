@@ -8,7 +8,8 @@
 	 	<link rel="stylesheet"  type="text/css" href="css/StiloviHorizontalniMeni.css"/>   
 	 </head> 
 <body>
- 	<form method="post" action="add">    
+<div>
+ 	   
  		<table class = "forma">   
  			<caption>Informacije o treningu</caption>    
  			<tr th:each="itTrening, status: ${trening}">
@@ -29,17 +30,19 @@
  			<tr  th:each="itTrening, status: ${trening}">
  			<th>Prosecna Ocena:</th><td th:text="${itTrening.prosecnaOcena}" name="prosecnaOcena"></td></td></tr>     
  		</table>    
- 	</form>
+ 
+ </div>
  	<div>
-<form method="post" action="addKomentar">
+        <form method="post" action="korisnik/addKomentar">
 			
-				<caption>Dodavanje komentara</caption>
+		    <caption>Dodavanje komentara</caption>
+				
+			<input type="hidden" name="id" th:value="${trening.id}"/>
 				 	    
  			<tr><th>Komentar:</th><td><input type="text" value="" name="textKomentara"/></td></tr>  
  			<tr><th>Ocena:</th><td><input type="number" min="1" max= "5" name="ocena"/></td></tr>     
-
-
-				<tr><th></th><td><input type="submit" value="Dodaj"/></td></tr>
+ 		    <tr><th>Anoniman:</th><td><input type = "checkbox" name="anoniman" th:checked="checked"/></td></tr>
+		    <tr><th></th><td><input type="submit" value="Dodaj"/></td></tr>
 			
 		</form>
 	</div> 

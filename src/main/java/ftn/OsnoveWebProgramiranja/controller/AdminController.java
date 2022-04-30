@@ -228,9 +228,7 @@ public class AdminController implements ServletContextAware {
 		TerminTreninga termin = new TerminTreninga(trening,sala,datumIVreme);
 		terminService.save(termin);
 		response.sendRedirect(bURL + "admin");
-		
-		
-		
+	
 	}
 
 	

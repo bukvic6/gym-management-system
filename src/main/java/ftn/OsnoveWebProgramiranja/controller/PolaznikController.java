@@ -1,6 +1,7 @@
 package ftn.OsnoveWebProgramiranja.controller;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -21,11 +22,13 @@ import org.springframework.web.servlet.ModelAndView;
 import ftn.OsnoveWebProgramiranja.model.Komentar;
 import ftn.OsnoveWebProgramiranja.model.Korisnik;
 import ftn.OsnoveWebProgramiranja.model.Sala;
+import ftn.OsnoveWebProgramiranja.model.Status;
 import ftn.OsnoveWebProgramiranja.model.Trening;
 import ftn.OsnoveWebProgramiranja.service.KomentarService;
 import ftn.OsnoveWebProgramiranja.service.KorisnikService;
 import ftn.OsnoveWebProgramiranja.service.TerminService;
 import ftn.OsnoveWebProgramiranja.service.TreningService;
+
 
 
 @Controller
@@ -43,8 +46,6 @@ public class PolaznikController implements ServletContextAware{
 	@Autowired
 	private KorisnikService korisnikService;
 	
-	@Autowired
-	private TerminService terminService;
 	
 	@Autowired 
 	private KomentarService komentarService;
@@ -91,13 +92,18 @@ public class PolaznikController implements ServletContextAware{
 		rezultat.addObject("trening",trening);
 		return rezultat;
 	}
+
 	
-	@SuppressWarnings("unused")
 	@PostMapping(value = "/addKomentar")
-	public void create(@RequestParam int ocena,@RequestParam String textKomentara, HttpServletResponse response) throws IOException {
-		Komentar komentar = new Komentar(textKomentara,ocena);
-		Komentar saved = komentarService.save(komentar);
-		response.sendRedirect(bURL + "polaznik");
+	public void create(@RequestParam int ocena,@RequestParam String textKomentara,@RequestParam Long id, @RequestParam boolean anoniman,HttpServletResponse response,HttpSession session) throws IOException {
+		LocalDate datum = LocalDate.now();
+		Korisnik ulogovani = (Korisnik) session.getAttribute(KorisnikController.KORISNIK_KEY);
+
+		Status status = Status.CEKANJE;
+		Trening trening = treningService.findOne(id);
+		Komentar komentar = new Komentar(textKomentara,ocena,datum,status,ulogovani,trening, anoniman);
+		komentarService.save(komentar);
+		response.sendRedirect(bURL + "korisnik");
 	}
 	
 

@@ -60,7 +60,7 @@ public class KomentarDAOimpl implements KomentarDAO {
 			Korisnik autor = new Korisnik(idKorisnika,korisnickoIme,ime,prezime,email,lozinka,
 					datRodj,adresa,brojTelefona,vremeRegistracije,tipKorisnika,aktivan);
 			
-			Long idTreninga = rs.getLong(index++);
+		
 			String naziv = rs.getString(index++);
 			String opis = rs.getString(index++);
 			String cena = rs.getString(index++);
@@ -77,7 +77,7 @@ public class KomentarDAOimpl implements KomentarDAO {
 			
 			boolean anoniman = rs.getBoolean(index++);
 			
-			Komentar komentar = new Komentar(id,text,ocena,datum,status,autor,trening,anoniman);
+			Komentar komentar = new Komentar(text,ocena,datum,status,autor,trening,anoniman);
 
 			
 		}
@@ -86,8 +86,8 @@ public class KomentarDAOimpl implements KomentarDAO {
 	
 	@Override
 	public int save(Komentar komentar) {
-		String sql = "insert into komentari (id,textKomentata,ocena,datum,statusKomentara,autor,trening,anoniman) values(?,?,?,?,?,?,?,?)";
-		return jdbcTemplate.update(sql, komentar.getId(), komentar.getText(), komentar.getOcena(),
+		String sql = "insert into komentari (textKomentata,ocena,datum,statusKomentara,autor,trening,anoniman) values(?,?,?,?,?,?,?)";
+		return jdbcTemplate.update(sql, komentar.getText(), komentar.getOcena(),
 				komentar.getDatum(), komentar.getStatus(), komentar.getAutor().getId()
 				,komentar.getTrening().getId(),komentar.isAnoniman());
 	}

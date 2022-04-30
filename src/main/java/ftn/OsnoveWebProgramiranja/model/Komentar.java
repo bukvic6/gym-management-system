@@ -3,7 +3,7 @@ package ftn.OsnoveWebProgramiranja.model;
 import java.time.LocalDate;
 
 public class Komentar {
-	private Long id;
+
 	private String text;
 	private int ocena;
 	private LocalDate datum;
@@ -12,15 +12,12 @@ public class Komentar {
 	private Trening trening;
 	private boolean anoniman;
 	
-	public Komentar() {}
 	
 	
+		
 	
-	
-	
-	public Komentar(Long id2, String text2, Integer ocena2, LocalDate datum2, Status status2, Korisnik autor2,
+	public Komentar( String text2, Integer ocena2, LocalDate datum2, Status status2, Korisnik autor2,
 			Trening trening2, boolean anoniman2) {
-		this.id = id2;
 		this.text = text2;
 		this.ocena = ocena2;
 		this.datum = datum2;
@@ -30,10 +27,6 @@ public class Komentar {
 		this.anoniman = anoniman2;
 				
 	}
-
-
-
-
 
 	public String getText() {
 		return text;
@@ -78,13 +71,6 @@ public class Komentar {
 		this.anoniman = anoniman;
 	}
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 	
 
 }
