@@ -1,5 +1,7 @@
 package ftn.OsnoveWebProgramiranja.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,4 +20,10 @@ public class DatabaseKomentarServiceImpl implements KomentarService {
 		komentarDAO.save(komentar);
 		return komentar;
 	}
+	
+	@Override
+	public List<Komentar> findAll() {
+		return komentarDAO.findAll();
+	}
+
 }

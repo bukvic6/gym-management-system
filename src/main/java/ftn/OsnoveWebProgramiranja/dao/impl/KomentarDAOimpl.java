@@ -3,12 +3,15 @@ package ftn.OsnoveWebProgramiranja.dao.impl;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowCallbackHandler;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 
@@ -28,14 +31,13 @@ public class KomentarDAOimpl implements KomentarDAO {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
-	private class KomentarRowCallHandler implements RowCallbackHandler{
+	private class KomentarRowMapper implements RowMapper<Komentar>{
 
-		private Map<Long, Komentar> komentar = new LinkedHashMap<>();
 		@Override
-		public void processRow(ResultSet rs) throws SQLException {
+		public Komentar mapRow(ResultSet rs, int rowNum) throws SQLException {
 			int index = 1;
-			Long id = rs.getLong(index++);
-			String text = rs.getString(index++);
+			
+			String textKomentara = rs.getString(index++);
 			Integer ocena = rs.getInt(index++);
 			LocalDate datum = rs.getTimestamp(index++).toLocalDateTime().toLocalDate();
 			String statusKom =rs.getString(index++);
@@ -61,6 +63,7 @@ public class KomentarDAOimpl implements KomentarDAO {
 					datRodj,adresa,brojTelefona,vremeRegistracije,tipKorisnika,aktivan);
 			
 		
+			Long id = rs.getLong(index++);
 			String naziv = rs.getString(index++);
 			String opis = rs.getString(index++);
 			String cena = rs.getString(index++);
@@ -77,18 +80,24 @@ public class KomentarDAOimpl implements KomentarDAO {
 			
 			boolean anoniman = rs.getBoolean(index++);
 			
-			Komentar komentar = new Komentar(text,ocena,datum,status,autor,trening,anoniman);
+			Komentar komentar = new Komentar(textKomentara,ocena,datum,status,autor,trening,anoniman);
+			return komentar;
 
-			
 		}
+	}
+	
+	@Override
+	public List<Komentar> findAll(){
+		String sql = "select textKomentara from komentari";	
+		return jdbcTemplate.query(sql, new KomentarRowMapper());
 		
 	}
 	
 	@Override
 	public int save(Komentar komentar) {
-		String sql = "insert into komentari (textKomentata,ocena,datum,statusKomentara,autor,trening,anoniman) values(?,?,?,?,?,?,?)";
+		String sql = "insert into komentari (textKomentara, ocena, datum, statusKomentara, autor, trening, anoniman) values(?,?,?,?,?,?,?)";
 		return jdbcTemplate.update(sql, komentar.getText(), komentar.getOcena(),
-				komentar.getDatum(), komentar.getStatus(), komentar.getAutor().getId()
+				komentar.getDatum(), komentar.getStatus().toString(), komentar.getAutor().getId()
 				,komentar.getTrening().getId(),komentar.isAnoniman());
 	}
 

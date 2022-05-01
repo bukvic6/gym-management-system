@@ -41,11 +41,26 @@
 				 	    
  			<tr><th>Komentar:</th><td><input type="text" value="" name="textKomentara"/></td></tr>  
  			<tr><th>Ocena:</th><td><input type="number" min="1" max= "5" name="ocena"/></td></tr>     
- 		    <tr><th>Anoniman:</th><td><input type = "checkbox" name="anoniman" th:checked="checked"/></td></tr>
+ 		    <tr><th>Anoniman:</th><td><input type = "checkbox" name="anoniman"/></td></tr>
 		    <tr><th></th><td><input type="submit" value="Dodaj"/></td></tr>
 			
 		</form>
 	</div> 
+	<div>
+	 		<table>     
+	 			<caption>Treninzi</caption>     
+	 			<tr>      
+	 			    <th>Autor:</th> 
+
+
+	 			</tr>
+	 			<tr th:each="itKomentar, status: ${komentar}">  
+	 				<td th:text="${itKomentar.textKomentara}"></td>    
+	 				
+
+	 			</tr>
+	 		</table>
+ </div>
 
 </body>
 </html>

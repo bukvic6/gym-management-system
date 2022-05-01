@@ -87,17 +87,20 @@ public class PolaznikController implements ServletContextAware{
 	@ResponseBody
 	public ModelAndView details(@RequestParam Long id, HttpServletResponse httpServletResponse) {
 		Trening trening = treningService.findOne(id);
+		List<Komentar> komentari = komentarService.findAll();
 		
 		ModelAndView rezultat = new ModelAndView("trening");
 		rezultat.addObject("trening",trening);
+		rezultat.addObject("komentar",komentari);
 		return rezultat;
 	}
 
 	
 	@PostMapping(value = "/addKomentar")
-	public void create(@RequestParam int ocena,@RequestParam String textKomentara,@RequestParam Long id, @RequestParam boolean anoniman,HttpServletResponse response,HttpSession session) throws IOException {
+	public void create(@RequestParam int ocena,@RequestParam String textKomentara,@RequestParam Long id, @RequestParam(required=false) boolean anoniman,HttpServletResponse response,HttpSession session) throws IOException {
 		LocalDate datum = LocalDate.now();
 		Korisnik ulogovani = (Korisnik) session.getAttribute(KorisnikController.KORISNIK_KEY);
+		
 
 		Status status = Status.CEKANJE;
 		Trening trening = treningService.findOne(id);
