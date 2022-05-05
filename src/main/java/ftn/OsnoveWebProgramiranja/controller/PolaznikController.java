@@ -100,7 +100,8 @@ public class PolaznikController implements ServletContextAware{
 	public void create(@RequestParam int ocena,@RequestParam String textKomentara,@RequestParam Long id, @RequestParam(required=false) boolean anoniman,HttpServletResponse response,HttpSession session) throws IOException {
 		LocalDate datum = LocalDate.now();
 		Korisnik ulogovani = (Korisnik) session.getAttribute(KorisnikController.KORISNIK_KEY);
-		
+
+
 
 		Status status = Status.CEKANJE;
 		Trening trening = treningService.findOne(id);

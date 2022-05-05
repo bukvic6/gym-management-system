@@ -4,7 +4,15 @@ import java.time.LocalDate;
 
 public class Komentar {
 
-	private String text;
+	private Long id;
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+	private String textKomentara;
 	private int ocena;
 	private LocalDate datum;
 	private Status status;
@@ -12,13 +20,29 @@ public class Komentar {
 	private Trening trening;
 	private boolean anoniman;
 	
+	public Komentar() {
+		
+	}
+	
 	
 	
 		
 	
-	public Komentar( String text2, Integer ocena2, LocalDate datum2, Status status2, Korisnik autor2,
+	public Komentar(String text2, int ocena2, LocalDate datum2, Status status2, Korisnik autor2,
 			Trening trening2, boolean anoniman2) {
-		this.text = text2;
+		this.textKomentara = text2;
+		this.ocena = ocena2;
+		this.datum = datum2;
+		this.status = status2;
+		this.autor = autor2;
+		this.trening = trening2;
+		this.anoniman = anoniman2;
+				
+	}
+	public Komentar(Long id, String text2, int ocena2, LocalDate datum2, Status status2, Korisnik autor2,
+			Trening trening2, boolean anoniman2) {
+		this.id = id;
+		this.textKomentara = text2;
 		this.ocena = ocena2;
 		this.datum = datum2;
 		this.status = status2;
@@ -28,12 +52,15 @@ public class Komentar {
 				
 	}
 
-	public String getText() {
-		return text;
+
+	public String getTextKomentara() {
+		return textKomentara;
 	}
-	public void setText(String text) {
-		this.text = text;
+
+	public void setTextKomentara(String textKomentara) {
+		this.textKomentara = textKomentara;
 	}
+
 	public int getOcena() {
 		return ocena;
 	}

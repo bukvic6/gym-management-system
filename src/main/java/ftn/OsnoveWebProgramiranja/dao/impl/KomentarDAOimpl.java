@@ -11,7 +11,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.RowCallbackHandler;
 import org.springframework.stereotype.Repository;
 
 
@@ -31,12 +31,13 @@ public class KomentarDAOimpl implements KomentarDAO {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
-	private class KomentarRowMapper implements RowMapper<Komentar>{
+	private class KomentarRowHandler implements RowCallbackHandler{
+		private Map<Long, Komentar> komentari = new LinkedHashMap<>();
 
 		@Override
-		public Komentar mapRow(ResultSet rs, int rowNum) throws SQLException {
+		public void processRow(ResultSet rs) throws SQLException{
 			int index = 1;
-			
+			Long id = rs.getLong(index++);
 			String textKomentara = rs.getString(index++);
 			Integer ocena = rs.getInt(index++);
 			LocalDate datum = rs.getTimestamp(index++).toLocalDateTime().toLocalDate();
@@ -59,44 +60,54 @@ public class KomentarDAOimpl implements KomentarDAO {
 			TipKorisnika tipKorisnika = TipKorisnika.valueOf(tip);
 			String adresa = rs.getString(index++);
 			boolean aktivan = rs.getBoolean(index++);
-			Korisnik autor = new Korisnik(idKorisnika,korisnickoIme,ime,prezime,email,lozinka,
-					datRodj,adresa,brojTelefona,vremeRegistracije,tipKorisnika,aktivan);
+			Korisnik autor = new Korisnik(idKorisnika,korisnickoIme,ime,prezime,email,lozinka,datRodj,brojTelefona,vremeRegistracije,tipKorisnika,adresa,aktivan);
 			
 		
-			Long id = rs.getLong(index++);
-			String naziv = rs.getString(index++);
-			String opis = rs.getString(index++);
-			String cena = rs.getString(index++);
-			String vrstaTr = rs.getString(index++);
-			VrstaTreninga vrstaTreninga = VrstaTreninga.valueOf(vrstaTr);
-			String nivoTr = rs.getString(index++);
-			NivoTreninga nivoTreninga = NivoTreninga.valueOf(nivoTr);
-			Integer trajanjeTreninga = rs.getInt(index++);
-			Integer prosecnaOcena = rs.getInt(index++);
-			String trener = rs.getString(index++);
+			Long idtre = rs.getLong(index++);
+//			String naziv = rs.getString(index++);
+//			String opis = rs.getString(index++);
+//			String cena = rs.getString(index++);
+//			String vrstaTr = rs.getString(index++);
+//			VrstaTreninga vrstaTreninga = VrstaTreninga.valueOf(vrstaTr);
+//			String nivoTr = rs.getString(index++);
+//			NivoTreninga nivoTreninga = NivoTreninga.valueOf(nivoTr);
+//			Integer trajanjeTreninga = rs.getInt(index++);
+//			Integer prosecnaOcena = rs.getInt(index++);
+//			String trener = rs.getString(index++);
 
-			Trening trening = new Trening(id,naziv,opis,cena,vrstaTreninga,nivoTreninga,trajanjeTreninga,prosecnaOcena, trener);
+			Trening trening = new Trening(idtre);
 		
 			
 			boolean anoniman = rs.getBoolean(index++);
 			
-			Komentar komentar = new Komentar(textKomentara,ocena,datum,status,autor,trening,anoniman);
-			return komentar;
+			Komentar komentar = komentari.get(id);
+			if(komentar == null) {
+			
+			komentar = new Komentar(id,textKomentara,ocena,datum,status,autor,trening,anoniman);
+			komentari.put(komentar.getId(), komentar);
 
 		}
 	}
-	
-	@Override
-	public List<Komentar> findAll(){
-		String sql = "select textKomentara from komentari";	
-		return jdbcTemplate.query(sql, new KomentarRowMapper());
+		public List<Komentar> getKomentari(){
+			return new ArrayList<>(komentari.values());
+			
+		}
+
 		
 	}
 	
 	@Override
+	public List<Komentar> findAll(){
+		String sql = "select * from komentari";	
+		KomentarRowHandler rowCallbackHandler = new KomentarRowHandler();
+		jdbcTemplate.query(sql, rowCallbackHandler);
+		
+		return rowCallbackHandler.getKomentari();
+	}
+	@Override
 	public int save(Komentar komentar) {
 		String sql = "insert into komentari (textKomentara, ocena, datum, statusKomentara, autor, trening, anoniman) values(?,?,?,?,?,?,?)";
-		return jdbcTemplate.update(sql, komentar.getText(), komentar.getOcena(),
+		return jdbcTemplate.update(sql, komentar.getTextKomentara(), komentar.getOcena(),
 				komentar.getDatum(), komentar.getStatus().toString(), komentar.getAutor().getId()
 				,komentar.getTrening().getId(),komentar.isAnoniman());
 	}

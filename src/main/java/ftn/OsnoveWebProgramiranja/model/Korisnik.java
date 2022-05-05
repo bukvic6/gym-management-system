@@ -23,7 +23,7 @@ public class Korisnik {
 
 
 
-	public Korisnik(long id2, String korisnickoIme2, String ime2, String prezime2, String email2, String lozinka2,
+	public Korisnik(Long id2, String korisnickoIme2, String ime2, String prezime2, String email2, String lozinka2,
 			String datRodj2, String adresa2, String brojTelefona2, LocalDate vremeRegistracije2,
 			TipKorisnika tipKorisnika2, boolean aktivan) {
 		
@@ -65,6 +65,15 @@ public class Korisnik {
 		this.prezime = prezime2;
 		this.email = email2;
 		
+	}
+
+
+
+
+
+
+	public Korisnik(Long idKorisnika) {
+		// TODO Auto-generated constructor stub
 	}
 
 

@@ -8,6 +8,7 @@
 	 	<link rel="stylesheet"  type="text/css" href="css/StiloviHorizontalniMeni.css"/>   
 	 </head> 
 <body>
+
 <div>
  	   
  		<table class = "forma">   
@@ -28,8 +29,35 @@
  			<tr  th:each="itTrening, status: ${trening}">
  			<th>Trajanje Treninga:</th><td th:text="${itTrening.trajanjeTreninga}" name="trajanjeTreninga"></td></tr>   
  			<tr  th:each="itTrening, status: ${trening}">
- 			<th>Prosecna Ocena:</th><td th:text="${itTrening.prosecnaOcena}" name="prosecnaOcena"></td></td></tr>     
+ 			<th>Prosecna Ocena:</th><td th:text="${itTrening.prosecnaOcena}" name="prosecnaOcena"></td></td></tr>  
+ 			 <tr  th:each="itKomentar, status: ${komentar}">
+ 			<th>Prosecna Ocena:</th><td th:text="${itKomentar.ocena}" name="Ocena"></td></td></tr>   
+ 			 <tr  th:each="itKomentar, status: ${komentar}">
+ 			<th>Prosecna Ocena:</th><td th:text="${itKomentar.datum}" name="text"></td></td></tr>      
  		</table>    
+ 		
+
+ 		
+ 		
+ 			 <table>     
+	 			<caption>Korisnici</caption>     
+	 			<tr>      
+	 			    <th>Autor</th> 
+	 				<th>Datum</th>     
+	 				<th>Text</th>     
+	 				<th>Ocena</th>   
+	 			
+
+	 			</tr>
+	 			<tr  th:each="itKomentar, status: ${komentar}">  
+	 			<td th:text="${itKomentar.autor}" name="autor"></td>  
+	 			<td th:text="${itKomentar.datum}" name="datum"></td> 
+	 				<td th:text="${itKomentar.textKomentara}" name="Text"></td> 
+	 				<td th:text="${itKomentar.ocena}" name="Ocena"></td> 
+	 				
+  
+     
+	 		</table>
  
  </div>
  	<div>
@@ -46,21 +74,7 @@
 			
 		</form>
 	</div> 
-	<div>
-	 		<table>     
-	 			<caption>Treninzi</caption>     
-	 			<tr>      
-	 			    <th>Autor:</th> 
 
-
-	 			</tr>
-	 			<tr th:each="itKomentar, status: ${komentar}">  
-	 				<td th:text="${itKomentar.textKomentara}"></td>    
-	 				
-
-	 			</tr>
-	 		</table>
- </div>
 
 </body>
 </html>
