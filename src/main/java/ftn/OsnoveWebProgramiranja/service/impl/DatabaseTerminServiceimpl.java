@@ -1,5 +1,7 @@
 package ftn.OsnoveWebProgramiranja.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +19,11 @@ public class DatabaseTerminServiceimpl implements TerminService{
 	public TerminTreninga save(TerminTreninga termin) {
 		terminDAO.save(termin);
 		return termin;
+	}
+
+	@Override
+	public List<TerminTreninga> findAll(Long id) {
+		return terminDAO.findAll(id);
 	}
 	
 

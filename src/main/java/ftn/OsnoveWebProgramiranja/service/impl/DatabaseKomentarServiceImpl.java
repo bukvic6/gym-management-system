@@ -22,8 +22,8 @@ public class DatabaseKomentarServiceImpl implements KomentarService {
 	}
 	
 	@Override
-	public List<Komentar> findAll() {
-		return komentarDAO.findAll();
+	public List<Komentar> findAll(Long id) {
+		return komentarDAO.findAll(id);
 	}
 
 }

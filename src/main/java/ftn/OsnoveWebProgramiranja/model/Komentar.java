@@ -28,27 +28,34 @@ public class Komentar {
 	
 		
 	
-	public Komentar(String text2, int ocena2, LocalDate datum2, Status status2, Korisnik autor2,
+	public Komentar(String text2, int ocena2, LocalDate datum2, Status status2, Korisnik autor,
 			Trening trening2, boolean anoniman2) {
 		this.textKomentara = text2;
 		this.ocena = ocena2;
 		this.datum = datum2;
 		this.status = status2;
-		this.autor = autor2;
+		this.autor = autor;
 		this.trening = trening2;
 		this.anoniman = anoniman2;
 				
 	}
-	public Komentar(Long id, String text2, int ocena2, LocalDate datum2, Status status2, Korisnik autor2,
+	public Komentar(Long id, String text2, int ocena2, LocalDate datum2, Status status2, Korisnik autor,
 			Trening trening2, boolean anoniman2) {
 		this.id = id;
 		this.textKomentara = text2;
 		this.ocena = ocena2;
 		this.datum = datum2;
 		this.status = status2;
-		this.autor = autor2;
+		this.autor = autor;
 		this.trening = trening2;
 		this.anoniman = anoniman2;
+				
+	}
+	public Komentar(Long id, Korisnik autor) {
+		this.id = id;
+
+		this.autor = autor;
+
 				
 	}
 
@@ -96,6 +103,12 @@ public class Komentar {
 	}
 	public void setAnoniman(boolean anoniman) {
 		this.anoniman = anoniman;
+	}
+
+	@Override
+	public String toString() {
+		return "Komentar [id=" + id + ", textKomentara=" + textKomentara + ", ocena=" + ocena + ", datum=" + datum
+				+ ", status=" + status + ", autor=" + autor + ", trening=" + trening + ", anoniman=" + anoniman + "]";
 	}
 
 	

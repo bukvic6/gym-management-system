@@ -72,8 +72,33 @@ public class Korisnik {
 
 
 
-	public Korisnik(Long idKorisnika) {
-		// TODO Auto-generated constructor stub
+	public Korisnik(long idKorisnika,String korisnickoIme) {
+		this.id = idKorisnika;
+		this.korisnickoIme = korisnickoIme;
+	}
+
+
+
+
+
+
+	public Korisnik(Long idKorisnika, String korisnickoIme2, String ime2, String prezime2, String email2,
+			String lozinka2, String datRodj2, String brojTelefona2, LocalDate vremeRegistracije2,
+			TipKorisnika tipKorisnika2, String adresa2, boolean aktivan2) {
+		
+		this.id = idKorisnika;
+		this.korisnickoIme = korisnickoIme2;
+		this.ime = ime2;
+		this.prezime = prezime2;
+		this.email = email2;
+		this.lozinka = lozinka2;
+		this.datRodj = datRodj2;
+		this.adresa = adresa2;
+		this.brojTelefona = brojTelefona2;
+		this.vremeRegistracije = vremeRegistracije2;
+		this.tipKorisnika = tipKorisnika2;
+		this.aktivan = aktivan2;
+		
 	}
 
 
@@ -116,6 +141,14 @@ public class Korisnik {
 
 
 
+	public String getIme() {
+		return ime;
+	}
+
+
+
+
+
 
 	public String getKorisnickoIme() {
 		return korisnickoIme;
@@ -128,15 +161,6 @@ public class Korisnik {
 
 	public void setKorisnickoIme(String korisnickoIme) {
 		this.korisnickoIme = korisnickoIme;
-	}
-
-
-
-
-
-
-	public String getIme() {
-		return ime;
 	}
 
 
@@ -276,8 +300,14 @@ public class Korisnik {
 
 	@Override
 	public String toString() {
-		return this.id + ";" +this.korisnickoIme+ ";" +  this.ime+ ";" + this.prezime + ";" + this.lozinka;
+		return "Korisnik [korisnickoIme=" + korisnickoIme + "]";
 	}
+
+
+
+
+
+
 	public TipKorisnika getTipKorisnika() {
 		return tipKorisnika;
 	}

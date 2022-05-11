@@ -9,13 +9,17 @@ import java.util.List;
 import java.util.Map;
 
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowCallbackHandler;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 
 import ftn.OsnoveWebProgramiranja.dao.KomentarDAO;
+import ftn.OsnoveWebProgramiranja.dao.KorisnikDAO;
+import ftn.OsnoveWebProgramiranja.dao.TreningDAO;
 import ftn.OsnoveWebProgramiranja.model.Komentar;
 import ftn.OsnoveWebProgramiranja.model.Korisnik;
 import ftn.OsnoveWebProgramiranja.model.NivoTreninga;
@@ -31,8 +35,15 @@ public class KomentarDAOimpl implements KomentarDAO {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
+	@Autowired
+	private KorisnikDAO korisnikDAO;
+	
+	@Autowired
+	private TreningDAO treningDAO;
+	
 	private class KomentarRowHandler implements RowCallbackHandler{
 		private Map<Long, Komentar> komentari = new LinkedHashMap<>();
+
 
 		@Override
 		public void processRow(ResultSet rs) throws SQLException{
@@ -42,41 +53,11 @@ public class KomentarDAOimpl implements KomentarDAO {
 			Integer ocena = rs.getInt(index++);
 			LocalDate datum = rs.getTimestamp(index++).toLocalDateTime().toLocalDate();
 			String statusKom =rs.getString(index++);
-			Status status = Status.valueOf(statusKom);
-			
-			
+			Status status = Status.valueOf(statusKom);	
 			Long idKorisnika = rs.getLong(index++);
-			String korisnickoIme = rs.getString(index++);
-			String ime = rs.getString(index++);
-			String prezime = rs.getString(index++);
-			String email = rs.getString(index++);
-			String lozinka = rs.getString(index++);
-			String datRodj = rs.getString(index++);
-			
-			String brojTelefona = rs.getString(index++);
-			LocalDate vremeRegistracije = rs.getTimestamp(index++).toLocalDateTime().toLocalDate();
-			
-			String tip = rs.getString(index++);
-			TipKorisnika tipKorisnika = TipKorisnika.valueOf(tip);
-			String adresa = rs.getString(index++);
-			boolean aktivan = rs.getBoolean(index++);
-			Korisnik autor = new Korisnik(idKorisnika,korisnickoIme,ime,prezime,email,lozinka,datRodj,brojTelefona,vremeRegistracije,tipKorisnika,adresa,aktivan);
-			
-		
+			Korisnik autor = korisnikDAO.findOne(idKorisnika);
 			Long idtre = rs.getLong(index++);
-//			String naziv = rs.getString(index++);
-//			String opis = rs.getString(index++);
-//			String cena = rs.getString(index++);
-//			String vrstaTr = rs.getString(index++);
-//			VrstaTreninga vrstaTreninga = VrstaTreninga.valueOf(vrstaTr);
-//			String nivoTr = rs.getString(index++);
-//			NivoTreninga nivoTreninga = NivoTreninga.valueOf(nivoTr);
-//			Integer trajanjeTreninga = rs.getInt(index++);
-//			Integer prosecnaOcena = rs.getInt(index++);
-//			String trener = rs.getString(index++);
-
-			Trening trening = new Trening(idtre);
-		
+			Trening trening = treningDAO.findOne(idtre);
 			
 			boolean anoniman = rs.getBoolean(index++);
 			
@@ -85,24 +66,22 @@ public class KomentarDAOimpl implements KomentarDAO {
 			
 			komentar = new Komentar(id,textKomentara,ocena,datum,status,autor,trening,anoniman);
 			komentari.put(komentar.getId(), komentar);
-
+			}
 		}
-	}
 		public List<Komentar> getKomentari(){
 			return new ArrayList<>(komentari.values());
-			
 		}
-
-		
+	
 	}
 	
 	@Override
-	public List<Komentar> findAll(){
-		String sql = "select * from komentari";	
+	public List<Komentar> findAll(Long id){
+		String sql = "select * from komentari where trening = ? ";	
 		KomentarRowHandler rowCallbackHandler = new KomentarRowHandler();
-		jdbcTemplate.query(sql, rowCallbackHandler);
-		
+		jdbcTemplate.query(sql, rowCallbackHandler, id);
+
 		return rowCallbackHandler.getKomentari();
+		
 	}
 	@Override
 	public int save(Komentar komentar) {

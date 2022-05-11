@@ -23,6 +23,7 @@ import ftn.OsnoveWebProgramiranja.model.Komentar;
 import ftn.OsnoveWebProgramiranja.model.Korisnik;
 import ftn.OsnoveWebProgramiranja.model.Sala;
 import ftn.OsnoveWebProgramiranja.model.Status;
+import ftn.OsnoveWebProgramiranja.model.TerminTreninga;
 import ftn.OsnoveWebProgramiranja.model.Trening;
 import ftn.OsnoveWebProgramiranja.service.KomentarService;
 import ftn.OsnoveWebProgramiranja.service.KorisnikService;
@@ -50,6 +51,8 @@ public class PolaznikController implements ServletContextAware{
 	@Autowired 
 	private KomentarService komentarService;
 	
+	@Autowired
+	private TerminService terminService;
 
 	
 	@PostConstruct
@@ -87,10 +90,15 @@ public class PolaznikController implements ServletContextAware{
 	@ResponseBody
 	public ModelAndView details(@RequestParam Long id, HttpServletResponse httpServletResponse) {
 		Trening trening = treningService.findOne(id);
-		List<Komentar> komentari = komentarService.findAll();
+		List<Komentar> komentari = komentarService.findAll(id);
+		List<TerminTreninga> termini = terminService.findAll(id);
+
 		
 		ModelAndView rezultat = new ModelAndView("trening");
 		rezultat.addObject("trening",trening);
+		rezultat.addObject("termini",termini);
+
+
 		rezultat.addObject("komentar",komentari);
 		return rezultat;
 	}

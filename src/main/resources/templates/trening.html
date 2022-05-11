@@ -35,12 +35,23 @@
  			 <tr  th:each="itKomentar, status: ${komentar}">
  			<th>Prosecna Ocena:</th><td th:text="${itKomentar.datum}" name="text"></td></td></tr>      
  		</table>    
+ 		<div>
+
+				<th>Termini:</th>
+					<td>
+						<select name="terminId">
+							<option th:each="itTermin: ${termini}" th:value="${itTermin.datum}" th:text="${itTermin.datum}"></option>
+						</select>	
+					</td>
+				</tr>
+ 		
+ 		</div>
  		
 
  		
  		
  			 <table>     
-	 			<caption>Korisnici</caption>     
+	 			<caption>Komentari</caption>     
 	 			<tr>      
 	 			    <th>Autor</th> 
 	 				<th>Datum</th>     
@@ -50,7 +61,7 @@
 
 	 			</tr>
 	 			<tr  th:each="itKomentar, status: ${komentar}">  
-	 			<td th:text="${itKomentar.autor}" name="autor"></td>  
+	 			<td th:text="${itKomentar.autor.korisnickoIme}" name="autor"></td>  
 	 			<td th:text="${itKomentar.datum}" name="datum"></td> 
 	 				<td th:text="${itKomentar.textKomentara}" name="Text"></td> 
 	 				<td th:text="${itKomentar.ocena}" name="Ocena"></td> 

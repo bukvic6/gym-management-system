@@ -9,6 +9,6 @@ public interface KomentarDAO {
 
 	int save(Komentar komentar);
 
-	List<Komentar> findAll();
+	List<Komentar> findAll(Long id);
 
 }
