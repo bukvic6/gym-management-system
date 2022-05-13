@@ -83,6 +83,17 @@ public class KomentarDAOimpl implements KomentarDAO {
 		return rowCallbackHandler.getKomentari();
 		
 	}
+	
+	@Override
+	public List<Komentar> findAll(){
+		String sql = "select * from komentari";	
+		KomentarRowHandler rowCallbackHandler = new KomentarRowHandler();
+		jdbcTemplate.query(sql, rowCallbackHandler);
+
+		return rowCallbackHandler.getKomentari();
+		
+	}
+	
 	@Override
 	public int save(Komentar komentar) {
 		String sql = "insert into komentari (textKomentara, ocena, datum, statusKomentara, autor, trening, anoniman) values(?,?,?,?,?,?,?)";

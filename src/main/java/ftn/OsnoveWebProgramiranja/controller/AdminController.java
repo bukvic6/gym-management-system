@@ -23,12 +23,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.ServletContextAware;
 import org.springframework.web.servlet.ModelAndView;
 
+import ftn.OsnoveWebProgramiranja.model.Komentar;
 import ftn.OsnoveWebProgramiranja.model.Korisnik;
 import ftn.OsnoveWebProgramiranja.model.NivoTreninga;
 import ftn.OsnoveWebProgramiranja.model.Sala;
 import ftn.OsnoveWebProgramiranja.model.TerminTreninga;
 import ftn.OsnoveWebProgramiranja.model.Trening;
 import ftn.OsnoveWebProgramiranja.model.VrstaTreninga;
+import ftn.OsnoveWebProgramiranja.service.KomentarService;
 import ftn.OsnoveWebProgramiranja.service.KorisnikService;
 import ftn.OsnoveWebProgramiranja.service.SalaService;
 import ftn.OsnoveWebProgramiranja.service.TerminService;
@@ -53,6 +55,9 @@ public class AdminController implements ServletContextAware {
 	
 	@Autowired
 	private TerminService terminService;
+	
+	@Autowired
+	private KomentarService komentarService;
 
 	/** inicijalizacija podataka za kontroler */
 	@PostConstruct
@@ -86,7 +91,6 @@ public class AdminController implements ServletContextAware {
 	}
 
 	@GetMapping(value = "/profil")
-
 	public ModelAndView profil(HttpSession session) {
 		Korisnik ulogovani = (Korisnik) session.getAttribute(KorisnikController.KORISNIK_KEY);
 		Korisnik korisnik = korisnikService.findOne(ulogovani.getId());
@@ -96,6 +100,18 @@ public class AdminController implements ServletContextAware {
 
 		return rezultat;
 	}
+	
+	@GetMapping(value = "/komentari")
+	public ModelAndView komentari() {
+		List<Komentar> komentari = komentarService.findAll();
+
+		ModelAndView rezultat = new ModelAndView("komentari");
+		rezultat.addObject("komentari", komentari);
+
+		return rezultat;
+	}
+	
+	
 
 	@GetMapping(value = "/add")
 	public String create(HttpServletResponse response) {

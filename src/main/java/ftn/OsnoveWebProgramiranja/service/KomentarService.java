@@ -9,5 +9,7 @@ public interface KomentarService {
 	Komentar save(Komentar komentar);
 
 	List<Komentar> findAll(Long id);
+	
+	List<Komentar> findAll();
 
 }

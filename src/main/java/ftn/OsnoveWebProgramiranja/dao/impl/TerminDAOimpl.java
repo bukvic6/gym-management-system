@@ -17,11 +17,9 @@ import org.springframework.stereotype.Repository;
 import ftn.OsnoveWebProgramiranja.dao.TerminDAO;
 import ftn.OsnoveWebProgramiranja.dao.TreningDAO;
 import ftn.OsnoveWebProgramiranja.model.Korisnik;
-import ftn.OsnoveWebProgramiranja.model.NivoTreninga;
 import ftn.OsnoveWebProgramiranja.model.Sala;
 import ftn.OsnoveWebProgramiranja.model.TerminTreninga;
 import ftn.OsnoveWebProgramiranja.model.Trening;
-import ftn.OsnoveWebProgramiranja.model.VrstaTreninga;
 import ftn.OsnoveWebProgramiranja.service.SalaService;
 
 @Repository
@@ -45,19 +43,7 @@ public class TerminDAOimpl implements TerminDAO{
 			int index = 1;
 			Long id = rs.getLong(index++);
 			Trening trening = treningDAO.findOne(id);
-//			String naziv = rs.getString(index++);
-//			String opis = rs.getString(index++);
-//			String cena = rs.getString(index++);
-//			String vrstaTr = rs.getString(index++);
-//			VrstaTreninga vrstaTreninga = VrstaTreninga.valueOf(vrstaTr);
-//			String nivoTr = rs.getString(index++);
-//			NivoTreninga nivoTreninga = NivoTreninga.valueOf(nivoTr);
-//			Integer trajanjeTreninga = rs.getInt(index++);
-//			Integer prosecnaOcena = rs.getInt(index++);
-//			String trener = rs.getString(index++);
-//
-//			Trening trening = new Trening(id,naziv,opis,cena,vrstaTreninga,nivoTreninga,trajanjeTreninga,prosecnaOcena, trener);
-//		
+
 			Long ids = rs.getLong(index++);
 			LocalDateTime vreme = rs.getTimestamp(index++).toLocalDateTime();
 			Sala sala = salaService.findOne(ids);
@@ -65,7 +51,9 @@ public class TerminDAOimpl implements TerminDAO{
 			TerminTreninga termin = termini.get(id);
 			if(termin == null) {
 				termin = new TerminTreninga(trening,sala,vreme);
+				termini.put(termin.getTreningId().getId(),termin);
 			}
+			
 			
 			
 			
