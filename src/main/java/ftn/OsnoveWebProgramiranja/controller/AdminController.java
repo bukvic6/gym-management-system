@@ -27,6 +27,7 @@ import ftn.OsnoveWebProgramiranja.model.Komentar;
 import ftn.OsnoveWebProgramiranja.model.Korisnik;
 import ftn.OsnoveWebProgramiranja.model.NivoTreninga;
 import ftn.OsnoveWebProgramiranja.model.Sala;
+import ftn.OsnoveWebProgramiranja.model.Status;
 import ftn.OsnoveWebProgramiranja.model.TerminTreninga;
 import ftn.OsnoveWebProgramiranja.model.Trening;
 import ftn.OsnoveWebProgramiranja.model.VrstaTreninga;
@@ -106,7 +107,7 @@ public class AdminController implements ServletContextAware {
 		List<Komentar> komentari = komentarService.findAll();
 
 		ModelAndView rezultat = new ModelAndView("komentari");
-		rezultat.addObject("komentari", komentari);
+		rezultat.addObject("komentar", komentari);
 
 		return rezultat;
 	}
@@ -144,6 +145,21 @@ public class AdminController implements ServletContextAware {
 	@PostMapping(value = "/delete")
 	private void delete(@RequestParam Long id, HttpServletResponse response) throws IOException {
 		Korisnik obrisan = korisnikService.delete(id);
+		response.sendRedirect(bURL + "admin");
+	}
+	@SuppressWarnings("unused")
+	@PostMapping(value = "komentari/obrisikomentar")
+	private void obrisi(@RequestParam Long id, HttpServletResponse response) throws IOException {
+		Komentar komentar = komentarService.delete(id);
+		
+		response.sendRedirect(bURL + "admin");
+	}
+	
+	@SuppressWarnings("unused")
+	@PostMapping(value = "komentari/odobri")
+	private void odobri(@RequestParam Long id, HttpServletResponse response) throws IOException {
+		Komentar komentar = komentarService.odobri(id);
+		
 		response.sendRedirect(bURL + "admin");
 	}
 

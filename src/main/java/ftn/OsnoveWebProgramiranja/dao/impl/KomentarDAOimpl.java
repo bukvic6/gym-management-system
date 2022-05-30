@@ -102,4 +102,27 @@ public class KomentarDAOimpl implements KomentarDAO {
 				,komentar.getTrening().getId(),komentar.isAnoniman());
 	}
 
+	@Override
+	public Komentar findOne(Long id) {
+		String sql = "select * from komentari where id = ?";	
+		KomentarRowHandler rowCallbackHandler = new KomentarRowHandler();
+		jdbcTemplate.query(sql, rowCallbackHandler, id );
+
+		return rowCallbackHandler.getKomentari().get(0);
+		
+	}
+	@Override
+	public int delete(Long id) {
+		String sql = "update komentari set statusKomentara = 'NEODOBREN' where id = ?";
+		
+		return jdbcTemplate.update(sql,id);
+	}
+	
+	@Override
+	public int odobri(Long id) {
+		String sql = "update komentari set statusKomentara = 'ODOBREN' where id = ?";
+		
+		return jdbcTemplate.update(sql,id);
+	}
+
 }

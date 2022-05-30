@@ -1,0 +1,46 @@
+<!DOCTYPE html> 
+<html xmlns:th="http://www.thymeleaf.org">     
+	<head>     
+		<meta charset="UTF-8">     
+		<base th:href="@{/}"><!-- popuni href atribut vrednosšću context path-a -->
+		<title>Komentari</title>     
+		<link rel="stylesheet"  type="text/css"  href="css/StiloviTabela.css"/>     
+	 	<link rel="stylesheet"  type="text/css" href="css/StiloviHorizontalniMeni.css"/>   
+	 </head> 
+<body>
+	
+ 			 <table>     
+	 			<caption>Komentari</caption>     
+	 			<tr>      
+	 			    <th>Autor</th> 
+	 				<th>Datum</th>     
+	 				<th>Text</th>     
+	 				<th>Ocena</th>   
+	 				<th>Naziv treninga</th>  
+	 				<th>Opcija</th>  
+	 			
+
+	 			</tr>
+	 			<tr  th:each="itKomentar, status: ${komentar}">  
+	 			<td th:text="${itKomentar.autor.korisnickoIme}" name="autor"></td>  
+	 			<td th:text="${itKomentar.datum}" name="datum"></td> 
+	 			<td th:text="${itKomentar.textKomentara}" name="Text"></td> 
+	 			<td th:text="${itKomentar.ocena}" name="Ocena"></td> 
+	 			<td th:text="${itKomentar.trening.naziv}" name="naziv"></td> 
+	 			<td>    
+	 					<form method="post" action="admin/komentari/obrisikomentar" >     
+	 						<input type="hidden"  name="id"  th:value="${itKomentar.id}">     
+	 						<input type="submit"  value="Obrisi" >    
+	 					</form>  
+	 					<form method="post" action="admin/komentari/odobri" >     
+	 						<input type="hidden"  name="id"  th:value="${itKomentar.id}">     
+	 						<input type="submit"  value="Odobri" >    
+	 					</form> 
+	 			</td> 
+	 				
+  
+     
+	 		</table>
+	
+</body>
+</html>

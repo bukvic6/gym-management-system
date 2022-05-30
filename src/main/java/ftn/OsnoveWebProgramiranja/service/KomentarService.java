@@ -12,4 +12,10 @@ public interface KomentarService {
 	
 	List<Komentar> findAll();
 
+	Komentar findOne(Long id);
+
+	Komentar delete(Long id);
+	
+	Komentar odobri(Long id);
+
 }
