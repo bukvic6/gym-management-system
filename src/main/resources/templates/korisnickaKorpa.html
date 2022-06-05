@@ -29,7 +29,13 @@
 						<input type="hidden" name="idTermina" th:value="${itTermin.id}">
 						<input type="submit" value="Ukloni iz korpe">
 					</form>
-				</td>  
+				</td> 
+ 				<td>
+					<form method="post" action="korisnik/korpa/zakazi">
+						<input type="hidden" name="idTermina" th:value="${itTermin.id}">
+						<input type="submit" value="Zakazi termin">
+					</form>
+				</td> 
  			</tr> 
 		</table>
 		<br/>

@@ -21,12 +21,14 @@ import org.springframework.web.context.ServletContextAware;
 import org.springframework.web.servlet.ModelAndView;
 
 import ftn.OsnoveWebProgramiranja.model.Komentar;
+import ftn.OsnoveWebProgramiranja.model.KorisnickaKorpa;
 import ftn.OsnoveWebProgramiranja.model.Korisnik;
 import ftn.OsnoveWebProgramiranja.model.Sala;
 import ftn.OsnoveWebProgramiranja.model.Status;
 import ftn.OsnoveWebProgramiranja.model.TerminTreninga;
 import ftn.OsnoveWebProgramiranja.model.Trening;
 import ftn.OsnoveWebProgramiranja.service.KomentarService;
+import ftn.OsnoveWebProgramiranja.service.KorisnickaKorpaService;
 import ftn.OsnoveWebProgramiranja.service.KorisnikService;
 import ftn.OsnoveWebProgramiranja.service.TerminService;
 import ftn.OsnoveWebProgramiranja.service.TreningService;
@@ -50,6 +52,9 @@ public class PolaznikController implements ServletContextAware{
 	
 	@Autowired
 	private KorisnikService korisnikService;
+	
+	@Autowired
+	private KorisnickaKorpaService korpaService;
 	
 	
 	@Autowired 
@@ -144,7 +149,7 @@ public class PolaznikController implements ServletContextAware{
 	@SuppressWarnings("unchecked")
 	@PostMapping(value="/korpa/ukloni")
 	@ResponseBody
-	public void ukloniIzKorpe(@RequestParam Long id, HttpSession session, HttpServletResponse response) throws IOException {
+	public void ukloniIzKorpe(@RequestParam(name = "idTermina") Long id, HttpSession session, HttpServletResponse response) throws IOException {
 		List<TerminTreninga> zaKorpu = (List<TerminTreninga>) session.getAttribute(TERMIN_ZELJA);
 		for (TerminTreninga termin : zaKorpu) {
 			if (termin.getId().equals(id)) {
@@ -154,6 +159,16 @@ public class PolaznikController implements ServletContextAware{
 		}
 		response.sendRedirect(bURL+"korisnik");
 	}
+	
+	@PostMapping(value = "/korpa/zakazi")
+	public void dodajUKorpu(@RequestParam(name = "idTermina") Long id,HttpServletResponse response,HttpSession session) throws IOException {
+		Korisnik ulogovani = (Korisnik) session.getAttribute(KorisnikController.KORISNIK_KEY);
+		TerminTreninga termin = terminService.findOne(id);
+		KorisnickaKorpa korpa = new KorisnickaKorpa(ulogovani,termin);
+		korpaService.save(korpa);
+		response.sendRedirect(bURL + "korisnik");
+	}
+	
 	
 	
 	
