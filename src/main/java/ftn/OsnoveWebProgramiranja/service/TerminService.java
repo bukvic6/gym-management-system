@@ -10,4 +10,6 @@ public interface TerminService {
 
 	List<TerminTreninga> findAll(Long id);
 
+	TerminTreninga findOne(Long id);
+
 }

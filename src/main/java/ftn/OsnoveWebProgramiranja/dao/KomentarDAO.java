@@ -18,7 +18,4 @@ public interface KomentarDAO {
 
 	int odobri(Long id);
 
-
-
-
 }

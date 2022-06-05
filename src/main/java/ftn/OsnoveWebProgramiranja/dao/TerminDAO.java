@@ -10,4 +10,6 @@ public interface TerminDAO {
 
 	List<TerminTreninga> findAll(Long id);
 
+	TerminTreninga findOne(Long id);
+
 }

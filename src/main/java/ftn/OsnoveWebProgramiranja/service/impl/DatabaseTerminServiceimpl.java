@@ -25,6 +25,11 @@ public class DatabaseTerminServiceimpl implements TerminService{
 	public List<TerminTreninga> findAll(Long id) {
 		return terminDAO.findAll(id);
 	}
+
+	@Override
+	public TerminTreninga findOne(Long id) {
+		return terminDAO.findOne(id);
+	}
 	
 
 

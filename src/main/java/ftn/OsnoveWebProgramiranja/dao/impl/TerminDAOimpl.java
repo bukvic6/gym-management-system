@@ -42,7 +42,8 @@ public class TerminDAOimpl implements TerminDAO{
 		public void processRow(ResultSet rs) throws SQLException {
 			int index = 1;
 			Long id = rs.getLong(index++);
-			Trening trening = treningDAO.findOne(id);
+			Long idtrening = rs.getLong(index++);
+			Trening trening = treningDAO.findOne(idtrening);
 
 			Long ids = rs.getLong(index++);
 			LocalDateTime vreme = rs.getTimestamp(index++).toLocalDateTime();
@@ -50,8 +51,8 @@ public class TerminDAOimpl implements TerminDAO{
 			
 			TerminTreninga termin = termini.get(id);
 			if(termin == null) {
-				termin = new TerminTreninga(trening,sala,vreme);
-				termini.put(termin.getTreningId().getId(),termin);
+				termin = new TerminTreninga(id,trening,sala,vreme);
+				termini.put(termin.getId(),termin);
 			}
 			
 			
@@ -78,6 +79,14 @@ public class TerminDAOimpl implements TerminDAO{
 		jdbcTemplate.query(sql, rowCallbackHandler, id);
 		
 		return rowCallbackHandler.getTermini();
+	}
+
+	@Override
+	public TerminTreninga findOne(Long id) {
+		String sql = "SELECT * from terminTreninga WHERE id = ?";
+		TerminRowCallHandler rowCallbackHandler = new TerminRowCallHandler();
+		jdbcTemplate.query(sql, rowCallbackHandler, id);
+		return rowCallbackHandler.getTermini().get(0);
 	}
 	
 

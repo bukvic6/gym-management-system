@@ -8,6 +8,8 @@
 	 	<link rel="stylesheet"  type="text/css" href="css/StiloviHorizontalniMeni.css"/>   
 	 </head> 
 <body>
+	 <li><a href="korisnik/profil">Profil</a></li>  
+	 <li><a href="korisnik/korpa">Korisnicka korpa</a></li>  
 
 <div>
  	   
@@ -35,22 +37,24 @@
  			 <tr  th:each="itKomentar, status: ${komentar}">
  			<th>Prosecna Ocena:</th><td th:text="${itKomentar.datum}" name="text"></td></td></tr>      
  		</table>    
- 		<div>
- 		<h1>Rezervisite termin: </h1>
+ 		
+ 		<form method ="post" action="korisnik/dodajUKorpu">
+		<table class="forma">
+				<caption>Projekcija</caption>
 
-				<th>Termini:</th>
+				<tr>
+					<th>film:</th>
 					<td>
 						<select name="terminId">
-							<option th:each="itTermin: ${termini}" th:value="${itTermin.datum}" th:text="${itTermin.datum} + ' Sala: '+${itTermin.salaId.id}"></option>
+							<option th:each="itTermin: ${termini}" th:value="${itTermin.id}" th:text="${itTermin.datum} + ' Sala: '+${itTermin.salaId.id}"></option>
+						
 						</select>	
 					</td>
-	
- 		
- 		</div>
- 		
+				</tr>
+				<tr><th></th><td><input type="submit" value="Dodaj"/></td></tr>
+			</table>
+			</form>
 
- 		
- 		
  			 <table>     
 	 			<caption>Komentari</caption>     
 	 			<tr>      

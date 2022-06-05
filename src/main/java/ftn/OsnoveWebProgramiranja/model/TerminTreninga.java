@@ -4,6 +4,7 @@ package ftn.OsnoveWebProgramiranja.model;
 import java.time.LocalDateTime;
 
 public class TerminTreninga {
+	private Long id;
 	private Trening treningId;
 	private Sala salaId;
 	private LocalDateTime datum;
@@ -16,6 +17,24 @@ public class TerminTreninga {
 	}
 
 	
+	public TerminTreninga(Long id2, Trening trening, Sala sala, LocalDateTime vreme) {
+		this.id = id2;
+		this.treningId = trening;
+		this.salaId = sala;
+		this.datum = vreme;
+	}
+
+
+	public Long getId() {
+		return id;
+	}
+
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+
 	public Trening getTreningId() {
 		return treningId;
 	}	

@@ -1,0 +1,37 @@
+<!DOCTYPE html> 
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<base th:href="@{/}">
+		<title>Knjige</title>
+		<link rel="stylesheet" type="text/css" href="css/StiloviTabela.css"/>
+		<link rel="stylesheet" type="text/css" href="css/StiloviHorizontalniMeni.css"/>
+	</head>
+	<body>
+		<ul>
+			 <li><a href="korisnik/profil">Profil</a></li> 
+			</ul>
+		<table>
+			<caption>Korisnicka korpa</caption> 
+			<tr>
+				<th>Trening</th>
+				<th>Trener</th>
+				<th>Datum odrzavanja</th>
+				<th></th>
+			</tr>
+			
+			<tr th:each="itTermin, status: ${termin}">  
+ 				<td th:text="${itTermin.treningId.naziv}"></td>    
+ 				<td th:text="${itTermin.treningId.trener}"></td>    
+ 				<td th:text="${itTermin.datum}"></td>    
+ 				<td>
+					<form method="post" action="korisnik/korpa/ukloni">
+						<input type="hidden" name="idTermina" th:value="${itTermin.id}">
+						<input type="submit" value="Ukloni iz korpe">
+					</form>
+				</td>  
+ 			</tr> 
+		</table>
+		<br/>
+	</body>
+</html>

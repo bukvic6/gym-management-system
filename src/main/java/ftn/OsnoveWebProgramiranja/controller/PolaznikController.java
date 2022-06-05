@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -35,6 +36,9 @@ import ftn.OsnoveWebProgramiranja.service.TreningService;
 @Controller
 @RequestMapping(value = "/korisnik")
 public class PolaznikController implements ServletContextAware{
+	
+	
+	public static final String TERMIN_ZELJA = "zeljeni_termin";
 	
 	
 	@Autowired
@@ -105,18 +109,54 @@ public class PolaznikController implements ServletContextAware{
 
 	
 	@PostMapping(value = "/addKomentar")
-	public void create(@RequestParam int ocena,@RequestParam String textKomentara,@RequestParam Long id, @RequestParam(required=false) boolean anoniman,HttpServletResponse response,HttpSession session) throws IOException {
+	public void create(@RequestParam int ocena, @RequestParam String textKomentara,@RequestParam Long id, @RequestParam(required=false) boolean anoniman,HttpServletResponse response,HttpSession session) throws IOException {
 		LocalDate datum = LocalDate.now();
 		Korisnik ulogovani = (Korisnik) session.getAttribute(KorisnikController.KORISNIK_KEY);
-
-
-
 		Status status = Status.CEKANJE;
 		Trening trening = treningService.findOne(id);
 		Komentar komentar = new Komentar(textKomentara,ocena,datum,status,ulogovani,trening, anoniman);
 		komentarService.save(komentar);
 		response.sendRedirect(bURL + "korisnik");
 	}
+	
+	@SuppressWarnings("unchecked")
+	@PostMapping(value="/dodajUKorpu")
+	public void dodajUZeljene(@RequestParam(name="terminId",required=false)Long id, HttpSession session, HttpServletResponse response) throws IOException {
+		List<TerminTreninga> zaKorpu = (List<TerminTreninga>) session.getAttribute(TERMIN_ZELJA);	
+
+		TerminTreninga termin = terminService.findOne(id);
+		zaKorpu.add(termin);
+		
+		response.sendRedirect(bURL+"korisnik");
+	}
+	
+	@SuppressWarnings("unchecked")
+	@GetMapping(value="/korpa")
+	@ResponseBody
+	public ModelAndView dodajZeljene(HttpSession session){
+		List<TerminTreninga> zaKorpu = (List<TerminTreninga>) session.getAttribute(TERMIN_ZELJA);	
+		
+		ModelAndView rezultat = new ModelAndView("korisnickaKorpa"); // naziv template-a
+		rezultat.addObject("termin", zaKorpu); // podatak koji se šalje template-u
+
+		return rezultat;
+	}
+	@SuppressWarnings("unchecked")
+	@PostMapping(value="/korpa/ukloni")
+	@ResponseBody
+	public void ukloniIzKorpe(@RequestParam Long id, HttpSession session, HttpServletResponse response) throws IOException {
+		List<TerminTreninga> zaKorpu = (List<TerminTreninga>) session.getAttribute(TERMIN_ZELJA);
+		for (TerminTreninga termin : zaKorpu) {
+			if (termin.getId().equals(id)) {
+				zaKorpu.remove(termin);
+				break;
+			}
+		}
+		response.sendRedirect(bURL+"korisnik");
+	}
+	
+	
+	
 	
 
 	
