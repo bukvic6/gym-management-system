@@ -16,6 +16,7 @@ import ftn.OsnoveWebProgramiranja.dao.ClanskaDAO;
 import ftn.OsnoveWebProgramiranja.dao.KorisnikDAO;
 import ftn.OsnoveWebProgramiranja.model.ClanskaKarta;
 import ftn.OsnoveWebProgramiranja.model.Korisnik;
+import ftn.OsnoveWebProgramiranja.model.Sala;
 import ftn.OsnoveWebProgramiranja.model.Status;
 import ftn.OsnoveWebProgramiranja.model.StatusClanske;
 
@@ -30,7 +31,7 @@ public class ClanskaDAOImpl implements ClanskaDAO{
 	private KorisnikDAO korisnikDAO;
 	
 	
-	private class SalaRowCallBackHandler implements RowCallbackHandler{
+	private class ClanskaRowCallBackHandler implements RowCallbackHandler{
 		private Map<Long, ClanskaKarta> clanskeKarte = new LinkedHashMap<>();
 		
 		@Override
@@ -54,7 +55,7 @@ public class ClanskaDAOImpl implements ClanskaDAO{
 			}
 			
 		}
-		public List<ClanskaKarta> getSale(){
+		public List<ClanskaKarta> getClanskeKarte(){
 			return new ArrayList<>(clanskeKarte.values());
 		}
 		
@@ -65,6 +66,40 @@ public class ClanskaDAOImpl implements ClanskaDAO{
 	public int save(ClanskaKarta clanska) {
 		String sql = "INSERT INTO clanskeKarte (korisnikId, popust, bodovi, statusClanske) VALUES (?, ?,?, ?)";
 		return jdbcTemplate.update(sql,clanska.getKorisnikId().getId(),clanska.getPopust(),clanska.getPoeni(), clanska.getStatus().toString());
+	}
+
+
+	@Override
+	public List<ClanskaKarta> findAll() {
+		String sql = "select * from clanskeKarte where status = 'CEKANJE'";
+		ClanskaRowCallBackHandler rowCallbackHandler = new ClanskaRowCallBackHandler();
+		jdbcTemplate.query(sql, rowCallbackHandler);
+
+		return rowCallbackHandler.getClanskeKarte();
+		
+	}
+	@Override
+	public ClanskaKarta findOne(Long id) {
+		String sql = "select * from clanskeKarte where id = ?";
+		
+		ClanskaRowCallBackHandler backHandler = new ClanskaRowCallBackHandler();
+		jdbcTemplate.query(sql, backHandler, id);
+		
+		return backHandler.getClanskeKarte().get(0);
+	}
+	@Override
+	public int delete(Long id) {
+		String sql = "delete from clanskeKarte where id = ?";
+		return jdbcTemplate.update(sql, id);
+	}
+
+
+	@Override
+	public int odobri(Long id) {
+		String sql = "update clanskeKarte set statusClanske = 'ODOBREN' where id = ?";
+		
+		return jdbcTemplate.update(sql,id);
+		
 	}
 
 }

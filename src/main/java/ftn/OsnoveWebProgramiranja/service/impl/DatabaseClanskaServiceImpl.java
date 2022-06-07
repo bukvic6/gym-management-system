@@ -1,10 +1,13 @@
 package ftn.OsnoveWebProgramiranja.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ftn.OsnoveWebProgramiranja.dao.ClanskaDAO;
 import ftn.OsnoveWebProgramiranja.model.ClanskaKarta;
+import ftn.OsnoveWebProgramiranja.model.Sala;
 import ftn.OsnoveWebProgramiranja.service.ClanskaKartaService;
 
 
@@ -18,6 +21,30 @@ public class DatabaseClanskaServiceImpl implements ClanskaKartaService{
 	@Override
 	public ClanskaKarta save(ClanskaKarta clanska) {
 		clanskaDAO.save(clanska);
+		return clanska;
+	}
+
+	@Override
+	public List<ClanskaKarta> findAll() {
+		return clanskaDAO.findAll();
+	}
+
+	@Override
+	public ClanskaKarta delete(Long id) {
+		ClanskaKarta clanska = clanskaDAO.findOne(id);
+		if(clanska != null) {
+			clanskaDAO.delete(id);
+		}
+		return clanska;
+		
+	}
+
+	@Override
+	public ClanskaKarta odobri(Long id) {
+		ClanskaKarta clanska = clanskaDAO.findOne(id);
+		if(clanska != null) {
+			clanskaDAO.odobri(id);
+		}
 		return clanska;
 	}
 }

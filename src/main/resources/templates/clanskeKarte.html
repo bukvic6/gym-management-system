@@ -14,31 +14,31 @@
 	   <li><a href="admin/komentari">Komentari</a></li>
 	    <li><a href="admin/clanskeKarte">Clanske Karte</a></li>
    
-	 		<table>     
-	 			<caption>Treninzi</caption>     
+ 			 <table>     
+	 			<caption>Komentari</caption>     
 	 			<tr>      
-	 			    <th>Naziv Treninga:</th> 
-	 				<th>Opis:</th>     
-	 				<th>Cena:</th>  
-	 				<th>Trener:</th> 
-	 				<th>Vrsta treninga:</th> 
-	 				<th>Nivo treninga:</th> 
-	 				<th>Trajanje treninga:</th> 
-	 				<th>Prosecna ocena:</th> 
+	 			    <th>Autor</th> 
+	 				<th>Opcija</th>  
+	 			
 
 	 			</tr>
-	 			<tr th:each="itTrening, status: ${treninzi}">  
-	 			    <td th:text="${itTrening.naziv}"></td>    
-	 				<td th:text="${itTrening.opis}"></td>    
-	 				<td th:text="${itTrening.cena}"></td>
-	 				<td th:text="${itTrening.trener}"></td>   
-	 				<td th:text="${itTrening.vrstaTreninga}"></td>   
-	 				<td th:text="${itTrening.nivoTreninga}"></td>   
-	 				<td th:text="${itTrening.trajanjeTreninga}"></td>   
-	 				<td th:text="${itTrening.prosecnaOcena}"></td>  
-	 			</tr>
+	 			<tr  th:each="itClanska, status: ${clanska}">  
+	 			<td th:text="${itClanska.korisnikId.korisnickoIme}" name="korisnickoIme"></td>  
+	 			<td>    
+	 					<form method="post" action="admin/clanskeKarte/obrisiClansku" >     
+	 						<input type="hidden"  name="id"  th:value="${itClanska.id}">     
+	 						<input type="submit"  value="Obrisi" >    
+	 					</form>  
+	 					<form method="post" action="admin/clanskeKarte/odobriClansku" >     
+	 						<input type="hidden"  name="id"  th:value="${itClanska.id}">     
+	 						<input type="submit"  value="Odobri" >    
+	 					</form> 
+	 			</td> 
+	 				
+  
+     
 	 		</table>
-	 			 	<ul>     
+	 	<ul>     
 	 		<li><a href="admin/add">Dodaj trening</a></li>   
 	 		<li><a href="admin/addTermin">Dodaj termin</a></li>      
 	 	</ul>

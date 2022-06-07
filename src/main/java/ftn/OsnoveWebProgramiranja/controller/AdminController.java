@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.ServletContextAware;
 import org.springframework.web.servlet.ModelAndView;
 
+import ftn.OsnoveWebProgramiranja.model.ClanskaKarta;
 import ftn.OsnoveWebProgramiranja.model.Komentar;
 import ftn.OsnoveWebProgramiranja.model.Korisnik;
 import ftn.OsnoveWebProgramiranja.model.NivoTreninga;
@@ -31,6 +32,7 @@ import ftn.OsnoveWebProgramiranja.model.Status;
 import ftn.OsnoveWebProgramiranja.model.TerminTreninga;
 import ftn.OsnoveWebProgramiranja.model.Trening;
 import ftn.OsnoveWebProgramiranja.model.VrstaTreninga;
+import ftn.OsnoveWebProgramiranja.service.ClanskaKartaService;
 import ftn.OsnoveWebProgramiranja.service.KomentarService;
 import ftn.OsnoveWebProgramiranja.service.KorisnikService;
 import ftn.OsnoveWebProgramiranja.service.SalaService;
@@ -59,6 +61,9 @@ public class AdminController implements ServletContextAware {
 	
 	@Autowired
 	private KomentarService komentarService;
+	
+	@Autowired
+	private ClanskaKartaService clanskeService;
 
 	/** inicijalizacija podataka za kontroler */
 	@PostConstruct
@@ -111,7 +116,14 @@ public class AdminController implements ServletContextAware {
 
 		return rezultat;
 	}
-	
+
+	@GetMapping(value = "/clanskeKarte")
+	public ModelAndView clanskeKarte() {
+		List<ClanskaKarta> clanske = clanskeService.findAll();
+		ModelAndView rezultat = new ModelAndView("clanskeKarte");
+		rezultat.addObject("clanska", clanske);
+		return rezultat;
+	}
 	
 
 	@GetMapping(value = "/add")
@@ -167,6 +179,19 @@ public class AdminController implements ServletContextAware {
 	@PostMapping(value = "sale/deleteSala")
 	private void deleteSala(@RequestParam Long id, HttpServletResponse response) throws IOException {
 		Sala obrisan = salaService.delete(id);
+		response.sendRedirect(bURL + "admin");
+	}
+	
+	@PostMapping(value = "clanskeKarte/obrisiClansku")
+	private void obrisiClansku(@RequestParam Long id, HttpServletResponse response) throws IOException{
+		ClanskaKarta obrisana = clanskeService.delete(id);
+		response.sendRedirect(bURL + "admin");
+	}
+
+	@PostMapping(value = "komentari/odobri")
+	private void odobriClansku(@RequestParam Long id, HttpServletResponse response) throws IOException {
+		ClanskaKarta clanska = clanskeService.odobri(id);
+		
 		response.sendRedirect(bURL + "admin");
 	}
 
