@@ -20,13 +20,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.ServletContextAware;
 import org.springframework.web.servlet.ModelAndView;
 
+import ftn.OsnoveWebProgramiranja.model.ClanskaKarta;
 import ftn.OsnoveWebProgramiranja.model.Komentar;
 import ftn.OsnoveWebProgramiranja.model.KorisnickaKorpa;
 import ftn.OsnoveWebProgramiranja.model.Korisnik;
 import ftn.OsnoveWebProgramiranja.model.Sala;
 import ftn.OsnoveWebProgramiranja.model.Status;
+import ftn.OsnoveWebProgramiranja.model.StatusClanske;
 import ftn.OsnoveWebProgramiranja.model.TerminTreninga;
 import ftn.OsnoveWebProgramiranja.model.Trening;
+import ftn.OsnoveWebProgramiranja.service.ClanskaKartaService;
 import ftn.OsnoveWebProgramiranja.service.KomentarService;
 import ftn.OsnoveWebProgramiranja.service.KorisnickaKorpaService;
 import ftn.OsnoveWebProgramiranja.service.KorisnikService;
@@ -55,6 +58,9 @@ public class PolaznikController implements ServletContextAware{
 	
 	@Autowired
 	private KorisnickaKorpaService korpaService;
+	
+	@Autowired
+	private ClanskaKartaService clanskaKartaService;
 	
 	
 	@Autowired 
@@ -121,6 +127,19 @@ public class PolaznikController implements ServletContextAware{
 		Trening trening = treningService.findOne(id);
 		Komentar komentar = new Komentar(textKomentara,ocena,datum,status,ulogovani,trening, anoniman);
 		komentarService.save(komentar);
+		response.sendRedirect(bURL + "korisnik");
+	}
+	@PostMapping(value = "/posalji")
+	public void posalji(HttpServletResponse response,HttpSession session) throws IOException {
+		Korisnik ulogovani = (Korisnik) session.getAttribute(KorisnikController.KORISNIK_KEY);
+		int procenat = 50;
+		int brojBodova = 10;
+		StatusClanske status = StatusClanske.CEKANJE;
+
+		
+
+		ClanskaKarta clanska = new ClanskaKarta(ulogovani,procenat,brojBodova,status);
+		clanskaKartaService.save(clanska);
 		response.sendRedirect(bURL + "korisnik");
 	}
 	
