@@ -42,11 +42,15 @@
  			<th>Datum rodjenja:</th>
  			<td><input type="text" th:value="${itKorisnik.datRodj}" name="datRodj"/></td>
  			</tr>
+ 			<tr th:each="itKorisnik, status: ${korisnik}">  
+ 			<th>Lozinka:</th>
+ 			<td><input type="password" th:value="${itKorisnik.lozinka}" name="lozinka"/></td>
+ 			</tr>
+ 			 <th>Ponovite Lozinku:</th>
+ 			<td><input type="text" name="lozinkaPonovljena"/></td>
+ 			</tr>
  			<tr><th></th><td><input type="submit" value="Izmeni"></td></tr>
  			  
- 
-  
- 			   
  		</table>   
  		</form>
 

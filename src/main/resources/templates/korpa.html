@@ -1,0 +1,46 @@
+<!DOCTYPE html> 
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<base th:href="@{/}">
+		<title>Korisnicka Korpa</title>
+		<link rel="stylesheet" type="text/css" href="css/StiloviTabela.css"/>
+		<link rel="stylesheet" type="text/css" href="css/StiloviHorizontalniMeni.css"/>
+	</head>
+	<body>
+		<ul>
+	 <li><a href="admin/profil">Profil</a></li>  
+	  <li><a href="admin/korisnici">Korisnici</a></li>  
+	   <li><a href="admin/sale">Sale</a></li> 
+	   <li><a href="admin/komentari">Komentari</a></li>
+	    <li><a href="admin/clanskeKarte">Clanske Karte</a></li>
+			</ul>
+				<table>
+			<caption>Termin</caption> 
+			<tr>
+				<th>Korisnicko Ime</th>
+				<th>Naziv treninga</th>
+				<th>Trener</th>
+				<th>Cena</th>
+				<th>Sala</th>
+				<th>Datum</th>
+			</tr>
+			
+			<tr th:each="itKorpa, status: ${korpa}">  
+			<td th:text="${itKorpa.korisnikId.korisnickoIme}"></td>   
+ 				<td th:text="${itKorpa.terminId.treningId.naziv}"></td>    
+ 				<td th:text="${itKorpa.terminId.treningId.trener}"></td>   
+ 				<td th:text="${itKorpa.terminId.treningId.cena}"></td>    
+ 				<td th:text="${itKorpa.terminId.salaId.Id}"></td>   
+ 				<td th:text="${itKorpa.terminId.datum}"></td>  
+ 
+		</tr>
+		</table>
+	</body>
+		<ul>     
+	 		<li><a href="admin/add">Dodaj trening</a></li>   
+	 		<li><a href="admin/addTermin">Dodaj termin</a></li>   
+	 		<li><a href="admin/logout">Izloguj se</a></li>   
+	 	</ul> 
+	
+</html>

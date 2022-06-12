@@ -19,6 +19,7 @@ import ftn.OsnoveWebProgramiranja.dao.TerminDAO;
 import ftn.OsnoveWebProgramiranja.model.KorisnickaKorpa;
 import ftn.OsnoveWebProgramiranja.model.Korisnik;
 import ftn.OsnoveWebProgramiranja.model.TerminTreninga;
+import ftn.OsnoveWebProgramiranja.model.Trening;
 
 @Repository
 public class KorpaDAOImpl implements KorpaDAO{
@@ -62,6 +63,30 @@ public class KorpaDAOImpl implements KorpaDAO{
 	public int save(KorisnickaKorpa korpa) {
 		String sql = "Insert into korisnickaKorpa (korisnikId,terminId) VALUES(?,?)";
 		return jdbcTemplate.update(sql, korpa.getKorisnikId().getId(), korpa.getTerminId().getId());
+		
+	}
+
+
+	@Override
+	public List<KorisnickaKorpa> findKorpa(Long id) {
+		String sql = "select * from korisnickaKorpa where korisnikId = ?";
+		KorpaRowCallHandler rowCallbackHandler = new KorpaRowCallHandler();
+		jdbcTemplate.query(sql, rowCallbackHandler, id);
+		
+		return rowCallbackHandler.getKorisnickaKorpa();
+	}
+
+
+	@Override
+	public KorisnickaKorpa findOne(Long id) {
+		String sql = 
+				"SELECT * from korisnickaKorpa WHERE id = ?";
+
+		KorpaRowCallHandler rowCallbackHandler = new KorpaRowCallHandler();
+		jdbcTemplate.query(sql, rowCallbackHandler, id);
+
+		
+		return rowCallbackHandler.getKorisnickaKorpa().get(0);
 		
 	}
 

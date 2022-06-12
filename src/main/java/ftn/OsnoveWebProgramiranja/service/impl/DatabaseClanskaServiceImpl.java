@@ -47,4 +47,15 @@ public class DatabaseClanskaServiceImpl implements ClanskaKartaService{
 		}
 		return clanska;
 	}
+
+	@Override
+	public ClanskaKarta findOdobrena(Long id) {
+		return clanskaDAO.findOdobrena(id);
+	}
+
+	@Override
+	public ClanskaKarta update(ClanskaKarta clanska) {
+		clanskaDAO.update(clanska);
+		return clanska;
+	}
 }

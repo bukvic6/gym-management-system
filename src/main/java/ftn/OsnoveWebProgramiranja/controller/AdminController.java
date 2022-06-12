@@ -8,6 +8,7 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -23,8 +24,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.ServletContextAware;
 import org.springframework.web.servlet.ModelAndView;
 
+
 import ftn.OsnoveWebProgramiranja.model.ClanskaKarta;
 import ftn.OsnoveWebProgramiranja.model.Komentar;
+import ftn.OsnoveWebProgramiranja.model.KorisnickaKorpa;
 import ftn.OsnoveWebProgramiranja.model.Korisnik;
 import ftn.OsnoveWebProgramiranja.model.NivoTreninga;
 import ftn.OsnoveWebProgramiranja.model.Sala;
@@ -34,6 +37,7 @@ import ftn.OsnoveWebProgramiranja.model.Trening;
 import ftn.OsnoveWebProgramiranja.model.VrstaTreninga;
 import ftn.OsnoveWebProgramiranja.service.ClanskaKartaService;
 import ftn.OsnoveWebProgramiranja.service.KomentarService;
+import ftn.OsnoveWebProgramiranja.service.KorisnickaKorpaService;
 import ftn.OsnoveWebProgramiranja.service.KorisnikService;
 import ftn.OsnoveWebProgramiranja.service.SalaService;
 import ftn.OsnoveWebProgramiranja.service.TerminService;
@@ -49,6 +53,9 @@ public class AdminController implements ServletContextAware {
 
 	@Autowired
 	private SalaService salaService;
+	
+	@Autowired
+	private KorisnickaKorpaService korpaService;
 
 	@Autowired
 	private TreningService treningService;
@@ -188,7 +195,7 @@ public class AdminController implements ServletContextAware {
 		response.sendRedirect(bURL + "admin");
 	}
 
-	@PostMapping(value = "komentari/odobri")
+	@PostMapping(value = "clanskeKarte/odobriClansku")
 	private void odobriClansku(@RequestParam Long id, HttpServletResponse response) throws IOException {
 		ClanskaKarta clanska = clanskeService.odobri(id);
 		
@@ -199,10 +206,20 @@ public class AdminController implements ServletContextAware {
 	@ResponseBody
 	public ModelAndView details(@RequestParam Long id) {
 		Korisnik korisnik = korisnikService.findOne(id);
+		List<KorisnickaKorpa> korpa = korpaService.findKorpa(id);
 
 		ModelAndView rezultat = new ModelAndView("editKorisnika"); // naziv template-a
 		rezultat.addObject("korisnik", korisnik); // podatak koji se šalje template-u
+		rezultat.addObject("korpa", korpa);
+		return rezultat; // prosleđivanje zahteva zajedno sa podacima template-u
+	}
+	@GetMapping(value = "/korpa")
+	@ResponseBody
+	public ModelAndView detailsKorpe(@RequestParam Long id) {
+		KorisnickaKorpa korpa = korpaService.findOne(id);
 
+		ModelAndView rezultat = new ModelAndView("korpa"); // naziv template-a
+		rezultat.addObject("korpa", korpa);
 		return rezultat; // prosleđivanje zahteva zajedno sa podacima template-u
 	}
 
@@ -237,7 +254,7 @@ public class AdminController implements ServletContextAware {
 
 	@SuppressWarnings("unused")
 	@PostMapping(value = "/profil")
-	public void editprofil(@ModelAttribute Korisnik profilEdited, HttpServletResponse response) throws IOException {
+	public void editprofil(@ModelAttribute Korisnik profilEdited, @RequestParam(name = "lozinkaPonovljena") String lozinkaPonovljena, HttpServletResponse response) throws IOException {
 		Korisnik korisnik = korisnikService.findOne(profilEdited.getId());
 		if (korisnik != null) {
 			if (profilEdited.getIme() != null && !profilEdited.getIme().trim().equals(""))
@@ -250,7 +267,9 @@ public class AdminController implements ServletContextAware {
 				korisnik.setEmail(profilEdited.getEmail());
 			if (profilEdited.getTipKorisnika() != null)
 				korisnik.setTipKorisnika(profilEdited.getTipKorisnika());
-
+			if(profilEdited.getLozinka() != null && profilEdited.getLozinka().equals(lozinkaPonovljena)) 
+				korisnik.setLozinka(profilEdited.getLozinka());
+		
 		}
 		Korisnik sacuvaj = korisnikService.updateprofil(korisnik);
 		response.sendRedirect(bURL + "admin");
@@ -258,7 +277,7 @@ public class AdminController implements ServletContextAware {
 
 	@SuppressWarnings("unused")
 	@PostMapping(value = "/add")
-	public void create(@RequestParam String naziv, @RequestParam String opis, @RequestParam String cena,
+	public void create(@RequestParam String naziv, @RequestParam String opis, @RequestParam int cena,
 			@RequestParam VrstaTreninga vrstaTreninga, @RequestParam NivoTreninga nivoTreninga,
 			@RequestParam int trajanjeTreninga, @RequestParam int prosecnaOcena, @RequestParam String trener,
 			HttpServletResponse response) throws IOException {
@@ -286,6 +305,14 @@ public class AdminController implements ServletContextAware {
 		terminService.save(termin);
 		response.sendRedirect(bURL + "admin");
 	
+	}
+	
+	@GetMapping(value="/logout")
+	@ResponseBody
+	public void logout(HttpServletRequest request, HttpServletResponse response,HttpSession session) throws IOException {	
+		request.getSession().removeAttribute(KorisnikController.KORISNIK_KEY);
+		request.getSession().invalidate();
+		response.sendRedirect(bURL);
 	}
 
 	

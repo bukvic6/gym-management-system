@@ -10,9 +10,10 @@
 	<body>
 		<ul>
 			 <li><a href="korisnik/profil">Profil</a></li> 
+			 
 			</ul>
 		<table>
-			<caption>Korisnicka korpa</caption> 
+			<caption>Lista zelja</caption> 
 			<tr>
 				<th>Trening</th>
 				<th>Trener</th>
@@ -37,6 +38,31 @@
 					</form>
 				</td> 
  	
-		<br/>
+		</tr>
+		</table>
+				<table>
+			<caption>Korisnicka korpa</caption> 
+			<tr>
+				<th>Trening</th>
+				<th>Cena</th>
+				<th>Datum odrzavanja</th>
+				<th></th>
+			</tr>
+			
+			<tr th:each="itKorpa, status: ${korpa}">  
+ 				<td th:text="${itKorpa.terminId.treningId.naziv}"></td>    
+ 				<td th:text="${itKorpa.terminId.treningId.cena}"></td>    
+ 				<td th:text="${itKorpa.terminId.datum}"></td>  
+  
+ 				<td>
+					<form method="post" action="korisnik/korpa/ukloniIzKorpe">
+						<input type="hidden" name="idTermina" th:value="${itKorpa.id}">
+						<input type="submit" value="Ukloni iz korpe">
+					</form>
+				</td> 
+		</tr>
+		</table>
 	</body>
+		 		<li><a href="korisnik/logout">Izloguj se</a></li>   
+	
 </html>

@@ -14,4 +14,8 @@ public interface ClanskaKartaService {
 
 	ClanskaKarta odobri(Long id);
 
+	ClanskaKarta findOdobrena(Long id);
+
+	ClanskaKarta update(ClanskaKarta clanska);
+
 }

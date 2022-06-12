@@ -9,15 +9,27 @@
 	</head>
 	<body>
 		<ul>
-			 <li><a href="korisnik/profil">Profil</a></li> 
+	 <li><a href="korisnik/profil">Profil</a></li>  
+	 <li><a href="korisnik/korpa">Korisnicka korpa</a></li>  
+	 <li><a href="korisnik/clanskaKarta">Clanska Karta</a></li> 
 			</ul>
 		
  				<td>
-					<form method="post" action="korisnik/clanskaKarta/posalji">
-						<input type="submit" value="Zakazi termin">
+					<form method="post" action="korisnik/posalji">
+						<input type="submit" value="Posalji zahtev za clansku kartu">
 					</form>
 				</td> 
  			</tr> 
-		</table>
+ 			 <table>     
+	 			<caption>Clanska</caption>     
+	 			<tr>      
+	 			    <th>Popust</th> 
+	 				<th>Broj poena</th>      	
+	 			</tr>
+	 			<tr  th:each="itClanska, status: ${clanska}">  
+	 			<td th:text="${itClanska.popust}+'%'" name="popust"></td>  
+	 			<td th:text="${itClanska.poeni}" name="poeni"></td> 
+	 		</table>
+		
 	</body>
 </html>

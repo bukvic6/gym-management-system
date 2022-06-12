@@ -71,7 +71,7 @@ public class ClanskaDAOImpl implements ClanskaDAO{
 
 	@Override
 	public List<ClanskaKarta> findAll() {
-		String sql = "select * from clanskeKarte where status = 'CEKANJE'";
+		String sql = "select * from clanskeKarte where statusClanske = 'CEKANJE'";
 		ClanskaRowCallBackHandler rowCallbackHandler = new ClanskaRowCallBackHandler();
 		jdbcTemplate.query(sql, rowCallbackHandler);
 
@@ -97,9 +97,28 @@ public class ClanskaDAOImpl implements ClanskaDAO{
 	@Override
 	public int odobri(Long id) {
 		String sql = "update clanskeKarte set statusClanske = 'ODOBREN' where id = ?";
-		
 		return jdbcTemplate.update(sql,id);
 		
+	}
+
+
+	@Override
+	public ClanskaKarta findOdobrena(Long id) {
+		String sql = "select * from clanskeKarte where korisnikId = ? and statusClanske = 'ODOBREN'";
+		ClanskaRowCallBackHandler backHandler = new ClanskaRowCallBackHandler();
+		jdbcTemplate.query(sql, backHandler, id);
+		if(backHandler.getClanskeKarte().size() == 0) {
+			return null;
+		}
+		return backHandler.getClanskeKarte().get(0);
+	}
+
+
+	@Override
+	public int update(ClanskaKarta clanska) {
+		String sql = "update clanskeKarte set popust = ? , bodovi = ? where id = ?";
+		boolean uspeh = jdbcTemplate.update(sql, clanska.getPopust(),clanska.getPoeni(),clanska.getId()) ==1;
+		return 0;
 	}
 
 }

@@ -10,7 +10,7 @@
 <body>
 	 <li><a href="korisnik/profil">Profil</a></li>  
 	 <li><a href="korisnik/korpa">Korisnicka korpa</a></li>  
-	 <li><a href="korisnik/clanskaKarta">Korisnicka korpa</a></li> 
+	 <li><a href="korisnik/clanskaKarta">Clanska Karta</a></li> 
 
 <div>
  	   
@@ -41,10 +41,10 @@
  		
  		<form method ="post" action="korisnik/dodajUKorpu">
 		<table class="forma">
-				<caption>Projekcija</caption>
+				<caption>Zakazivanje termina treninga</caption>
 
 				<tr>
-					<th>film:</th>
+					<th>Termin:</th>
 					<td>
 						<select name="terminId">
 							<option th:each="itTermin: ${termini}" th:value="${itTermin.id}" th:text="${itTermin.datum} + ' Sala: '+${itTermin.salaId.id}"></option>
@@ -52,7 +52,7 @@
 						</select>	
 					</td>
 				</tr>
-				<tr><th></th><td><input type="submit" value="Dodaj"/></td></tr>
+				<tr><th></th><td><input type="submit" value="Zakazi termin"/></td></tr>
 			</table>
 			</form>
 
@@ -91,6 +91,11 @@
 			
 		</form>
 	</div> 
+	
+		<ul>     
+
+	 		<li><a href="korisnik/logout">Izloguj se</a></li>   
+	 	</ul>
 
 
 </body>

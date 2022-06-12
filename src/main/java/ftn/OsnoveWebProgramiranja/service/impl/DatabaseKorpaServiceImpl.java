@@ -1,5 +1,7 @@
 package ftn.OsnoveWebProgramiranja.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +23,20 @@ public class DatabaseKorpaServiceImpl implements KorisnickaKorpaService{
 		korpaDAO.save(korpa);
 		return korpa;
 		
+	}
+
+
+
+	@Override
+	public List<KorisnickaKorpa> findKorpa(Long id) {
+		return korpaDAO.findKorpa(id);
+	}
+
+
+
+	@Override
+	public KorisnickaKorpa findOne(Long id) {
+		return korpaDAO.findOne(id);
 	}
 
 }

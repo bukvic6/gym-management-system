@@ -15,5 +15,9 @@ public interface ClanskaDAO {
 
 	int odobri(Long id);
 
+	ClanskaKarta findOdobrena(Long id);
+
+	public int update(ClanskaKarta clanska);
+
 
 }

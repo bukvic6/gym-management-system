@@ -14,19 +14,19 @@
 			<caption>Korisnik</caption>
 			<tr th:each="itKorisnik, status: ${korisnik}">
  			<th>Ime:</th>
- 			<td><input type="text" th:value="${itKorisnik.ime}"  name="ime"></td>
+ 			<td th:text="${itKorisnik.ime}"  name="ime"></td>
  			</tr>    
  			<tr th:each="itKorisnik, status: ${korisnik}">
  			<th>Prezime:</th>
- 			<td><input type="text" th:value="${itKorisnik.prezime}" name="prezime" /></td>
+ 			<td th:text="${itKorisnik.prezime}" name="prezime" /></td>
  			</tr>   
  			<tr th:each="itKorisnik, status: ${korisnik}">
  			<th>Korisnicko ime:</th>
- 			<td><input type="text" th:value="${itKorisnik.korisnickoIme}" name="korisnickoIme"/></td>
+ 			<td th:text="${itKorisnik.korisnickoIme}" name="korisnickoIme"/></td>
  			</tr>   
  			<tr th:each="itKorisnik, status: ${korisnik}">
  			<th>Email:</th>
- 			<td><input type="text" th:value="${itKorisnik.email}" name="email"/></td>
+ 			<td th:text="${itKorisnik.email}" name="email"/></td>
  			</tr> 
 			<tr>
 			<th>Tip korisnika:</th>
@@ -45,5 +45,26 @@
 			<tr><th></th><td><input type="submit" value="Izmeni"></td></tr>
 		</table>
 	</form>
+	
+			<table>
+			<caption>Zakazani treninzi korisnika</caption> 
+			<tr>
+				<th>Trening</th>
+				<th>Cena</th>
+				<th>Datum odrzavanja</th>
+				<th></th>
+			</tr>
+			
+			<tr th:each="itKorpa, status: ${korpa}">  
+ 				<td th:text="${itKorpa.terminId.treningId.naziv}"></td>    
+ 				<td th:text="${itKorpa.terminId.treningId.cena}"></td>    
+ 				<td><a th:href="|admin/korpa?id=${itKorpa.id}|"  th:text="${itKorpa.terminId.datum}"></td>  
+		</tr>
+		</table>
+		<ul>
+			<li><a href="admin/add">Dodaj trening</a></li>   
+	 		<li><a href="admin/addTermin">Dodaj termin</a></li>   
+	 		<li><a href="admin/logout">Izloguj se</a></li>   
+		</ul>
 </body>
 </html>

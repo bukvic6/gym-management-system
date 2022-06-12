@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.ServletContextAware;
 import org.springframework.web.servlet.ModelAndView;
+
 
 import ftn.OsnoveWebProgramiranja.model.ClanskaKarta;
 import ftn.OsnoveWebProgramiranja.model.Komentar;
@@ -100,6 +102,28 @@ public class PolaznikController implements ServletContextAware{
 
 		return rezultat;
 	}
+	@GetMapping(value = "/clanskaKarta")
+	public ModelAndView clanska(HttpSession session) {
+		Korisnik ulogovani = (Korisnik) session.getAttribute(KorisnikController.KORISNIK_KEY);
+		ClanskaKarta clanska = clanskaKartaService.findOdobrena(ulogovani.getId());
+		ModelAndView rezultat = new ModelAndView("clanskaKarta");
+		rezultat.addObject("clanska", clanska);
+		return rezultat;
+	}
+	@SuppressWarnings("unchecked")
+	@GetMapping(value="/korpa")
+	@ResponseBody
+	public ModelAndView dodajZeljene(HttpSession session){
+		Korisnik ulogovani = (Korisnik) session.getAttribute(KorisnikController.KORISNIK_KEY);
+
+		List<TerminTreninga> zaKorpu = (List<TerminTreninga>) session.getAttribute(TERMIN_ZELJA);	
+		List<KorisnickaKorpa> korpa = korpaService.findKorpa(ulogovani.getId());
+		ModelAndView rezultat = new ModelAndView("korisnickaKorpa"); // naziv template-a
+		rezultat.addObject("termin", zaKorpu);
+		rezultat.addObject("korpa", korpa);// podatak koji se šalje template-u
+
+		return rezultat;
+	}
 	
 	@GetMapping(value ="/details")
 	@ResponseBody
@@ -135,9 +159,6 @@ public class PolaznikController implements ServletContextAware{
 		int procenat = 50;
 		int brojBodova = 10;
 		StatusClanske status = StatusClanske.CEKANJE;
-
-		
-
 		ClanskaKarta clanska = new ClanskaKarta(ulogovani,procenat,brojBodova,status);
 		clanskaKartaService.save(clanska);
 		response.sendRedirect(bURL + "korisnik");
@@ -154,17 +175,7 @@ public class PolaznikController implements ServletContextAware{
 		response.sendRedirect(bURL+"korisnik");
 	}
 	
-	@SuppressWarnings("unchecked")
-	@GetMapping(value="/korpa")
-	@ResponseBody
-	public ModelAndView dodajZeljene(HttpSession session){
-		List<TerminTreninga> zaKorpu = (List<TerminTreninga>) session.getAttribute(TERMIN_ZELJA);	
-		
-		ModelAndView rezultat = new ModelAndView("korisnickaKorpa"); // naziv template-a
-		rezultat.addObject("termin", zaKorpu); // podatak koji se šalje template-u
 
-		return rezultat;
-	}
 	@SuppressWarnings("unchecked")
 	@PostMapping(value="/korpa/ukloni")
 	@ResponseBody
@@ -184,8 +195,26 @@ public class PolaznikController implements ServletContextAware{
 		Korisnik ulogovani = (Korisnik) session.getAttribute(KorisnikController.KORISNIK_KEY);
 		TerminTreninga termin = terminService.findOne(id);
 		KorisnickaKorpa korpa = new KorisnickaKorpa(ulogovani,termin);
+		int broj = termin.getTreningId().getCena() / 500;
+		ClanskaKarta clanska = clanskaKartaService.findOdobrena(ulogovani.getId());
+		clanska.setPoeni(clanska.getPoeni() + broj);
+		int popust = broj*5;
+		clanska.setPopust(clanska.getPopust() + popust);
+		clanskaKartaService.update(clanska);
+
+
+		
+		
 		korpaService.save(korpa);
 		response.sendRedirect(bURL + "korisnik");
+	}
+	
+	@GetMapping(value="/logout")
+	@ResponseBody
+	public void logout(HttpServletRequest request, HttpServletResponse response,HttpSession session) throws IOException {	
+		request.getSession().removeAttribute(KorisnikController.KORISNIK_KEY);
+		request.getSession().invalidate();
+		response.sendRedirect(bURL);
 	}
 	
 	

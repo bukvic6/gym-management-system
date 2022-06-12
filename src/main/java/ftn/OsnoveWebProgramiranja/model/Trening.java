@@ -7,7 +7,7 @@ public class Trening {
 	private String naziv;
 	private String opis;
 	private TipTreninga tipTreniga;
-	private String cena;
+	private int cena;
 	private VrstaTreninga vrstaTreninga;
 	private NivoTreninga nivoTreninga;
 	private int trajanjeTreninga;
@@ -15,7 +15,7 @@ public class Trening {
 	private String trener;
 
 
-	public Trening(String naziv2, String opis2, String cena2,VrstaTreninga vrstatr, NivoTreninga nivotr, 
+	public Trening(String naziv2, String opis2, int cena2,VrstaTreninga vrstatr, NivoTreninga nivotr, 
 			int trajanjeTreninga2, int prosecnaOcena2, String trener) {
 		this.naziv = naziv2;
 		this.opis = opis2;
@@ -26,7 +26,7 @@ public class Trening {
 		this.prosecnaOcena = prosecnaOcena2;
 		this.trener = trener;
 	}
-	public Trening(Long id2, String naziv2, String opis2, String cena2, VrstaTreninga vrstaTreninga2,
+	public Trening(Long id2, String naziv2, String opis2, int cena2, VrstaTreninga vrstaTreninga2,
 			NivoTreninga nivoTreninga2, int trajanjeTreninga2, int prosecnaOcena2, String trener) {
 		this.id = id2;
 		this.naziv = naziv2;
@@ -67,10 +67,10 @@ public class Trening {
 	public void setTipTreniga(TipTreninga tipTreniga) {
 		this.tipTreniga = tipTreniga;
 	}
-	public String getCena() {
+	public int getCena() {
 		return cena;
 	}
-	public void setCena(String cena) {
+	public void setCena(int cena) {
 		this.cena = cena;
 	}
 	public VrstaTreninga getVrstaTreninga() {
