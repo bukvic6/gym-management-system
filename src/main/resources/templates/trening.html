@@ -48,10 +48,11 @@
 					<td>
 						<select name="terminId">
 							<option th:each="itTermin: ${termini}" th:value="${itTermin.id}" th:text="${itTermin.datum} + ' Sala: '+${itTermin.salaId.id}"></option>
-						
 						</select>	
 					</td>
+					
 				</tr>
+				<tr><th>Popust:</th><td><input type="number" min="0" max= "5" name="popust"/></td></tr>     
 				<tr><th></th><td><input type="submit" value="Zakazi termin"/></td></tr>
 			</table>
 			</form>
@@ -63,19 +64,13 @@
 	 				<th>Datum</th>     
 	 				<th>Text</th>     
 	 				<th>Ocena</th>   
-	 			
-
 	 			</tr>
 	 			<tr  th:each="itKomentar, status: ${komentar}">  
 	 			<td th:text="${itKomentar.autor.korisnickoIme}" name="autor"></td>  
 	 			<td th:text="${itKomentar.datum}" name="datum"></td> 
 	 				<td th:text="${itKomentar.textKomentara}" name="Text"></td> 
 	 				<td th:text="${itKomentar.ocena}" name="Ocena"></td> 
-	 				
-  
-     
 	 		</table>
- 
  </div>
  	<div>
         <form method="post" action="korisnik/addKomentar">
@@ -94,7 +89,7 @@
 	
 		<ul>     
 
-	 		<li><a href="korisnik/logout">Izloguj se</a></li>   
+	 		<li><a th:href="korisnik/logout">Izloguj se</a></li>   
 	 	</ul>
 
 

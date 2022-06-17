@@ -7,17 +7,24 @@
 		<link rel="stylesheet"  type="text/css"  href="css/StiloviTabela.css"/>     
 	 	<link rel="stylesheet"  type="text/css" href="css/StiloviHorizontalniMeni.css"/>   
 	 </head> 
+	 
 <body>
+	 <li><a href="admin/profil" th:text="#{profil}"></a></li>
+	  <li><a href="admin/korisnici" th:text="#{korisnici}"></a></li>  
+	   <li><a href="admin/sale" th:text="#{sale}"></a></li> 
+	   <li><a href="admin/komentari" th:text="#{komentari}"></a></li>
+	    <li><a href="admin/clanskeKarte" th:text="#{clanskeKarte}"></a></li>
 	
  			 <table>     
-	 			<caption>Komentari</caption>     
+	 			<h1 th:text="#{komentari}"></h1>  
+
 	 			<tr>      
-	 			    <th>Autor</th> 
-	 				<th>Datum</th>     
-	 				<th>Text</th>     
-	 				<th>Ocena</th>   
-	 				<th>Naziv treninga</th>  
-	 				<th>Opcija</th>  
+	 			    <th th:text="#{autor}">Autor</th> 
+	 				<th th:text="#{datumiVreme}">Datum</th>     
+	 				<th th:text="#{text}">Text</th>     
+	 				<th th:text="#{prosecnaOcena}">Ocena</th>   
+	 				<th th:text="#{imeTreninga}">Naziv treninga</th>  
+	 				<th th:text="#{opcija}">Opcija</th>  
 	 			
 
 	 			</tr>
@@ -37,10 +44,12 @@
 	 						<input type="submit"  value="Odobri" >    
 	 					</form> 
 	 			</td> 
-	 				
-  
-     
 	 		</table>
+	 			 			 	<ul>     
+	 		<li><a href="admin/add" th:text="#{dodajTrening}"></a></li>   
+	 		<li><a href="admin/addTermin" th:text="#{dodajTermin}"></a></li>   
+	 		<li><a href="admin/logout" th:text="#{logOut}"></a></li>   
+	 	</ul>
 	
 </body>
 </html>

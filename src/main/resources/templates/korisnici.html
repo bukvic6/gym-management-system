@@ -8,21 +8,26 @@
 	 	<link rel="stylesheet"  type="text/css" href="css/StiloviHorizontalniMeni.css"/>   
 	 </head>     
 	 <body>   
+	 <li><a href="admin/profil" th:text="#{profil}"></a></li>
+	   <li><a href="admin/sale" th:text="#{sale}"></a></li> 
+	   <li><a href="admin/komentari" th:text="#{korisnici}"></a></li>
+	    <li><a href="admin/clanskeKarte" th:text="#{clanskeKarte}"></a></li>
+   
    
 	 		<table>     
-	 			<caption>Korisnici</caption>     
+	 			<h1 th:text="#{korisnici}"></h1></caption>     
 	 			<tr>      
-	 			    <th>Korisnicko ime</th> 
-	 				<th>Ime</th>     
-	 				<th>Prezime</th>     
-	 				<th>Email</th>   
-	 				<th>Lozinka</th> 
-	 				<th>Datum Rodjenja</th> 
-	 				<th>Broj Telefona</th> 
-	 				<th>Vreme Registracije</th> 
-	 				<th>Tip korisnika</th> 
-	 				<th>Adresa</th> 
-	 				<th></th>    
+	 			    <th th:text="#{username}"></th> 
+	 				<th th:text="#{ime}"></th>     
+	 				<th th:text="#{prezime}"></th>     
+	 				<th th:text="#{email}"></th>   
+	 				<th th:text="#{lozinka}"></th> 
+	 				<th th:text="#{datumRodj}"></th> 
+	 				<th th:text="#{brojTelefona}"></th> 
+	 				<th th:text="#{datumiVreme}"></th> 
+	 				<th th:text="#{tipKorisnika}"></th> 
+	 				<th th:text="#{adresa}"></th> 
+	 				 
 	 			</tr>
 	 			<tr th:each="itKorisnik, status: ${korisnici}">  
 	 			    <td ><a th:href="|admin/details?id=${itKorisnik.id}|"  th:text="${itKorisnik.korisnickoIme}"></a></td>    
@@ -38,6 +43,11 @@
 
 	 			</tr>
 	 		</table>
+	 	<ul>     
+	 		<li><a href="admin/add" th:text="#{dodajTrening}"></a></li>   
+	 		<li><a href="admin/addTermin" th:text="#{dodajTermin}"></a></li>   
+	 		<li><a href="admin/logout" th:text="#{logOut}"></a></li>   
+	 	</ul>
 
 	 </body>   
  </html>	

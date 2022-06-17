@@ -8,17 +8,16 @@
 	 	<link rel="stylesheet"  type="text/css" href="css/StiloviHorizontalniMeni.css"/>   
 	 </head>     
 	 <body>   
-	 <li><a href="admin/profil">Profil</a></li>  
-	  <li><a href="admin/korisnici">Korisnici</a></li>  
-	   <li><a href="admin/sale">Sale</a></li> 
-	   <li><a href="admin/komentari">Komentari</a></li>
-	    <li><a href="admin/clanskeKarte">Clanske Karte</a></li>
+	 <li><a href="admin/profil"  th:text="#{profil}"></a></li>
+	  <li><a href="admin/korisnici" th:text="#{korisnici}"></a></li>  
+	   <li><a href="admin/sale" th:text="#{sale}"></a></li> 
+	   <li><a href="admin/komentari" th:text="#{korisnici}"></a></li>
    
  			 <table>     
-	 			<caption>Clanske karte</caption>     
+	 			<h1 th:text="#{clanskeKarte}"></h1></caption>         
 	 			<tr>      
-	 			    <th>Korisnicko Ime</th> 
-	 				<th>Opcija</th>  
+                    <th th:text="#{username}"></th> 
+	 			    <th th:text="#{opcija}"></th> 
 	 			
 
 	 			</tr>
@@ -31,17 +30,17 @@
 	 					</form>  
 	 					<form method="post" action="admin/clanskeKarte/odobriClansku" >     
 	 						<input type="hidden"  name="id"  th:value="${itClanska.id}">     
-	 						<input type="submit"  value="Odobri" >    
+	 						<input type="submit"  th:value="#{odobri}" >    
 	 					</form> 
 	 			</td> 
 	 				
   
      
 	 		</table>
-	 	<ul>     
-	 		<li><a href="admin/add">Dodaj trening</a></li>   
-	 		<li><a href="admin/addTermin">Dodaj termin</a></li>   
-	 		<li><a href="admin/logout">Izloguj se</a></li>       
+	 			 	<ul>     
+	 		<li><a href="admin/add" th:text="#{dodajTrening}"></a></li>   
+	 		<li><a href="admin/addTermin" th:text="#{dodajTermin}"></a></li>   
+	 		<li><a href="admin/logout" th:text="#{logOut}"></a></li>   
 	 	</ul>
 	 </body>   
  </html>	

@@ -12,9 +12,17 @@
 <div>
 <form method="post" action="addTermin">
 			<table class="forma">
-				<caption>Dodavanje termina</caption>
+			
+				 <li><a href="admin/profil" th:text="#{profil}"></a></li>
+	             <li><a href="admin/korisnici" th:text="#{korisnici}"></a></li>  
+	             <li><a href="admin/sale" th:text="#{sale}"></a></li> 
+	             <li><a href="admin/komentari" th:text="#{korisnici}"></a></li>
+	             <li><a href="admin/clanskeKarte" th:text="#{clanskeKarte}"></a></li>
+				<h1 th:text="#{termini}"></h1></caption>  
+				
+	   
 				<tr>
-					<th>Trening:</th>
+					 <th th:text="#{imeTreninga}"></th> 
 					<td>
 						<select name="treningId">
 							<option th:each="itTrening: ${treninzi}" th:value="${itTrening.id}" th:text="${itTrening.naziv}"></option>
@@ -22,7 +30,7 @@
 					</td>
 				</tr>
 				<tr>
-					<th>Sala:</th>
+					 <th th:text="#{sala}"></th> 
 					<td>
 						<select name="salaId">
 							<option th:each="itSala: ${sala}" th:value="${itSala.id}" th:text=" 'Oznaka: '+${itSala.id}+' Kapacitet: '+${itSala.kapacitet}"></option>
@@ -30,20 +38,21 @@
 					</td>
 				</tr>
 				<tr>
-					<th>datum i vreme:</th>
+				<th th:text="#{datumiVreme}"></th> 
+
 					<td>
 						<input type="date" th:value="2020-04-01" name="datum"/>&nbsp;
 						<input type="time" value="18:00" name="vreme"/>
 					</td>
 				<tr>
 				
-				<tr><th></th><td><input type="submit" value="Dodaj"/></td></tr>
+				<tr><th></th><td><input type="submit" th:value="dodaj"/></td></tr>
 			</table>
 		</form>
-		<ul>
-		 	<li><a href="admin/add">Dodaj trening</a></li>   
-	 		<li><a href="admin/logout">Izloguj se</a></li>   
-		</ul>
+	 			 	<ul>     
+	 		<li><a href="admin/add" th:text="#{dodajTrening}"></a></li>   
+	 		<li><a href="admin/logout" th:text="#{logOut}"></a></li>   
+	 	</ul>
 	</div>
 </body>
 </html>

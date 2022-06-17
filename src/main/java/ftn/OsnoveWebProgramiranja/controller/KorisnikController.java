@@ -34,6 +34,14 @@ public class KorisnikController implements ServletContextAware {
 	private ServletContext servletContext;
 	private  String bURL; 
 	
+	@Controller
+	public class ViewController {
+	   @RequestMapping("/locale")
+	   public String locale() {
+	      return "locale";
+	   }
+	}
+	
 	@Autowired
 	private KorisnikService korisnikService;
 	

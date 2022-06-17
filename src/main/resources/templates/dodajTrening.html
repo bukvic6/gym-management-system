@@ -16,12 +16,12 @@
  	</ul>    
  	<form method="post" action="add">    
  		<table>   
- 			<caption>Dodaj Trening</caption>    
- 			<tr><th>Naziv:</th><td><input type="text" value="" name="naziv"/></td></tr>    
- 			<tr><th>Opis:</th><td><input type="text" value="" name="opis"/></td></tr>   
- 			<tr><th>Cena:</th><td><input type="text" value="" name="cena" /></td></tr>   
- 			<tr><th>Trener:</th><td><input type="text" value="" name="trener" /></td></tr>   
- 			<tr><th>Vrsta Treninga:</th>
+	 		<h1 th:text="#{dodajTrening}"></h1></caption>     
+ 			<tr><th th:text="#{imeTreninga}"></th><td><input type="text" value="" name="naziv"/></td></tr>    
+ 			<tr><th th:text="#{opisTreninga}"></th><td><input type="text" value="" name="opis"/></td></tr>   
+ 			<tr><th th:text="#{cenaTreninga}"></th><td><input type="text" value="" name="cena" /></td></tr>   
+ 			<tr><th th:text="#{trener}"></th><td><input type="text" value="" name="trener" /></td></tr>   
+ 			<tr><th th:text="#{vrstaTreninga}">Vrsta Treninga:</th>
  			<td>
  			<select name="vrstaTreninga">
 	 			<option  value="POJEDINACNI">POJEDINACNI</option>
@@ -30,7 +30,7 @@
  			</select>
  			</td>
  			</tr>   
- 			<tr><th>Nivo Treninga:</th>
+ 			<tr><th th:text="#{nivoTreninga}"></th>
  			<td>
  			<select name="nivoTreninga">
 	 			<option value="AMATERSKI">AMATERSKI</option>
@@ -40,9 +40,9 @@
  			</select>
  			</td>
  			</tr>  
- 			<tr><th>Trajanje Treninga:</th><td><input type="number" min="1" name="trajanjeTreninga"/></td></tr>   
- 			<tr><th>Prosecna Ocena:</th><td><input type="number" min="1" name="prosecnaOcena"/></td></tr>   
- 			<tr><th></th><td><input type="submit" value="Dodaj"/></td>    
+ 			<tr><th th:text="#{trajanjeTreninga}"></th><td><input type="number" min="1" name="trajanjeTreninga"/></td></tr>   
+ 			<tr><th th:text="#{prosecnaOcena}"></th><td><input type="number" min="1" name="prosecnaOcena"/></td></tr>   
+ 			<tr><th></th><td><input type="submit" th:value="#{dodaj}"/></td>    
  		</table>    
  	</form> 
 </body>

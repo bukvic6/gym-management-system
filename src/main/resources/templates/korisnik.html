@@ -8,21 +8,21 @@
 	 	<link rel="stylesheet"  type="text/css" href="css/StiloviHorizontalniMeni.css"/>   
 	 </head>     
 	 <body>   
-	 <li><a href="korisnik/profil">Profil</a></li>  
-	 <li><a href="korisnik/korpa">Korisnicka korpa</a></li>  
-	 <li><a href="korisnik/clanskaKarta">Clanska Karta</a></li> 
+	 <li><a href="korisnik/profil" th:text="#{profil}"></a></li>  
+	 <li><a href="korisnik/korpa" th:text="#{korisnickaKorpa}"></a></li>  
+	 <li><a href="korisnik/clanskaKarta" th:text="#{clanskaKarta}"></a></li> 
    
 	 		<table>     
-	 			<caption>Treninzi</caption>     
+	 			<h1 th:text="#{treninzi}"></h1></caption>    
 	 			<tr>      
-	 			    <th>Naziv Treninga:</th> 
-	 				<th>Opis:</th>     
-	 				<th>Cena:</th>  
-	 				<th>Trener:</th> 
-	 				<th>Vrsta treninga:</th> 
-	 				<th>Nivo treninga:</th> 
-	 				<th>Trajanje treninga:</th> 
-	 				<th>Prosecna ocena:</th> 
+	 			    <th th:text="#{imeTreninga}"></th> 
+	 				<th th:text="#{opisTreninga}"></th>     
+	 				<th th:text="#{cenaTreninga}"></th>  
+	 				<th th:text="#{trener}"></th> 
+	 				<th th:text="#{vrstaTreninga}"></th> 
+	 				<th th:text="#{nivoTreninga}"></th> 
+	 				<th th:text="#{trajanjeTreninga}"></th> 
+	 				<th th:text="#{prosecnaOcena}"></th> 
 
 	 			</tr>
 	 			<tr th:each="itTrening, status: ${treninzi}">  
@@ -38,7 +38,7 @@
 	 		</table>
 	 		<ul>     
 
-	 		<li><a href="korisnik/logout">Izloguj se</a></li>   
+	 		<li><a href="korisnik/logout"  th:text="#{logOut}">Izloguj se</a></li>   
 	 	</ul>
 	 </body>  
 

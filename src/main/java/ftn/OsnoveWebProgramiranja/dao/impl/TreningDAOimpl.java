@@ -41,7 +41,7 @@ public class TreningDAOimpl implements TreningDAO{
 			Long id = resultSet.getLong(index++);
 			String naziv = resultSet.getString(index++);
 			String opis = resultSet.getString(index++);
-			Integer cena = resultSet.getInt(index++);
+			Float cena = resultSet.getFloat(index++);
 			String vrstaTr = resultSet.getString(index++);
 			VrstaTreninga vrstaTreninga = VrstaTreninga.valueOf(vrstaTr);
 			String nivoTr = resultSet.getString(index++);
@@ -86,7 +86,7 @@ public class TreningDAOimpl implements TreningDAO{
 				int index = 1;
 				preparedStatement.setString(index++, trening.getNaziv());
 				preparedStatement.setString(index++, trening.getOpis());
-				preparedStatement.setInt(index++, trening.getCena());
+				preparedStatement.setFloat(index++, trening.getCena());
 				preparedStatement.setString(index++, trening.getVrstaTreninga().toString());
 				preparedStatement.setString(index++, trening.getNivoTreninga().toString());
 				preparedStatement.setInt(index++, trening.getTrajanjeTreninga());

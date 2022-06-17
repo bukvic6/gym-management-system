@@ -11,25 +11,26 @@
 	<form method="post" action="admin/edit">
  		<input type="hidden" name="id" th:value="${korisnik.id}"/>
 		<table class="forma">
-			<caption>Korisnik</caption>
+			<h1 th:text="#{editKorisnika}"></h1></caption>     
+
 			<tr th:each="itKorisnik, status: ${korisnik}">
- 			<th>Ime:</th>
+ 			<th th:text="#{ime}"></th>
  			<td th:text="${itKorisnik.ime}"  name="ime"></td>
  			</tr>    
  			<tr th:each="itKorisnik, status: ${korisnik}">
- 			<th>Prezime:</th>
+ 			<th th:text="#{prezime}"></th>
  			<td th:text="${itKorisnik.prezime}" name="prezime" /></td>
  			</tr>   
  			<tr th:each="itKorisnik, status: ${korisnik}">
- 			<th>Korisnicko ime:</th>
+ 			<th th:text="#{username}"></th>
  			<td th:text="${itKorisnik.korisnickoIme}" name="korisnickoIme"/></td>
  			</tr>   
  			<tr th:each="itKorisnik, status: ${korisnik}">
- 			<th>Email:</th>
+ 			<th th:text="#{email}"></th>
  			<td th:text="${itKorisnik.email}" name="email"/></td>
  			</tr> 
 			<tr>
-			<th>Tip korisnika:</th>
+			<th th:text="#{tipKorisnika}"></th>
 			<td>
 				<select th:each="itKorisnik, status: ${korisnik}" name="tipKorisnika">
 				      <option th:text="${itKorisnik.tipKorisnika}" ></option>
@@ -39,7 +40,7 @@
 			</td>
 		   </tr>
 		   <tr th:each="itKorisnik, status: ${korisnik}">
-		   <th>Aktivan:</th>
+		   <th th:text="#{aktivan}"></th>
 		   <td><input type = "checkbox" name="aktivan" th:checked="${itKorisnik.isAktivan}"/></td>
 		   </tr>
 			<tr><th></th><td><input type="submit" value="Izmeni"></td></tr>
@@ -47,11 +48,11 @@
 	</form>
 	
 			<table>
-			<caption>Zakazani treninzi korisnika</caption> 
+	 			<h1 th:text="#{zakazaniTreninziKorisnika}"></h1></caption>     
 			<tr>
-				<th>Trening</th>
-				<th>Cena</th>
-				<th>Datum odrzavanja</th>
+				<th th:text="#{naziv}">Trening</th>
+				<th th:text="#{cena}">Cena</th>
+				<th th:text="#{datumiVreme}">Datum odrzavanja</th>
 				<th></th>
 			</tr>
 			
@@ -61,10 +62,10 @@
  				<td><a th:href="|admin/korpa?id=${itKorpa.id}|"  th:text="${itKorpa.terminId.datum}"></td>  
 		</tr>
 		</table>
-		<ul>
-			<li><a href="admin/add">Dodaj trening</a></li>   
-	 		<li><a href="admin/addTermin">Dodaj termin</a></li>   
-	 		<li><a href="admin/logout">Izloguj se</a></li>   
-		</ul>
+	 	<ul>     
+	 		<li><a href="admin/add" th:text="#{dodajTrening}"></a></li>   
+	 		<li><a href="admin/addTermin" th:text="#{dodajTermin}"></a></li>   
+	 		<li><a href="admin/logout" th:text="#{logOut}"></a></li>   
+	 	</ul>
 </body>
 </html>

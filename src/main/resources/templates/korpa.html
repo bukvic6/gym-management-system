@@ -9,21 +9,21 @@
 	</head>
 	<body>
 		<ul>
-	 <li><a href="admin/profil">Profil</a></li>  
-	  <li><a href="admin/korisnici">Korisnici</a></li>  
-	   <li><a href="admin/sale">Sale</a></li> 
-	   <li><a href="admin/komentari">Komentari</a></li>
-	    <li><a href="admin/clanskeKarte">Clanske Karte</a></li>
+		 <li><a href="admin/profil" th:text="#{profil}"></a></li>
+	  <li><a href="admin/korisnici" th:text="#{korisnici}"></a></li>  
+	   <li><a href="admin/sale" th:text="#{sale}"></a></li> 
+	   <li><a href="admin/komentari" th:text="#{korisnici}"></a></li>
+	    <li><a href="admin/clanskeKarte" th:text="#{clanskeKarte}"></a></li>
 			</ul>
 				<table>
-			<caption>Termin</caption> 
+	 			<h1 th:text="#{zakazaniTermini}"></h1>    
 			<tr>
-				<th>Korisnicko Ime</th>
-				<th>Naziv treninga</th>
-				<th>Trener</th>
-				<th>Cena</th>
-				<th>Sala</th>
-				<th>Datum</th>
+				<th th:text="#{username}"></th>
+				<th th:text="#{naziv}"></th>
+				<th th:text="#{trener}"></th>
+				<th th:text="#{cena}"></th>
+				<th th:text="#{sala}"></th>
+				<th th:text="#{datumiVreme}"></th>
 			</tr>
 			
 			<tr th:each="itKorpa, status: ${korpa}">  
@@ -37,10 +37,10 @@
 		</tr>
 		</table>
 	</body>
-		<ul>     
-	 		<li><a href="admin/add">Dodaj trening</a></li>   
-	 		<li><a href="admin/addTermin">Dodaj termin</a></li>   
-	 		<li><a href="admin/logout">Izloguj se</a></li>   
-	 	</ul> 
+	 			 	<ul>     
+	 		<li><a href="admin/add" th:text="#{dodajTrening}"></a></li>   
+	 		<li><a href="admin/addTermin" th:text="#{dodajTermin}"></a></li>   
+	 		<li><a href="admin/logout" th:text="#{logOut}"></a></li>   
+	 	</ul>
 	
 </html>

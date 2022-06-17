@@ -10,11 +10,17 @@
 	<title>Dodavanje sale</title>
 </head>
 <body>
+	 <li><a href="admin/profil" th:text="#{profil}"></a></li>
+	  <li><a href="admin/korisnici" th:text="#{korisnici}"></a></li>  
+	   <li><a href="admin/sale" th:text="#{sale}"></a></li> 
+	   <li><a href="admin/komentari" th:text="#{korisnici}"></a></li>
+	    <li><a href="admin/clanskeKarte" th:text="#{clanskeKarte}"></a></li>
+   
 	 		<table>     
-	 			<caption>Sale</caption>     
+	 			<h1 th:text="#{sale}"></h1>    
 	 			<tr>      
-	 			    <th>Oznaka sale:</th> 
-	 				<th>Kapacitet:</th>     
+	 			    <th th:text="#{oznakaSale}"></th> 
+	 				<th th:text="#{kapacitet}"></th>     
 
 	 				<th></th>    
 	 			</tr>
@@ -31,17 +37,16 @@
 	 		</table>    
  	<form method="post" action="addSala">    
 		 
-		  <label for="kapacitet">Kapacitet:</label>
+		  <label th:text="#{kapacitet}" for="kapacitet"></label>
 		  <input type="number"  name="kapacitet" min="1" max="1000">
 		  <input type="submit" value="Dodaj"/>
 		 
  	</form> 
  	
- 	<ul>    
- 		<li><a href="admin">Povratak</a></li>   
- 		<li><a href="admin/logout">Izloguj se</a></li>   
- 		 
- 
- 	</ul>  
+	 			 	<ul>     
+	 		<li><a href="admin/add" th:text="#{dodajTrening}"></a></li>   
+	 		<li><a href="admin/addTermin" th:text="#{dodajTermin}"></a></li>   
+	 		<li><a href="admin/logout" th:text="#{logOut}"></a></li>   
+	 	</ul>
 </body>
 </html>

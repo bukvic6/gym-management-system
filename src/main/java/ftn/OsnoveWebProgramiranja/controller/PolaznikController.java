@@ -195,7 +195,7 @@ public class PolaznikController implements ServletContextAware{
 		Korisnik ulogovani = (Korisnik) session.getAttribute(KorisnikController.KORISNIK_KEY);
 		TerminTreninga termin = terminService.findOne(id);
 		KorisnickaKorpa korpa = new KorisnickaKorpa(ulogovani,termin);
-		int broj = termin.getTreningId().getCena() / 500;
+		int broj = (int) (termin.getTreningId().getCena() / 500);
 		ClanskaKarta clanska = clanskaKartaService.findOdobrena(ulogovani.getId());
 		clanska.setPoeni(clanska.getPoeni() + broj);
 		int popust = broj*5;

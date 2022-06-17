@@ -2,29 +2,31 @@
 <html xmlns:th="http://www.thymeleaf.org">     
 	<head>     
 		<meta charset="UTF-8">     
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js">
+</script>
 		<base th:href="@{/}"><!-- popuni href atribut vrednosšću context path-a -->
 		<title>Treninzi</title>     
 		<link rel="stylesheet"  type="text/css"  href="css/StiloviTabela.css"/>     
 	 	<link rel="stylesheet"  type="text/css" href="css/StiloviHorizontalniMeni.css"/>   
 	 </head>     
 	 <body>   
-	 <li><a href="admin/profil">Profil</a></li>  
-	  <li><a href="admin/korisnici">Korisnici</a></li>  
-	   <li><a href="admin/sale">Sale</a></li> 
-	   <li><a href="admin/komentari">Komentari</a></li>
-	    <li><a href="admin/clanskeKarte">Clanske Karte</a></li>
+	 <li><a href="admin/profil" th:text="#{profil}"></a></li>
+	  <li><a href="admin/korisnici" th:text="#{korisnici}"></a></li>  
+	   <li><a href="admin/sale" th:text="#{sale}"></a></li> 
+	   <li><a href="admin/komentari" th:text="#{komentari}"></a></li>
+	    <li><a href="admin/clanskeKarte" th:text="#{clanskeKarte}"></a></li>
    
 	 		<table>     
-	 			<caption>Treninzi</caption>     
+	 			<h1 th:text="#{treninzi}"></h1></caption>     
 	 			<tr>      
-	 			    <th>Naziv Treninga:</th> 
-	 				<th>Opis:</th>     
-	 				<th>Cena:</th>  
-	 				<th>Trener:</th> 
-	 				<th>Vrsta treninga:</th> 
-	 				<th>Nivo treninga:</th> 
-	 				<th>Trajanje treninga:</th> 
-	 				<th>Prosecna ocena:</th> 
+	 			    <th th:text="#{imeTreninga}"></th> 
+	 				<th th:text="#{opisTreninga}"></th>     
+	 				<th th:text="#{cenaTreninga}"></th>  
+	 				<th th:text="#{trener}"></th> 
+	 				<th th:text="#{vrstaTreninga}"></th> 
+	 				<th th:text="#{nivoTreninga}"></th> 
+	 				<th th:text="#{trajanjeTreninga}"></th> 
+	 				<th th:text="#{prosecnaOcena}"></th> 
 
 	 			</tr>
 	 			<tr th:each="itTrening, status: ${treninzi}">  
@@ -39,9 +41,26 @@
 	 			</tr>
 	 		</table>
 	 			 	<ul>     
-	 		<li><a href="admin/add">Dodaj trening</a></li>   
-	 		<li><a href="admin/addTermin">Dodaj termin</a></li>   
-	 		<li><a href="admin/logout">Izloguj se</a></li>   
+	 		<li><a href="admin/add" th:text="#{dodajTrening}"></a></li>   
+	 		<li><a href="admin/addTermin" th:text="#{dodajTermin}"></a></li>   
+	 		<li><a href="admin/logout" th:text="#{logOut}"></a></li>   
 	 	</ul>
-	 </body>   
+	 			
+		<span th:text="#{lang.change}"></span>
+		<select id="locales">
+		    <option value=""></option>
+		    <option value="en" th:text="#{lang.eng}"></option>
+		    <option value="sr" th:text="#{lang.sr}"></option>
+		</select>
+	 </body>  
+	 <script type="text/javascript">
+    $(document).ready(function () {
+        $("#locales").change(function () {
+            var selectedOption = $('#locales').val();
+            if (selectedOption != '') {
+                window.location.replace('admin/?lang=' + selectedOption);
+            }
+        });
+    });
+</script> 
  </html>	

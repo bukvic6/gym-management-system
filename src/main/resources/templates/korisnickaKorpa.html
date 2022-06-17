@@ -9,15 +9,17 @@
 	</head>
 	<body>
 		<ul>
-			 <li><a href="korisnik/profil">Profil</a></li> 
+			 	 <li><a href="korisnik/profil" th:text="#{profil}"></a></li>  
+	             <li><a href="korisnik/korpa" th:text="#{korisnickaKorpa}"></a></li>  
+	             <li><a href="korisnik/clanskaKarta" th:text="#{clanskaKarta}"></a></li> 
 			 
 			</ul>
 		<table>
-			<caption>Lista zelja</caption> 
+	 			<h1 th:text="#{listaZelja}"></h1></caption>     
 			<tr>
-				<th>Trening</th>
-				<th>Trener</th>
-				<th>Datum odrzavanja</th>
+				<th th:text="#{naziv}">Trening</th>
+				<th th:text="#{trener}">Trener</th>
+				<th th:text="#{datumiVreme}">Datum odrzavanja</th>
 				<th></th>
 			</tr>
 			
@@ -41,11 +43,11 @@
 		</tr>
 		</table>
 				<table>
-			<caption>Korisnicka korpa</caption> 
+	 			<h1 th:text="#{zakazaniTreninzi}"></h1></caption>     
 			<tr>
-				<th>Trening</th>
-				<th>Cena</th>
-				<th>Datum odrzavanja</th>
+				<th th:text="#{naziv}"></th>
+				<th th:text="#{cena}">Cena</th>
+				<th th:text="#{datumiVreme}">Datum odrzavanja</th>
 				<th></th>
 			</tr>
 			
@@ -63,6 +65,6 @@
 		</tr>
 		</table>
 	</body>
-		 		<li><a href="korisnik/logout">Izloguj se</a></li>   
+	 		<li><a href="korisnik/logout"  th:text="#{logOut}">Izloguj se</a></li>   
 	
 </html>

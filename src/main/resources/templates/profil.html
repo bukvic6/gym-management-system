@@ -13,40 +13,40 @@
            <form method="post" action="admin/profil">
            <input type="hidden" name="id" th:value="${korisnik.id}"/>
  			<table>   
- 			<caption>Profil</caption>    
+	 		<h1 th:text="#{profil}"></h1></caption>     
  			<tr th:each="itKorisnik, status: ${korisnik}">
- 			<th>Ime:</th>
+ 			<th th:text="#{ime}"></th>
  			<td><input type="text" th:value="${itKorisnik.ime}"  name="ime"></td>
  			</tr>    
  			<tr th:each="itKorisnik, status: ${korisnik}">
- 			<th>Prezime:</th>
+ 			<th th:text="#{prezime}"></th>
  			<td><input type="text" th:value="${itKorisnik.prezime}" name="prezime" /></td>
  			</tr>   
  			<tr th:each="itKorisnik, status: ${korisnik}">
- 			<th>Korisnicko ime:</th>
+ 			<th th:text="#{username}"></th>
  			<td><input type="text" th:value="${itKorisnik.korisnickoIme}" name="korisnickoIme"/></td>
  			</tr>   
  			<tr th:each="itKorisnik, status: ${korisnik}">
- 			<th>Email:</th>
+ 			<th th:text="#{email}"></th>
  			<td><input type="text" th:value="${itKorisnik.email}" name="email"/></td>
  			</tr>   
  			<tr th:each="itKorisnik, status: ${korisnik}">
- 			<th>Adresa:</th>
+ 			<th th:text="#{adresa}"></th>
  			<td><input type="text" th:value="${itKorisnik.adresa}" name="adresa"/></td>
  			</tr>   
  			<tr th:each="itKorisnik, status: ${korisnik}">
- 			<th>Broj telefona:</th>
+ 			<th th:text="#{profil}"></th>
  			<td><input type="text" th:value="${itKorisnik.brojTelefona}" name="telefon"/></td>
  			</tr>  
  			<tr th:each="itKorisnik, status: ${korisnik}">  
- 			<th>Datum rodjenja:</th>
+ 			<th th:text="#{datumRodj}"></th>
  			<td><input type="text" th:value="${itKorisnik.datRodj}" name="datRodj"/></td>
  			</tr>
  			<tr th:each="itKorisnik, status: ${korisnik}">  
- 			<th>Lozinka:</th>
+ 			<th th:text="#{lozinka}"></th>
  			<td><input type="password" th:value="${itKorisnik.lozinka}" name="lozinka"/></td>
  			</tr>
- 			 <th>Ponovite Lozinku:</th>
+ 			 <th th:text="#{ponoviteLozinku}"></th>
  			<td><input type="text" name="lozinkaPonovljena"/></td>
  			</tr>
  			<tr><th></th><td><input type="submit" value="Izmeni"></td></tr>
