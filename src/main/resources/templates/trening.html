@@ -32,12 +32,44 @@
  			<tr  th:each="itTrening, status: ${trening}">
  			<th>Trajanje Treninga:</th><td th:text="${itTrening.trajanjeTreninga}" name="trajanjeTreninga"></td></tr>   
  			<tr  th:each="itTrening, status: ${trening}">
+ 			<th>Prosecna Ocena:</th><td th:text="${itTrening.prosecnaOcena}" name="prosecnaOcena"></td></td></tr>     
+ 		</table>
+ 		
+ 		 		<table class = "forma">   
+ 			<caption>Tip Treninga</caption>    
+ 			<tr th:each="itTipTreninga, status: ${tipTreninga}">
+ 			<th>Ime:</th>
+ 			<td th:text="${itTipTreninga.ime}" name="ime"/></td></tr>    
+ 			<tr th:each="itTipTreninga, status: ${tipTreninga}">
+ 			<th>Opis:</th><td th:text="${itTipTreninga.opis}" name="opis"></td></tr>   
+ 	
+  
+ 		</table>    
+ 		
+ 		 		<table class = "forma">   
+ 			<caption>Informacije o treningu</caption>    
+ 			<tr th:each="itTrening, status: ${trening}">
+ 			<th>Naziv:</th>
+ 			<td th:text="${itTrening.naziv}" name="naziv"/></td></tr>    
+ 			<tr th:each="itTrening, status: ${trening}">
+ 			<th>Opis:</th><td th:text="${itTrening.opis}" name="opis"></td></tr>   
+ 			<tr th:each="itTrening, status: ${trening}">
+ 			<th>Cena:</th><td th:text="${itTrening.cena}" name="cena"></td></tr>   
+ 			<tr th:each="itTrening, status: ${trening}">
+ 			<th>Trener:</th><td th:text="${itTrening.trener}" name="trener"></td></tr>   
+ 			<tr th:each="itTrening, status: ${trening}">
+ 			<th>Vrsta Treninga:</th><td th:text="${itTrening.vrstaTreninga}" name="vrstaTreninga"></td></tr>   
+ 			<tr th:each="itTrening, status: ${trening}">
+ 			<th>Nivo Treninga:</th><td th:text="${itTrening.nivoTreninga}" name="nivoTreninga"></td></td></tr>  
+ 			<tr  th:each="itTrening, status: ${trening}">
+ 			<th>Trajanje Treninga:</th><td th:text="${itTrening.trajanjeTreninga}" name="trajanjeTreninga"></td></tr>   
+ 			<tr  th:each="itTrening, status: ${trening}">
  			<th>Prosecna Ocena:</th><td th:text="${itTrening.prosecnaOcena}" name="prosecnaOcena"></td></td></tr>  
  			 <tr  th:each="itKomentar, status: ${komentar}">
  			<th>Prosecna Ocena:</th><td th:text="${itKomentar.ocena}" name="Ocena"></td></td></tr>   
  			 <tr  th:each="itKomentar, status: ${komentar}">
  			<th>Prosecna Ocena:</th><td th:text="${itKomentar.datum}" name="text"></td></td></tr>      
- 		</table>    
+ 		</table>   
  		
  		<form method ="post" action="korisnik/dodajUKorpu">
 		<table class="forma">
@@ -89,7 +121,7 @@
 	
 		<ul>     
 
-	 		<li><a th:href="korisnik/logout">Izloguj se</a></li>   
+	 		<li><a href="korisnik/logout">Izloguj se</a></li>   
 	 	</ul>
 
 

@@ -30,12 +30,14 @@ import ftn.OsnoveWebProgramiranja.model.Sala;
 import ftn.OsnoveWebProgramiranja.model.Status;
 import ftn.OsnoveWebProgramiranja.model.StatusClanske;
 import ftn.OsnoveWebProgramiranja.model.TerminTreninga;
+import ftn.OsnoveWebProgramiranja.model.TipTreninga;
 import ftn.OsnoveWebProgramiranja.model.Trening;
 import ftn.OsnoveWebProgramiranja.service.ClanskaKartaService;
 import ftn.OsnoveWebProgramiranja.service.KomentarService;
 import ftn.OsnoveWebProgramiranja.service.KorisnickaKorpaService;
 import ftn.OsnoveWebProgramiranja.service.KorisnikService;
 import ftn.OsnoveWebProgramiranja.service.TerminService;
+import ftn.OsnoveWebProgramiranja.service.TipTreningaService;
 import ftn.OsnoveWebProgramiranja.service.TreningService;
 
 
@@ -63,6 +65,9 @@ public class PolaznikController implements ServletContextAware{
 	
 	@Autowired
 	private ClanskaKartaService clanskaKartaService;
+	
+	@Autowired
+	private TipTreningaService tipTreningaService;
 	
 	
 	@Autowired 
@@ -131,11 +136,13 @@ public class PolaznikController implements ServletContextAware{
 		Trening trening = treningService.findOne(id);
 		List<Komentar> komentari = komentarService.findAll(id);
 		List<TerminTreninga> termini = terminService.findAll(id);
+		List<TipTreninga> tipTreninga = tipTreningaService.findAll(id);
 
 		
 		ModelAndView rezultat = new ModelAndView("trening");
 		rezultat.addObject("trening",trening);
 		rezultat.addObject("termini",termini);
+		rezultat.addObject("tipTreninga", tipTreninga);
 
 
 		rezultat.addObject("komentar",komentari);
@@ -148,8 +155,14 @@ public class PolaznikController implements ServletContextAware{
 		LocalDate datum = LocalDate.now();
 		Korisnik ulogovani = (Korisnik) session.getAttribute(KorisnikController.KORISNIK_KEY);
 		Status status = Status.CEKANJE;
+
 		Trening trening = treningService.findOne(id);
 		Komentar komentar = new Komentar(textKomentara,ocena,datum,status,ulogovani,trening, anoniman);
+		if(anoniman == true) {
+			Long idAnoniman = (long) 5;
+			Korisnik anonimanKorisnik = korisnikService.findOne(idAnoniman);
+			komentar.setAutor(anonimanKorisnik);
+		}
 		komentarService.save(komentar);
 		response.sendRedirect(bURL + "korisnik");
 	}
@@ -174,8 +187,6 @@ public class PolaznikController implements ServletContextAware{
 		
 		response.sendRedirect(bURL+"korisnik");
 	}
-	
-
 	@SuppressWarnings("unchecked")
 	@PostMapping(value="/korpa/ukloni")
 	@ResponseBody
@@ -189,7 +200,6 @@ public class PolaznikController implements ServletContextAware{
 		}
 		response.sendRedirect(bURL+"korisnik");
 	}
-	
 	@PostMapping(value = "/korpa/zakazi")
 	public void dodajUKorpu(@RequestParam(name = "idTermina") Long id,HttpServletResponse response,HttpSession session) throws IOException {
 		Korisnik ulogovani = (Korisnik) session.getAttribute(KorisnikController.KORISNIK_KEY);
@@ -201,14 +211,9 @@ public class PolaznikController implements ServletContextAware{
 		int popust = broj*5;
 		clanska.setPopust(clanska.getPopust() + popust);
 		clanskaKartaService.update(clanska);
-
-
-		
-		
 		korpaService.save(korpa);
 		response.sendRedirect(bURL + "korisnik");
 	}
-	
 	@GetMapping(value="/logout")
 	@ResponseBody
 	public void logout(HttpServletRequest request, HttpServletResponse response,HttpSession session) throws IOException {	
@@ -216,14 +221,4 @@ public class PolaznikController implements ServletContextAware{
 		request.getSession().invalidate();
 		response.sendRedirect(bURL);
 	}
-	
-	
-	
-	
-	
-
-	
-	
-	
-
 }

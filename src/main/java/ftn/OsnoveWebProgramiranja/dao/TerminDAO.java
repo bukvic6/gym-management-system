@@ -12,4 +12,6 @@ public interface TerminDAO {
 
 	TerminTreninga findOne(Long id);
 
+	List<TerminTreninga> checkIfExist(Long id);
+
 }

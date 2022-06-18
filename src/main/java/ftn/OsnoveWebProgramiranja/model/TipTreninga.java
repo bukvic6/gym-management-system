@@ -1,15 +1,30 @@
 package ftn.OsnoveWebProgramiranja.model;
 
 public class TipTreninga {
-	@Override
-	public String toString() {
-		return "TipTreninga [ime=" + ime + ", opis=" + opis + "]";
-	}
+	private Long id;
+	private Trening treningId;
 	private String ime;
 	private String opis;
-	public TipTreninga(String nazivTipa, String opisTipa) {
-		this.ime = nazivTipa;
-		this.opis = opisTipa;
+	
+	public TipTreninga() {}
+	public TipTreninga(Long id, Trening treningId, String ime, String opis) {
+		super();
+		this.id = id;
+		this.treningId = treningId;
+		this.ime = ime;
+		this.opis = opis;
+	}
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public Trening getTreningId() {
+		return treningId;
+	}
+	public void setTreningId(Trening treningId) {
+		this.treningId = treningId;
 	}
 	public String getIme() {
 		return ime;

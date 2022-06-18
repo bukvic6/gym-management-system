@@ -80,6 +80,14 @@ public class TerminDAOimpl implements TerminDAO{
 		
 		return rowCallbackHandler.getTermini();
 	}
+	@Override
+	public List<TerminTreninga> checkIfExist(Long id) {
+		String sql = "select * from terminTreninga where salaId = ?";
+		TerminRowCallHandler rowCallbackHandler = new TerminRowCallHandler();
+		jdbcTemplate.query(sql, rowCallbackHandler, id);
+		
+		return rowCallbackHandler.getTermini();
+	}
 
 	@Override
 	public TerminTreninga findOne(Long id) {
@@ -88,6 +96,7 @@ public class TerminDAOimpl implements TerminDAO{
 		jdbcTemplate.query(sql, rowCallbackHandler, id);
 		return rowCallbackHandler.getTermini().get(0);
 	}
+
 	
 
 }

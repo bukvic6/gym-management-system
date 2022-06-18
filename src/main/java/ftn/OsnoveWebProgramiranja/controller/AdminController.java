@@ -185,7 +185,14 @@ public class AdminController implements ServletContextAware {
 	@SuppressWarnings("unused")
 	@PostMapping(value = "sale/deleteSala")
 	private void deleteSala(@RequestParam Long id, HttpServletResponse response) throws IOException {
+		List<TerminTreninga> terminiCheck = terminService.checkifExist(id);
+		if(terminiCheck.size()>0) {
+			return;
+		}
+
 		Sala obrisan = salaService.delete(id);
+
+		
 		response.sendRedirect(bURL + "admin");
 	}
 	

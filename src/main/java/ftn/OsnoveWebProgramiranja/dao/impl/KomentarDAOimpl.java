@@ -76,7 +76,7 @@ public class KomentarDAOimpl implements KomentarDAO {
 	
 	@Override
 	public List<Komentar> findAll(Long id){
-		String sql = "select * from komentari where trening = ? ";	
+		String sql = "select * from komentari where trening = ? and statusKomentara = 'ODOBREN'";	
 		KomentarRowHandler rowCallbackHandler = new KomentarRowHandler();
 		jdbcTemplate.query(sql, rowCallbackHandler, id);
 

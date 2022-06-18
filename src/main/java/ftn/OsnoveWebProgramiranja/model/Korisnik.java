@@ -106,6 +106,15 @@ public class Korisnik {
 
 
 
+	public Korisnik(String anoniman) {
+	    this.korisnickoIme = anoniman;
+	}
+
+
+
+
+
+
 	public Long getId() {
 		return id;
 	}

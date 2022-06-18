@@ -30,7 +30,13 @@ public class DatabaseTerminServiceimpl implements TerminService{
 	public TerminTreninga findOne(Long id) {
 		return terminDAO.findOne(id);
 	}
-	
+
+	@Override
+	public List<TerminTreninga> checkifExist(Long id) {
+		return terminDAO.checkIfExist(id);
+		}
+
+
 
 
 }

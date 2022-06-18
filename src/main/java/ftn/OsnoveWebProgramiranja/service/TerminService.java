@@ -12,4 +12,6 @@ public interface TerminService {
 
 	TerminTreninga findOne(Long id);
 
+	List<TerminTreninga> checkifExist(Long id);
+
 }
