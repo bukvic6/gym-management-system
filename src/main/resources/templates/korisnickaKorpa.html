@@ -17,9 +17,9 @@
 		<table>
 	 			<h1 th:text="#{listaZelja}"></h1></caption>     
 			<tr>
-				<th th:text="#{naziv}">Trening</th>
-				<th th:text="#{trener}">Trener</th>
-				<th th:text="#{datumiVreme}">Datum odrzavanja</th>
+				<th th:text="#{imeTreninga}"></th>
+				<th th:text="#{trener}"></th>
+				<th th:text="#{datumiVreme}"></th>
 				<th></th>
 			</tr>
 			
@@ -45,9 +45,9 @@
 				<table>
 	 			<h1 th:text="#{zakazaniTreninzi}"></h1></caption>     
 			<tr>
-				<th th:text="#{naziv}"></th>
-				<th th:text="#{cena}">Cena</th>
-				<th th:text="#{datumiVreme}">Datum odrzavanja</th>
+				<th th:text="#{imeTreninga}"></th>
+				<th th:text="#{cenaTreninga}"></th>
+				<th th:text="#{datumiVreme}"></th>
 				<th></th>
 			</tr>
 			
@@ -59,7 +59,7 @@
  				<td>
 					<form method="post" action="korisnik/korpa/ukloniIzKorpe">
 						<input type="hidden" name="idTermina" th:value="${itKorpa.id}">
-						<input type="submit" value="Ukloni iz korpe">
+						<input type="submit" th:value="#{ukloniIzKorpe}">
 					</form>
 				</td> 
 		</tr>

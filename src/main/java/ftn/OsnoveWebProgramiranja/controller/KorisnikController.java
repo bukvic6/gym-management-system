@@ -126,12 +126,17 @@ public class KorisnikController implements ServletContextAware {
 			session.setAttribute(KORISNIK_KEY, korisnik);
 			response.sendRedirect(bURL + "korisnik");
 		}
-
-
-	
-
+		else {
+			System.out.println("Korisnik je blokiran");
+			response.sendRedirect(bURL + "greska.html");		
+		}
 		
 	}
+	@PostMapping(value = "/greska")
+	public void greska(HttpSession session, HttpServletResponse response) throws IOException { 
+		response.sendRedirect(bURL + "greska.html");
+	}
+
 	@GetMapping(value="/registracija")
 	public String create(HttpServletResponse response){
 		return "registracija"; 

@@ -43,16 +43,16 @@
 		   <th th:text="#{aktivan}"></th>
 		   <td><input type = "checkbox" name="aktivan" th:checked="${itKorisnik.isAktivan}"/></td>
 		   </tr>
-			<tr><th></th><td><input type="submit" value="Izmeni"></td></tr>
+			<tr><th></th><td><input type="submit" th:value="#{izmeni}"></td></tr>
 		</table>
 	</form>
 	
 			<table>
 	 			<h1 th:text="#{zakazaniTreninziKorisnika}"></h1></caption>     
 			<tr>
-				<th th:text="#{naziv}">Trening</th>
-				<th th:text="#{cena}">Cena</th>
-				<th th:text="#{datumiVreme}">Datum odrzavanja</th>
+				<th th:text="#{imeTreninga}"></th>
+				<th th:text="#{cena}"></th>
+				<th th:text="#{datumiVreme}"></th>
 				<th></th>
 			</tr>
 			

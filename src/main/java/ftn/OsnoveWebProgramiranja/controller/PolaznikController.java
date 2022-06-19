@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -102,7 +103,7 @@ public class PolaznikController implements ServletContextAware{
 		Korisnik ulogovani = (Korisnik) session.getAttribute(KorisnikController.KORISNIK_KEY);
 		Korisnik korisnik = korisnikService.findOne(ulogovani.getId());
 
-		ModelAndView rezultat = new ModelAndView("profil");
+		ModelAndView rezultat = new ModelAndView("polaznikProfil");
 		rezultat.addObject("korisnik", korisnik);
 
 		return rezultat;
@@ -129,6 +130,7 @@ public class PolaznikController implements ServletContextAware{
 
 		return rezultat;
 	}
+
 	
 	@GetMapping(value ="/details")
 	@ResponseBody
@@ -143,10 +145,31 @@ public class PolaznikController implements ServletContextAware{
 		rezultat.addObject("trening",trening);
 		rezultat.addObject("termini",termini);
 		rezultat.addObject("tipTreninga", tipTreninga);
-
-
 		rezultat.addObject("komentar",komentari);
 		return rezultat;
+	}
+	@SuppressWarnings("unused")
+	@PostMapping(value = "/profil")
+	public void editprofil(@ModelAttribute Korisnik profilEdited,  @RequestParam(name = "lozinkaPonovljena") String lozinkaPonovljena,HttpServletResponse response) throws IOException {
+		Korisnik korisnik = korisnikService.findOne(profilEdited.getId());
+		if (korisnik != null) {
+			if (profilEdited.getIme() != null && !profilEdited.getIme().trim().equals(""))
+				korisnik.setIme(profilEdited.getIme());
+			if (profilEdited.getPrezime() != null && !profilEdited.getPrezime().trim().equals(""))
+				korisnik.setPrezime(profilEdited.getPrezime());
+			if (profilEdited.getKorisnickoIme() != null && !profilEdited.getKorisnickoIme().trim().equals(""))
+				korisnik.setKorisnickoIme(profilEdited.getKorisnickoIme());
+			if (profilEdited.getEmail() != null && !profilEdited.getEmail().trim().equals(""))
+				korisnik.setEmail(profilEdited.getEmail());
+			if (profilEdited.getTipKorisnika() != null)
+				korisnik.setTipKorisnika(profilEdited.getTipKorisnika());
+			if(profilEdited.getLozinka() != null && profilEdited.getLozinka().equals(lozinkaPonovljena)) 
+				korisnik.setLozinka(profilEdited.getLozinka());
+				else korisnik.setLozinka(profilEdited.getLozinka());
+		
+		}
+		Korisnik sacuvaj = korisnikService.updateprofil(korisnik);
+		response.sendRedirect(bURL + "korisnik");
 	}
 
 	
@@ -185,7 +208,7 @@ public class PolaznikController implements ServletContextAware{
 		TerminTreninga termin = terminService.findOne(id);
 		zaKorpu.add(termin);
 		
-		response.sendRedirect(bURL+"korisnik");
+		response.sendRedirect(bURL + "korisnik");
 	}
 	@SuppressWarnings("unchecked")
 	@PostMapping(value="/korpa/ukloni")

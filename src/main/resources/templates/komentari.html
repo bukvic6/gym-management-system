@@ -37,11 +37,11 @@
 	 			<td>    
 	 					<form method="post" action="admin/komentari/obrisikomentar" >     
 	 						<input type="hidden"  name="id"  th:value="${itKomentar.id}">     
-	 						<input type="submit"  value="Obrisi" >    
+	 						<input type="submit"  th:value="#{obrisi}">    
 	 					</form>  
 	 					<form method="post" action="admin/komentari/odobri" >     
 	 						<input type="hidden"  name="id"  th:value="${itKomentar.id}">     
-	 						<input type="submit"  value="Odobri" >    
+	 						<input type="submit"  th:value="#{odobri}">    
 	 					</form> 
 	 			</td> 
 	 		</table>

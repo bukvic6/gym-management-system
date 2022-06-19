@@ -8,122 +8,96 @@
 	 	<link rel="stylesheet"  type="text/css" href="css/StiloviHorizontalniMeni.css"/>   
 	 </head> 
 <body>
-	 <li><a href="korisnik/profil">Profil</a></li>  
-	 <li><a href="korisnik/korpa">Korisnicka korpa</a></li>  
-	 <li><a href="korisnik/clanskaKarta">Clanska Karta</a></li> 
+		 <li><a href="korisnik/profil" th:text="#{profil}"></a></li>  
+	     <li><a href="korisnik/korpa" th:text="#{korisnickaKorpa}"></a></li>  
+	     <li><a href="korisnik/clanskaKarta" th:text="#{clanskaKarta}"></a></li> 
 
 <div>
  	   
  		<table class = "forma">   
- 			<caption>Informacije o treningu</caption>    
+            <h1 th:text="#{infoOTreningu}"></h1></caption>   
  			<tr th:each="itTrening, status: ${trening}">
- 			<th>Naziv:</th>
+ 			<th th:text="#{imeTreninga}"></th>
  			<td th:text="${itTrening.naziv}" name="naziv"/></td></tr>    
  			<tr th:each="itTrening, status: ${trening}">
- 			<th>Opis:</th><td th:text="${itTrening.opis}" name="opis"></td></tr>   
+ 			<th th:text="#{opis}"></th><td th:text="${itTrening.opis}" name="opis"></td></tr>   
  			<tr th:each="itTrening, status: ${trening}">
- 			<th>Cena:</th><td th:text="${itTrening.cena}" name="cena"></td></tr>   
+ 			<th th:text="#{cena}"></th><td th:text="${itTrening.cena}" name="cena"></td></tr>   
  			<tr th:each="itTrening, status: ${trening}">
- 			<th>Trener:</th><td th:text="${itTrening.trener}" name="trener"></td></tr>   
+ 			<th th:text="#{trener}"></th><td th:text="${itTrening.trener}" name="trener"></td></tr>   
  			<tr th:each="itTrening, status: ${trening}">
- 			<th>Vrsta Treninga:</th><td th:text="${itTrening.vrstaTreninga}" name="vrstaTreninga"></td></tr>   
+ 			<th th:text="#{vrstaTreninga}"></th><td th:text="${itTrening.vrstaTreninga}" name="vrstaTreninga"></td></tr>   
  			<tr th:each="itTrening, status: ${trening}">
- 			<th>Nivo Treninga:</th><td th:text="${itTrening.nivoTreninga}" name="nivoTreninga"></td></td></tr>  
+ 			<th th:text="#{nivoTreninga}"></th><td th:text="${itTrening.nivoTreninga}" name="nivoTreninga"></td></td></tr>  
  			<tr  th:each="itTrening, status: ${trening}">
- 			<th>Trajanje Treninga:</th><td th:text="${itTrening.trajanjeTreninga}" name="trajanjeTreninga"></td></tr>   
+ 			<th th:text="#{trajanjeTreninga}"></th><td th:text="${itTrening.trajanjeTreninga}" name="trajanjeTreninga"></td></tr>   
  			<tr  th:each="itTrening, status: ${trening}">
- 			<th>Prosecna Ocena:</th><td th:text="${itTrening.prosecnaOcena}" name="prosecnaOcena"></td></td></tr>     
+ 			<th th:text="#{prosecnaOcena}"></th><td th:text="${itTrening.prosecnaOcena}" name="prosecnaOcena"></td></td></tr>     
  		</table>
  		
- 		 		<table class = "forma">   
- 			<caption>Tip Treninga</caption>    
- 			<tr th:each="itTipTreninga, status: ${tipTreninga}">
- 			<th>Ime:</th>
- 			<td th:text="${itTipTreninga.ime}" name="ime"/></td></tr>    
- 			<tr th:each="itTipTreninga, status: ${tipTreninga}">
- 			<th>Opis:</th><td th:text="${itTipTreninga.opis}" name="opis"></td></tr>   
+	 		<table class = "forma">   
+          <h1 th:text="#{tipTreninga}"></h1></caption>   
+			 <tr>      
+			    <th th:text="#{ime}"></th> 
+				<th th:text="#{opis}"></th>     
+			</tr>
+			<tr th:each="itTipTreninga, status: ${tipTreninga}">  
+			<td th:text="${itTipTreninga.ime}" name="ime"></td>  
+			<td th:text="${itTipTreninga.opis}" name="opis"></td> 
+	 		</table>
  	
   
  		</table>    
- 		
- 		 		<table class = "forma">   
- 			<caption>Informacije o treningu</caption>    
- 			<tr th:each="itTrening, status: ${trening}">
- 			<th>Naziv:</th>
- 			<td th:text="${itTrening.naziv}" name="naziv"/></td></tr>    
- 			<tr th:each="itTrening, status: ${trening}">
- 			<th>Opis:</th><td th:text="${itTrening.opis}" name="opis"></td></tr>   
- 			<tr th:each="itTrening, status: ${trening}">
- 			<th>Cena:</th><td th:text="${itTrening.cena}" name="cena"></td></tr>   
- 			<tr th:each="itTrening, status: ${trening}">
- 			<th>Trener:</th><td th:text="${itTrening.trener}" name="trener"></td></tr>   
- 			<tr th:each="itTrening, status: ${trening}">
- 			<th>Vrsta Treninga:</th><td th:text="${itTrening.vrstaTreninga}" name="vrstaTreninga"></td></tr>   
- 			<tr th:each="itTrening, status: ${trening}">
- 			<th>Nivo Treninga:</th><td th:text="${itTrening.nivoTreninga}" name="nivoTreninga"></td></td></tr>  
- 			<tr  th:each="itTrening, status: ${trening}">
- 			<th>Trajanje Treninga:</th><td th:text="${itTrening.trajanjeTreninga}" name="trajanjeTreninga"></td></tr>   
- 			<tr  th:each="itTrening, status: ${trening}">
- 			<th>Prosecna Ocena:</th><td th:text="${itTrening.prosecnaOcena}" name="prosecnaOcena"></td></td></tr>  
- 			 <tr  th:each="itKomentar, status: ${komentar}">
- 			<th>Prosecna Ocena:</th><td th:text="${itKomentar.ocena}" name="Ocena"></td></td></tr>   
- 			 <tr  th:each="itKomentar, status: ${komentar}">
- 			<th>Prosecna Ocena:</th><td th:text="${itKomentar.datum}" name="text"></td></td></tr>      
- 		</table>   
- 		
  		<form method ="post" action="korisnik/dodajUKorpu">
 		<table class="forma">
-				<caption>Zakazivanje termina treninga</caption>
-
-				<tr>
-					<th>Termin:</th>
-					<td>
-						<select name="terminId">
-							<option th:each="itTermin: ${termini}" th:value="${itTermin.id}" th:text="${itTermin.datum} + ' Sala: '+${itTermin.salaId.id}"></option>
-						</select>	
-					</td>
-					
-				</tr>
-				<tr><th>Popust:</th><td><input type="number" min="0" max= "5" name="popust"/></td></tr>     
-				<tr><th></th><td><input type="submit" value="Zakazi termin"/></td></tr>
+                <h1 th:text="#{zakazivanjeTermina}"></h1></caption>   
+			<tr>
+				<th th:text="#{termin}"></th> 
+				<td>
+					<select name="terminId">
+						<option th:each="itTermin: ${termini}" th:value="${itTermin.id}" th:text="${itTermin.datum} + ' Sala: '+${itTermin.salaId.id}"></option>
+					</select>	
+				</td>
+				
+			</tr>
+			<tr><th th:text="#{popust}"></th><td><input type="number" min="0" max= "5" name="popust"/></td></tr>     
+			<tr><th></th><td><input type="submit" th:value="Zakazitermin"/></td></tr>
 			</table>
 			</form>
 
  			 <table>     
-	 			<caption>Komentari</caption>     
-	 			<tr>      
-	 			    <th>Autor</th> 
-	 				<th>Datum</th>     
-	 				<th>Text</th>     
-	 				<th>Ocena</th>   
-	 			</tr>
-	 			<tr  th:each="itKomentar, status: ${komentar}">  
-	 			<td th:text="${itKomentar.autor.korisnickoIme}" name="autor"></td>  
-	 			<td th:text="${itKomentar.datum}" name="datum"></td> 
-	 				<td th:text="${itKomentar.textKomentara}" name="Text"></td> 
-	 				<td th:text="${itKomentar.ocena}" name="Ocena"></td> 
+             <h1 th:text="#{komentari}"></h1></caption>  			<tr>      
+ 			    <th  th:text="#{autor}"></th> 
+ 				<th  th:text="#{datumiVreme}"></th>     
+ 				<th  th:text="#{text}"></th>     
+ 				<th  th:text="#{ocena}"></th>   
+ 			</tr>
+	 		<tr  th:each="itKomentar, status: ${komentar}">  
+	 		<td th:text="${itKomentar.autor.korisnickoIme}" name="autor"></td>  
+	 		<td th:text="${itKomentar.datum}" name="datum"></td> 
+	 		<td th:text="${itKomentar.textKomentara}" name="Text"></td> 
+	 		<td th:text="${itKomentar.ocena}" name="Ocena"></td> 
 	 		</table>
  </div>
  	<div>
         <form method="post" action="korisnik/addKomentar">
 			
-		    <caption>Dodavanje komentara</caption>
+            <h1 th:text="#{postaviKomentar}"></h1></caption>   
 				
 			<input type="hidden" name="id" th:value="${trening.id}"/>
 				 	    
- 			<tr><th>Komentar:</th><td><input type="text" value="" name="textKomentara"/></td></tr>  
- 			<tr><th>Ocena:</th><td><input type="number" min="1" max= "5" name="ocena"/></td></tr>     
- 		    <tr><th>Anoniman:</th><td><input type = "checkbox" name="anoniman"/></td></tr>
-		    <tr><th></th><td><input type="submit" value="Dodaj"/></td></tr>
+ 			<tr><th th:text="#{komentar}"></th><td><input type="text" value="" name="textKomentara"/></td></tr>  
+ 			<tr><th th:text="#{ocena}"></th><td><input type="number" min="1" max= "5" name="ocena"/></td></tr>     
+ 		    <tr><th th:text="#{anoniman}"></th><td><input type = "checkbox" name="anoniman"/></td></tr>
+		    <tr><th></th><td><input type="submit" th:value="#{dodaj}"/></td></tr>
 			
 		</form>
 	</div> 
 	
-		<ul>     
-
-	 		<li><a href="korisnik/logout">Izloguj se</a></li>   
+	 	<ul>     
+	 
+	 		<li><a href="korisnik/logout" th:text="#{logOut}"></a></li>   
 	 	</ul>
-
 
 </body>
 </html>

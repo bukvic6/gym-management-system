@@ -140,7 +140,6 @@ public class AdminController implements ServletContextAware {
 
 	@GetMapping(value = "/sale")
 	public ModelAndView sale() {
-
 		List<Sala> sale = salaService.findAll();
 		ModelAndView rezultat = new ModelAndView("sala");
 		rezultat.addObject("sala", sale);
@@ -185,17 +184,22 @@ public class AdminController implements ServletContextAware {
 	@SuppressWarnings("unused")
 	@PostMapping(value = "sale/deleteSala")
 	private void deleteSala(@RequestParam Long id, HttpServletResponse response) throws IOException {
+		System.out.println("aaad");
 		List<TerminTreninga> terminiCheck = terminService.checkifExist(id);
 		if(terminiCheck.size()>0) {
-			return;
+			response.sendRedirect(bURL + "deleteSala");
+
+			
 		}
 
-		Sala obrisan = salaService.delete(id);
-
-		
+		Sala obrisan = salaService.delete(id);	
 		response.sendRedirect(bURL + "admin");
 	}
-	
+	@GetMapping(value="/deleteSala")
+	public String delSala(HttpServletResponse response){
+		return "deleteSala"; 
+	}
+
 	@PostMapping(value = "clanskeKarte/obrisiClansku")
 	private void obrisiClansku(@RequestParam Long id, HttpServletResponse response) throws IOException{
 		ClanskaKarta obrisana = clanskeService.delete(id);
@@ -261,7 +265,7 @@ public class AdminController implements ServletContextAware {
 
 	@SuppressWarnings("unused")
 	@PostMapping(value = "/profil")
-	public void editprofil(@ModelAttribute Korisnik profilEdited, @RequestParam(name = "lozinkaPonovljena") String lozinkaPonovljena, HttpServletResponse response) throws IOException {
+	public void editprofil(@ModelAttribute Korisnik profilEdited,  @RequestParam(name = "lozinkaPonovljena") String lozinkaPonovljena,HttpServletResponse response) throws IOException {
 		Korisnik korisnik = korisnikService.findOne(profilEdited.getId());
 		if (korisnik != null) {
 			if (profilEdited.getIme() != null && !profilEdited.getIme().trim().equals(""))
@@ -276,6 +280,7 @@ public class AdminController implements ServletContextAware {
 				korisnik.setTipKorisnika(profilEdited.getTipKorisnika());
 			if(profilEdited.getLozinka() != null && profilEdited.getLozinka().equals(lozinkaPonovljena)) 
 				korisnik.setLozinka(profilEdited.getLozinka());
+				else korisnik.setLozinka(profilEdited.getLozinka());
 		
 		}
 		Korisnik sacuvaj = korisnikService.updateprofil(korisnik);

@@ -23,8 +23,8 @@
  			 <table>     
 	 			<h1 th:text="#{clanskaKarta}"></h1></caption>    
 	 			<tr>      
-	 			    <th  th:text="${popust}"></th> 
-	 				<th  th:text="${poeni}"></th>    	
+	 			    <th  th:text="#{popust}"></th> 
+	 				<th  th:text="#{poeni}"></th>    	
 	 			</tr>
 	 			<tr  th:each="itClanska, status: ${clanska}">  
 	 			<td th:text="${itClanska.popust}+'%'" name="popust"></td>  

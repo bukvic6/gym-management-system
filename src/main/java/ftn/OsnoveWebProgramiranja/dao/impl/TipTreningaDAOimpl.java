@@ -13,6 +13,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowCallbackHandler;
 import org.springframework.stereotype.Repository;
 
+import ftn.OsnoveWebProgramiranja.dao.TipTreningaDAO;
 import ftn.OsnoveWebProgramiranja.dao.TreningDAO;
 import ftn.OsnoveWebProgramiranja.model.Sala;
 import ftn.OsnoveWebProgramiranja.model.TerminTreninga;
@@ -21,7 +22,7 @@ import ftn.OsnoveWebProgramiranja.model.Trening;
 import ftn.OsnoveWebProgramiranja.service.SalaService;
 
 @Repository
-public class TipTreningaDAOimpl {
+public class TipTreningaDAOimpl implements TipTreningaDAO{
 	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
@@ -61,6 +62,15 @@ public class TipTreningaDAOimpl {
 		return new ArrayList<>(tipoviTermina.values());
 	}	
     }
+
+
+	@Override
+	public List<TipTreninga> findAll(Long id) {
+		String sql = "SELECT * from tipTreninga WHERE treningId = ?";
+		TerminRowCallHandler rowCallbackHandler = new TerminRowCallHandler();
+		jdbcTemplate.query(sql, rowCallbackHandler, id);
+		return rowCallbackHandler.getTipTreninga();
+	}
 	
 
 }

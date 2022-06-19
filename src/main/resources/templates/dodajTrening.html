@@ -1,17 +1,22 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
+
 	<meta charset="UTF-8" />
 
 	<link rel="stylesheet"  type="text/css"  href="css/StiloviTabela.css"/>     
 	<link rel="stylesheet" type="text/css" href="css/StiloviForma.css"/>
 	<link rel="stylesheet" type="text/css" href="css/StiloviHorizontalniMeni.css"/>
-	<base href="bURL">
+	<base th:href="@{/}">
 	<title>Dodaj trening</title>
 </head>
 <body>
  	<ul>    
- 		<li><a href="admin">Povratak</a></li>    
+ 	 <li><a href="admin/profil" th:text="#{profil}"></a></li>
+	  <li><a href="admin/korisnici" th:text="#{korisnici}"></a></li>  
+	   <li><a href="admin/sale" th:text="#{sale}"></a></li> 
+	   <li><a href="admin/komentari" th:text="#{komentari}"></a></li>
+	    <li><a href="admin/clanskeKarte" th:text="#{clanskeKarte}"></a></li> 
  
  	</ul>    
  	<form method="post" action="add">    
@@ -21,7 +26,7 @@
  			<tr><th th:text="#{opisTreninga}"></th><td><input type="text" value="" name="opis"/></td></tr>   
  			<tr><th th:text="#{cenaTreninga}"></th><td><input type="text" value="" name="cena" /></td></tr>   
  			<tr><th th:text="#{trener}"></th><td><input type="text" value="" name="trener" /></td></tr>   
- 			<tr><th th:text="#{vrstaTreninga}">Vrsta Treninga:</th>
+ 			<tr><th th:text="#{vrstaTreninga}"></th>
  			<td>
  			<select name="vrstaTreninga">
 	 			<option  value="POJEDINACNI">POJEDINACNI</option>
@@ -45,6 +50,11 @@
  			<tr><th></th><td><input type="submit" th:value="#{dodaj}"/></td>    
  		</table>    
  	</form> 
+ 	    <ul>     
+	 		<li><a href="admin/add" th:text="#{dodajTrening}"></a></li>   
+	 		<li><a href="admin/addTermin" th:text="#{dodajTermin}"></a></li>   
+	 		<li><a href="admin/logout" th:text="#{logOut}"></a></li>   
+	 	</ul>
 </body>
 </html>
   	
