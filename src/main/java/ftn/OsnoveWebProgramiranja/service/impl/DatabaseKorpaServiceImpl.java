@@ -51,4 +51,12 @@ public class DatabaseKorpaServiceImpl implements KorisnickaKorpaService{
 		return korpa;
 	}
 
+
+
+	@Override
+	public KorisnickaKorpa sum(Long id) {
+		return korpaDAO.sum(id);
+		
+	}
+
 }

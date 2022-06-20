@@ -14,4 +14,6 @@ public interface KorisnickaKorpaService {
 
 	KorisnickaKorpa deleteZakazano(Long id);
 
+	KorisnickaKorpa sum(Long id);
+
 }

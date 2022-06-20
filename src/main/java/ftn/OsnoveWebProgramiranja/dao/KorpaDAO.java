@@ -17,5 +17,8 @@ public interface KorpaDAO {
 	int deleteZakazano(Long id);
 
 
+	public KorisnickaKorpa sum(Long id);
+
+
 
 }

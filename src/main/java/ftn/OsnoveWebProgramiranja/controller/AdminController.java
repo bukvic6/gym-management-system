@@ -205,7 +205,6 @@ public class AdminController implements ServletContextAware {
 	@SuppressWarnings("unused")
 	@PostMapping(value = "sale/deleteSala")
 	private void deleteSala(@RequestParam Long id, HttpServletResponse response) throws IOException {
-		System.out.println("aaad");
 		List<TerminTreninga> terminiCheck = terminService.checkifExist(id);
 		if(terminiCheck.size()>0) {
 			System.out.println("Ne mozete obrisati salu jer vec postoji termin za nju");

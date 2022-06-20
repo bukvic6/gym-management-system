@@ -95,5 +95,16 @@ public class KorpaDAOImpl implements KorpaDAO{
 	
 		return jdbcTemplate.update(sql, id);
 	}
+	@Override
+	public KorisnickaKorpa sum(Long id) {
+		String sql = "SELECT sum(tr.cena) from korisnickaKorpa k left join terminTreninga t on k.terminId = t.id left join treninzi tr on t.treningId = tr.id where k.korisnikId = ?";
+			
+
+				KorpaRowCallHandler rowCallbackHandler = new KorpaRowCallHandler();
+				jdbcTemplate.query(sql, rowCallbackHandler, id);
+
+				
+				return rowCallbackHandler.getKorisnickaKorpa().get(0);
+	}
 
 }
