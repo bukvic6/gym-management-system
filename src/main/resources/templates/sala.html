@@ -10,12 +10,6 @@
 	<title>Dodavanje sale</title>
 </head>
 <body>
-	 <li><a href="admin/profil" th:text="#{profil}"></a></li>
-	  <li><a href="admin/korisnici" th:text="#{korisnici}"></a></li>  
-	   <li><a href="admin/sale" th:text="#{sale}"></a></li> 
-	   <li><a href="admin/komentari" th:text="#{korisnici}"></a></li>
-	    <li><a href="admin/clanskeKarte" th:text="#{clanskeKarte}"></a></li>
-   
 	 		<table>     
 	 			<h1 th:text="#{sale}"></h1>    
 	 			<tr>      
@@ -28,7 +22,7 @@
 	 			    <td th:text="${itSala.id}"></a></td>    
 	 				<td th:text="${itSala.kapacitet}"></td>
 	 				<td>    
-	 					<form method="post" action="sale/deleteSala" >     
+	 				<form method="post" action="sale/deleteSala" >     
 	 						<input type="hidden"  name="id"  th:value="${itSala.id}">     
 	 						<input type="submit"  value="Obriši" >    
 	 				</form>    
@@ -43,10 +37,5 @@
 		 
  	</form> 
  	
-	 	<ul>     
-	 		<li><a href="admin/add" th:text="#{dodajTrening}"></a></li>   
-	 		<li><a href="admin/addTermin" th:text="#{dodajTermin}"></a></li>   
-	 		<li><a href="admin/logout" th:text="#{logOut}"></a></li>   
-	 	</ul>
 </body>
 </html>

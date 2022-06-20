@@ -30,7 +30,7 @@
 
 	 			</tr>
 	 			<tr th:each="itTrening, status: ${treninzi}">  
-	 			    <td th:text="${itTrening.naziv}"></td>    
+	 			    <td ><a th:href="|admin/detailsT?id=${itTrening.id}|" th:text="${itTrening.naziv}"></td>    
 	 				<td th:text="${itTrening.opis}"></td>    
 	 				<td th:text="${itTrening.cena}"></td>
 	 				<td th:text="${itTrening.trener}"></td>   

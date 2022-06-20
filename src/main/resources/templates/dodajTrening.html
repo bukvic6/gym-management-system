@@ -7,18 +7,11 @@
 	<link rel="stylesheet"  type="text/css"  href="css/StiloviTabela.css"/>     
 	<link rel="stylesheet" type="text/css" href="css/StiloviForma.css"/>
 	<link rel="stylesheet" type="text/css" href="css/StiloviHorizontalniMeni.css"/>
-	<base th:href="@{/}">
+	<base href="bURL">
 	<title>Dodaj trening</title>
 </head>
 <body>
- 	<ul>    
- 	 <li><a href="admin/profil" th:text="#{profil}"></a></li>
-	  <li><a href="admin/korisnici" th:text="#{korisnici}"></a></li>  
-	   <li><a href="admin/sale" th:text="#{sale}"></a></li> 
-	   <li><a href="admin/komentari" th:text="#{komentari}"></a></li>
-	    <li><a href="admin/clanskeKarte" th:text="#{clanskeKarte}"></a></li> 
- 
- 	</ul>    
+
  	<form method="post" action="add">    
  		<table>   
 	 		<h1 th:text="#{dodajTrening}"></h1></caption>     
@@ -50,11 +43,7 @@
  			<tr><th></th><td><input type="submit" th:value="#{dodaj}"/></td>    
  		</table>    
  	</form> 
- 	    <ul>     
-	 		<li><a href="admin/add" th:text="#{dodajTrening}"></a></li>   
-	 		<li><a href="admin/addTermin" th:text="#{dodajTermin}"></a></li>   
-	 		<li><a href="admin/logout" th:text="#{logOut}"></a></li>   
-	 	</ul>
+
 </body>
 </html>
   	

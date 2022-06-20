@@ -8,9 +8,11 @@
 	 	<link rel="stylesheet"  type="text/css" href="css/StiloviHorizontalniMeni.css"/>   
 	 </head> 
 <body>
-		 <li><a href="korisnik/profil" th:text="#{profil}"></a></li>  
-	     <li><a href="korisnik/korpa" th:text="#{korisnickaKorpa}"></a></li>  
-	     <li><a href="korisnik/clanskaKarta" th:text="#{clanskaKarta}"></a></li> 
+	 <li><a href="admin/profil" th:text="#{profil}"></a></li>
+	  <li><a href="admin/korisnici" th:text="#{korisnici}"></a></li>  
+	   <li><a href="admin/sale" th:text="#{sale}"></a></li> 
+	   <li><a href="admin/komentari" th:text="#{komentari}"></a></li>
+	    <li><a href="admin/clanskeKarte" th:text="#{clanskeKarte}"></a></li>
 
 <div>
  	   
@@ -48,25 +50,8 @@
  	
   
  		</table>    
- 		<form method ="post" action="korisnik/dodajUKorpu">
+
 		<table class="forma">
-                <h1 th:text="#{listaZelja}"></h1></caption>   
-			<tr>
-				<th th:text="#{termin}"></th> 
-				<td>
-					<select name="terminId">
-						<option th:each="itTermin: ${termini}" th:value="${itTermin.id}" th:text="${itTermin.datum} + ' Sala: '+${itTermin.salaId.id}"></option>
-					</select>	
-				</td>
-				
-			</tr>
-			<tr><th th:text="#{popust}"></th><td><input type="number" min="0" max= "5" name="popust"/></td></tr>     
-			<tr><th></th><td><input type="submit" th:value="dodaj"/></td></tr>
-			</table>
-			</form>
-			
-			<form method ="post" action="korisnik/zakaziTrening">
-		    <table class="forma">
                 <h1 th:text="#{zakazivanjeTermina}"></h1></caption>   
 			<tr>
 				<th th:text="#{termin}"></th> 
@@ -77,13 +62,8 @@
 				</td>
 				
 			</tr>
-			<tr><th th:text="#{popust}"></th><td><input type="number" min="0" max= "5" name="popust"/></td></tr>     
- 
-			<tr><th></th><td><input type="submit" th:value="Zakazitermin"/></td></tr>
 			</table>
-			</form>
-			
-			
+
 
  			 <table>     
              <h1 th:text="#{komentari}"></h1></caption>  			<tr>      
@@ -99,24 +79,11 @@
 	 		<td th:text="${itKomentar.ocena}" name="Ocena"></td> 
 	 		</table>
  </div>
- 	<div>
-        <form method="post" action="korisnik/addKomentar">
-			
-            <h1 th:text="#{postaviKomentar}"></h1></caption>   
-				
-			<input type="hidden" name="id" th:value="${trening.id}"/>
-				 	    
- 			<tr><th th:text="#{komentar}"></th><td><input type="text" value="" name="textKomentara"/></td></tr>  
- 			<tr><th th:text="#{ocena}"></th><td><input type="number" min="1" max= "5" name="ocena"/></td></tr>     
- 		    <tr><th th:text="#{anoniman}"></th><td><input type = "checkbox" name="anoniman"/></td></tr>
-		    <tr><th></th><td><input type="submit" th:value="#{dodaj}"/></td></tr>
-			
-		</form>
-	</div> 
 	
 	 	<ul>     
-	 
-	 		<li><a href="korisnik/logout" th:text="#{logOut}"></a></li>   
+	 		<li><a href="admin/add" th:text="#{dodajTrening}"></a></li>   
+	 		<li><a href="admin/addTermin" th:text="#{dodajTermin}"></a></li>   
+	 		<li><a href="admin/logout" th:text="#{logOut}"></a></li>   
 	 	</ul>
 
 </body>

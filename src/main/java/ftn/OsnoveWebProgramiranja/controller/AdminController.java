@@ -33,6 +33,7 @@ import ftn.OsnoveWebProgramiranja.model.NivoTreninga;
 import ftn.OsnoveWebProgramiranja.model.Sala;
 import ftn.OsnoveWebProgramiranja.model.Status;
 import ftn.OsnoveWebProgramiranja.model.TerminTreninga;
+import ftn.OsnoveWebProgramiranja.model.TipTreninga;
 import ftn.OsnoveWebProgramiranja.model.Trening;
 import ftn.OsnoveWebProgramiranja.model.VrstaTreninga;
 import ftn.OsnoveWebProgramiranja.service.ClanskaKartaService;
@@ -41,6 +42,7 @@ import ftn.OsnoveWebProgramiranja.service.KorisnickaKorpaService;
 import ftn.OsnoveWebProgramiranja.service.KorisnikService;
 import ftn.OsnoveWebProgramiranja.service.SalaService;
 import ftn.OsnoveWebProgramiranja.service.TerminService;
+import ftn.OsnoveWebProgramiranja.service.TipTreningaService;
 import ftn.OsnoveWebProgramiranja.service.TreningService;
 
 @Controller
@@ -53,6 +55,9 @@ public class AdminController implements ServletContextAware {
 
 	@Autowired
 	private SalaService salaService;
+	
+	@Autowired
+	private TipTreningaService tipTreningaService;
 	
 	@Autowired
 	private KorisnickaKorpaService korpaService;
@@ -131,6 +136,22 @@ public class AdminController implements ServletContextAware {
 		rezultat.addObject("clanska", clanske);
 		return rezultat;
 	}
+	@GetMapping(value ="/detailsT")
+	@ResponseBody
+	public ModelAndView details(@RequestParam Long id, HttpServletResponse httpServletResponse) {
+		Trening trening = treningService.findOne(id);
+		List<Komentar> komentari = komentarService.findAll(id);
+		List<TerminTreninga> termini = terminService.findAll(id);
+		List<TipTreninga> tipTreninga = tipTreningaService.findAll(id);
+
+		
+		ModelAndView rezultat = new ModelAndView("treningAdmin");
+		rezultat.addObject("trening",trening);
+		rezultat.addObject("termini",termini);
+		rezultat.addObject("tipTreninga", tipTreninga);
+		rezultat.addObject("komentar",komentari);
+		return rezultat;
+	}
 	
 
 	@GetMapping(value = "/add")
@@ -187,7 +208,8 @@ public class AdminController implements ServletContextAware {
 		System.out.println("aaad");
 		List<TerminTreninga> terminiCheck = terminService.checkifExist(id);
 		if(terminiCheck.size()>0) {
-			response.sendRedirect(bURL + "deleteSala");
+			System.out.println("Ne mozete obrisati salu jer vec postoji termin za nju");
+			return;
 
 			
 		}
@@ -195,10 +217,7 @@ public class AdminController implements ServletContextAware {
 		Sala obrisan = salaService.delete(id);	
 		response.sendRedirect(bURL + "admin");
 	}
-	@GetMapping(value="/deleteSala")
-	public String delSala(HttpServletResponse response){
-		return "deleteSala"; 
-	}
+
 
 	@PostMapping(value = "clanskeKarte/obrisiClansku")
 	private void obrisiClansku(@RequestParam Long id, HttpServletResponse response) throws IOException{

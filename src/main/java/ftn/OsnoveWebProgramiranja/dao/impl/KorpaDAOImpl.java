@@ -89,5 +89,11 @@ public class KorpaDAOImpl implements KorpaDAO{
 		return rowCallbackHandler.getKorisnickaKorpa().get(0);
 		
 	}
+	@Override
+	public int deleteZakazano(Long id) {
+		String sql = "delete from korisnickaKorpa where id = ?";
+	
+		return jdbcTemplate.update(sql, id);
+	}
 
 }

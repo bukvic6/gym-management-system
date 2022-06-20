@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import ftn.OsnoveWebProgramiranja.dao.KorpaDAO;
 import ftn.OsnoveWebProgramiranja.model.KorisnickaKorpa;
+import ftn.OsnoveWebProgramiranja.model.Sala;
 import ftn.OsnoveWebProgramiranja.model.Trening;
 import ftn.OsnoveWebProgramiranja.service.KorisnickaKorpaService;
 
@@ -37,6 +38,17 @@ public class DatabaseKorpaServiceImpl implements KorisnickaKorpaService{
 	@Override
 	public KorisnickaKorpa findOne(Long id) {
 		return korpaDAO.findOne(id);
+	}
+
+
+
+	@Override
+	public KorisnickaKorpa deleteZakazano(Long id) {
+		KorisnickaKorpa korpa = korpaDAO.findOne(id);
+		if(korpa != null) {
+			korpaDAO.deleteZakazano(id);
+		}
+		return korpa;
 	}
 
 }

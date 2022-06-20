@@ -130,6 +130,11 @@ public class PolaznikController implements ServletContextAware{
 
 		return rezultat;
 	}
+	@PostMapping(value = "korpa/ukloniIzKorpe")
+	private void deleteZakazano(@RequestParam(name = "idTermina") Long id, HttpServletResponse response) throws IOException{
+		KorisnickaKorpa obrisi = korpaService.deleteZakazano(id);
+		response.sendRedirect(bURL + "korisnik");
+	}
 
 	
 	@GetMapping(value ="/details")
@@ -225,6 +230,21 @@ public class PolaznikController implements ServletContextAware{
 	}
 	@PostMapping(value = "/korpa/zakazi")
 	public void dodajUKorpu(@RequestParam(name = "idTermina") Long id,HttpServletResponse response,HttpSession session) throws IOException {
+		Korisnik ulogovani = (Korisnik) session.getAttribute(KorisnikController.KORISNIK_KEY);
+		TerminTreninga termin = terminService.findOne(id);
+		KorisnickaKorpa korpa = new KorisnickaKorpa(ulogovani,termin);
+		int broj = (int) (termin.getTreningId().getCena() / 500);
+		ClanskaKarta clanska = clanskaKartaService.findOdobrena(ulogovani.getId());
+		clanska.setPoeni(clanska.getPoeni() + broj);
+		int popust = broj*5;
+		clanska.setPopust(clanska.getPopust() + popust);
+		clanskaKartaService.update(clanska);
+		korpaService.save(korpa);
+		response.sendRedirect(bURL + "korisnik");
+	}
+	
+	@PostMapping(value = "/zakaziTrening")
+	public void zakaziTrening(@RequestParam(name = "terminId") Long id,HttpServletResponse response,HttpSession session) throws IOException {
 		Korisnik ulogovani = (Korisnik) session.getAttribute(KorisnikController.KORISNIK_KEY);
 		TerminTreninga termin = terminService.findOne(id);
 		KorisnickaKorpa korpa = new KorisnickaKorpa(ulogovani,termin);

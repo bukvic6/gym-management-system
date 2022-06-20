@@ -12,4 +12,6 @@ public interface KorisnickaKorpaService {
 
 	KorisnickaKorpa findOne(Long id);
 
+	KorisnickaKorpa deleteZakazano(Long id);
+
 }

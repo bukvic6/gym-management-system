@@ -1,7 +1,9 @@
 <!DOCTYPE html> 
 <html xmlns:th="http://www.thymeleaf.org">     
 	<head>     
-		<meta charset="UTF-8">     
+		<meta charset="UTF-8">   
+		  		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js">
+</script>
 		<base th:href="@{/}"><!-- popuni href atribut vrednosšću context path-a -->
 		<title>Korisnik profil</title>     
 		<link rel="stylesheet"  type="text/css"  href="css/StiloviTabela.css"/>     
@@ -40,6 +42,22 @@
 
 	 		<li><a href="korisnik/logout"  th:text="#{logOut}">Izloguj se</a></li>   
 	 	</ul>
+			<span th:text="#{lang.change}"></span>
+		<select id="locales">
+		    <option value=""></option>
+		    <option value="en" th:text="#{lang.eng}"></option>
+		    <option value="sr" th:text="#{lang.sr}"></option>
+		</select>
 	 </body>  
+	 <script type="text/javascript">
+    $(document).ready(function () {
+        $("#locales").change(function () {
+            var selectedOption = $('#locales').val();
+            if (selectedOption != '') {
+                window.location.replace('korisnik/?lang=' + selectedOption);
+            }
+        });
+    });
+</script>  
 
  </html>
