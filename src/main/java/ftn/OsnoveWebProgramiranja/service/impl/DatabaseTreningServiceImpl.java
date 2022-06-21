@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ftn.OsnoveWebProgramiranja.dao.TreningDAO;
+import ftn.OsnoveWebProgramiranja.model.KorisnickaKorpa;
 import ftn.OsnoveWebProgramiranja.model.Trening;
 import ftn.OsnoveWebProgramiranja.service.TreningService;
 
@@ -34,6 +35,11 @@ public class DatabaseTreningServiceImpl implements TreningService {
 		return treningDAO.findOne(treningId);
 	}
 	
+	@Override
+	public Float sum(Long id) {
+		return treningDAO.sum(id);
+		
+	}
 	
 
 }

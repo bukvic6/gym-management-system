@@ -13,4 +13,9 @@ public interface TreningDAO {
 
 	Trening findOne(Long treningId);
 
+
+
+
+	Float sum(Long id);
+
 }

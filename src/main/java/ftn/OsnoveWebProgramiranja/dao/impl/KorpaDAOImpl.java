@@ -97,7 +97,7 @@ public class KorpaDAOImpl implements KorpaDAO{
 	}
 	@Override
 	public KorisnickaKorpa sum(Long id) {
-		String sql = "SELECT sum(tr.cena) from korisnickaKorpa k left join terminTreninga t on k.terminId = t.id left join treninzi tr on t.treningId = tr.id where k.korisnikId = ?";
+		String sql = "SELECT sum(cena) from korisnickaKorpa k left join terminTreninga t on k.terminId = t.id left join treninzi tr on t.treningId = tr.id where k.korisnikId = ?";
 			
 
 				KorpaRowCallHandler rowCallbackHandler = new KorpaRowCallHandler();

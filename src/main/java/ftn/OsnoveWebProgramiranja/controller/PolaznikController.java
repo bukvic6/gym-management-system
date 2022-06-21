@@ -124,9 +124,12 @@ public class PolaznikController implements ServletContextAware{
 
 		List<TerminTreninga> zaKorpu = (List<TerminTreninga>) session.getAttribute(TERMIN_ZELJA);	
 		List<KorisnickaKorpa> korpa = korpaService.findKorpa(ulogovani.getId());
+		Float sum = treningService.sum(ulogovani.getId());
+		System.out.println(sum);
 		
 		ModelAndView rezultat = new ModelAndView("korisnickaKorpa"); // naziv template-a
 		rezultat.addObject("termin", zaKorpu);
+		rezultat.addObject("sum", sum);
 		rezultat.addObject("korpa", korpa);// podatak koji se šalje template-u
 
 		return rezultat;

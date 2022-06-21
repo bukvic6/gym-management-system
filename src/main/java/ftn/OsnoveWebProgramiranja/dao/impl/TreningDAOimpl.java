@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -20,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 import ftn.OsnoveWebProgramiranja.dao.TreningDAO;
+import ftn.OsnoveWebProgramiranja.model.KorisnickaKorpa;
 import ftn.OsnoveWebProgramiranja.model.Korisnik;
 import ftn.OsnoveWebProgramiranja.model.NivoTreninga;
 import ftn.OsnoveWebProgramiranja.model.Trening;
@@ -113,6 +115,35 @@ public class TreningDAOimpl implements TreningDAO{
 			return rowCallbackHandler.getTreninzi().get(0);
 	}
 	
+	private class CenaHandler implements RowCallbackHandler{
+		private List<Float> list = new ArrayList<Float>();
+		
+		@Override
+		public void processRow(ResultSet resultSet) throws SQLException{
+			int index = 1;
+			Float cena = resultSet.getFloat(index++);
+
+		  
+			list.add(cena);
+		}
+
+		public List<Float> getCene(){
+			return new ArrayList<>(list);
+			
+		}
+	
+	}
+	@Override
+	public Float sum(Long id) {
+		String sql = "select sum(cena) from treninzi tr left join terminTreninga t on t.treningId = tr.id left join korisnickaKorpa k on k.terminId = t.id where k.korisnikId = ?";
+			
+
+		CenaHandler rowCallbackHandler = new CenaHandler();
+				jdbcTemplate.query(sql, rowCallbackHandler, id);
+
+				
+				return rowCallbackHandler.getCene().get(0);
+	}
 	
 
 
