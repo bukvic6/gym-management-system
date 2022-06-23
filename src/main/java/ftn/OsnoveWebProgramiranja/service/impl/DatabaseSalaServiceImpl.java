@@ -45,4 +45,11 @@ public class DatabaseSalaServiceImpl implements SalaService {
 		return salaDAO.findOne(salaId);
 	}
 
+
+	@Override
+	public Sala update(Sala sala) {
+		salaDAO.update(sala);
+		return sala;
+	}
+
 }

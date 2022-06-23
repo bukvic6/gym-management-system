@@ -54,11 +54,12 @@
 			<tr th:each="itKorpa, status: ${korpa}">  
  				<td th:text="${itKorpa.terminId.treningId.naziv}"></td>    
  				<td th:text="${itKorpa.terminId.treningId.cena}"></td>    
- 				<td th:text="${itKorpa.terminId.datum}"></td>  
+ 				<td th:text = "${#temporals.format(itKorpa.terminId.datum,'dd-MM-yyyy HH:mm')}"></td>
   
  				<td>
 					<form method="post" action="korisnik/korpa/ukloniIzKorpe">
 						<input type="hidden" name="idTermina" th:value="${itKorpa.id}">
+						<input type="hidden" name="idTerm" th:value="${itKorpa.terminId.id}">
 						<input type="submit" th:value="#{ukloniIzKorpe}">
 					</form>
 				</td> 

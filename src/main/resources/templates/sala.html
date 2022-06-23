@@ -10,17 +10,26 @@
 	<title>Dodavanje sale</title>
 </head>
 <body>
+
 	 		<table>     
 	 			<h1 th:text="#{sale}"></h1>    
 	 			<tr>      
 	 			    <th th:text="#{oznakaSale}"></th> 
-	 				<th th:text="#{kapacitet}"></th>     
+	 				<th th:text="#{kapacitet}"></th>  
+	 				<th th:text="#{izmenaKapaciteta}"></th> 
+	 				<th th:text="#{obrisiSalu}"></th> 
 
-	 				<th></th>    
 	 			</tr>
 	 			<tr th:each="itSala, status: ${sala}">  
-	 			    <td th:text="${itSala.id}"></a></td>    
-	 				<td><input type="text" th:text="${itSala.kapacitet}" name="kapacitet"></td>
+	 			    <td th:text="${itSala.id}" th:value="${itSala.id}" name="id"></td>    
+	 				<td th:text="${itSala.kapacitet}"></td>
+	 				<td>
+	 				<form method="post" action="sale/editSala">
+	 				<input type="number" name="kapacitet">
+	 	            <input type="hidden"  name="id"  th:value="${itSala.id}">     
+	 				<input type="submit" th:value="izmeni">
+                    </form>
+                    </td>
 	 				<td>    
 	 				<form method="post" action="sale/deleteSala" >     
 	 						<input type="hidden"  name="id"  th:value="${itSala.id}">     

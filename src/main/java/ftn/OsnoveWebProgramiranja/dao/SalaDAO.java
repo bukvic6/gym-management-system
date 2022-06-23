@@ -15,5 +15,7 @@ public interface SalaDAO {
 
 	public int delete(Long id);
 
+	public int update(Sala sala);
+
 
 }

@@ -51,7 +51,7 @@
 	 			<h1 th:text="#{zakazaniTreninziKorisnika}"></h1></caption>     
 			<tr>
 				<th th:text="#{imeTreninga}"></th>
-				<th th:text="#{cena}"></th>
+				<th th:text="#{cenaTreninga}"></th>
 				<th th:text="#{datumiVreme}"></th>
 				<th></th>
 			</tr>
@@ -60,6 +60,18 @@
  				<td th:text="${itKorpa.terminId.treningId.naziv}"></td>    
  				<td th:text="${itKorpa.terminId.treningId.cena}"></td>    
  				<td><a th:href="|admin/korpa?id=${itKorpa.id}|"  th:text="${itKorpa.terminId.datum}"></td>  
+		</tr>
+		</table>
+				</table>
+				</table>
+				<table>
+	 			
+			<tr>
+				<th th:text="#{Ukupno}"></th>
+			</tr>
+			
+			
+ 				<td th:text="${sum}"></td>     
 		</tr>
 		</table>
 	 	<ul>     

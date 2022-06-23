@@ -236,10 +236,15 @@ public class AdminController implements ServletContextAware {
 	public ModelAndView details(@RequestParam Long id) {
 		Korisnik korisnik = korisnikService.findOne(id);
 		List<KorisnickaKorpa> korpa = korpaService.findKorpa(id);
+		Float sum = treningService.sum(id);
+		
+
 
 		ModelAndView rezultat = new ModelAndView("editKorisnika"); // naziv template-a
 		rezultat.addObject("korisnik", korisnik); // podatak koji se šalje template-u
 		rezultat.addObject("korpa", korpa);
+		rezultat.addObject("sum", sum);
+
 		return rezultat; // prosleđivanje zahteva zajedno sa podacima template-u
 	}
 	@GetMapping(value = "/korpa")
@@ -279,6 +284,16 @@ public class AdminController implements ServletContextAware {
 		Korisnik sacuvaj = korisnikService.update(korisnik);
 		response.sendRedirect(bURL + "admin");
 
+	}
+	@SuppressWarnings("unused")
+	@PostMapping(value = "sale/editSala")
+	private void editSala(@RequestParam(name = "id") Long id, @RequestParam(name = "kapacitet") int kapacitet, HttpServletResponse response) throws IOException {
+		Sala sala = salaService.findOne(id);
+		System.out.println(kapacitet);
+		sala.setKapacitet(kapacitet);
+
+		salaService.update(sala);
+		response.sendRedirect(bURL + "admin");
 	}
 
 	@SuppressWarnings("unused")

@@ -22,7 +22,7 @@
  			<tr th:each="itTrening, status: ${trening}">
  			<th th:text="#{opis}"></th><td th:text="${itTrening.opis}" name="opis"></td></tr>   
  			<tr th:each="itTrening, status: ${trening}">
- 			<th th:text="#{cena}"></th><td th:text="${itTrening.cena}" name="cena"></td></tr>   
+ 			<th th:text="#{cenaTreninga}"></th><td th:text="${itTrening.cena}" name="cena"></td></tr>   
  			<tr th:each="itTrening, status: ${trening}">
  			<th th:text="#{trener}"></th><td th:text="${itTrening.trener}" name="trener"></td></tr>   
  			<tr th:each="itTrening, status: ${trening}">
@@ -60,19 +60,18 @@
 				</td>
 				
 			</tr>
-			<tr><th th:text="#{popust}"></th><td><input type="number" min="0" max= "5" name="popust"/></td></tr>     
 			<tr><th></th><td><input type="submit" th:value="dodaj"/></td></tr>
 			</table>
 			</form>
 			
 			<form method ="post" action="korisnik/zakaziTrening">
 		    <table class="forma">
-                <h1 th:text="#{zakazivanjeTermina}"></h1></caption>   
+                <h1 th:text="#{Zakazitermin}"></h1></caption>   
 			<tr>
 				<th th:text="#{termin}"></th> 
 				<td>
 					<select name="terminId">
-						<option th:each="itTermin: ${termini}" th:value="${itTermin.id}" th:text="${itTermin.datum} + ' Sala: '+${itTermin.salaId.id}"></option>
+						<option th:each="itTermin: ${termini}" th:value="${itTermin.id}" th:text="${#temporals.format(itTermin.datum,'dd-MM-yyyy HH:mm')} + ' Sala: '+${itTermin.salaId.id}"></option>
 					</select>	
 				</td>
 				

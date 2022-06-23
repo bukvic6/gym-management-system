@@ -19,6 +19,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import ftn.OsnoveWebProgramiranja.dao.SalaDAO;
+import ftn.OsnoveWebProgramiranja.model.ClanskaKarta;
 import ftn.OsnoveWebProgramiranja.model.Sala;
 
 @Repository
@@ -83,13 +84,17 @@ public class SalaDAOimpl implements SalaDAO {
 				preparedStatement.setInt(index++,sala.getKapacitet());
 				return preparedStatement;
 
-	}
-	
-	};
+	}};
 	GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
 	boolean uspeh = jdbcTemplate.update(preparedStatementCreator, keyHolder) == 1;
 	return uspeh?1:0;
 }
+	@Override
+	public int update(Sala sala) {
+		String sql = "update sala set kapacitet = ? where id = ?";
+		boolean uspeh = jdbcTemplate.update(sql, sala.getKapacitet(),sala.getId()) ==1;
+		return 0;
+	}
 	@Override
 	public int delete(Long id) {
 		String sql = "delete from sala where id = ?";

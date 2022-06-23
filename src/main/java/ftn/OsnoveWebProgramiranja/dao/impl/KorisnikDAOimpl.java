@@ -108,7 +108,7 @@ public class KorisnikDAOimpl implements KorisnikDAO{
 
 	@Override
 	public List<Korisnik> findAll() {
-		String sql = "select * from korisnici";
+		String sql = "select * from korisnici where id not like 5";
 		KorisnikRowCallBackHandler rowCallbackHandler = new KorisnikRowCallBackHandler();
 		jdbcTemplate.query(sql, rowCallbackHandler);
 		

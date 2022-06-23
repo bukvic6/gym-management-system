@@ -124,20 +124,13 @@ public class PolaznikController implements ServletContextAware{
 
 		List<TerminTreninga> zaKorpu = (List<TerminTreninga>) session.getAttribute(TERMIN_ZELJA);	
 		List<KorisnickaKorpa> korpa = korpaService.findKorpa(ulogovani.getId());
-		Float sum = treningService.sum(ulogovani.getId());
-		System.out.println(sum);
-		
+		Float sum = treningService.sum(ulogovani.getId());		
 		ModelAndView rezultat = new ModelAndView("korisnickaKorpa"); // naziv template-a
 		rezultat.addObject("termin", zaKorpu);
 		rezultat.addObject("sum", sum);
 		rezultat.addObject("korpa", korpa);// podatak koji se šalje template-u
 
 		return rezultat;
-	}
-	@PostMapping(value = "korpa/ukloniIzKorpe")
-	private void deleteZakazano(@RequestParam(name = "idTermina") Long id, HttpServletResponse response) throws IOException{
-		KorisnickaKorpa obrisi = korpaService.deleteZakazano(id);
-		response.sendRedirect(bURL + "korisnik");
 	}
 
 	
@@ -260,6 +253,20 @@ public class PolaznikController implements ServletContextAware{
 		clanskaKartaService.update(clanska);
 		korpaService.save(korpa);
 		response.sendRedirect(bURL + "korisnik");
+	}
+	@PostMapping(value = "korpa/ukloniIzKorpe")
+	private void deleteZakazano(@RequestParam(name = "idTermina") Long id,@RequestParam(name = "idTerm") Long idTermin, HttpServletResponse response, HttpSession session) throws IOException{
+		KorisnickaKorpa obrisi = korpaService.deleteZakazano(id);
+		Korisnik ulogovani = (Korisnik) session.getAttribute(KorisnikController.KORISNIK_KEY);
+		TerminTreninga termin = terminService.findOne(idTermin);
+		int broj = (int) (termin.getTreningId().getCena() / 500);
+		ClanskaKarta clanska = clanskaKartaService.findOdobrena(ulogovani.getId());
+		clanska.setPoeni(clanska.getPoeni() - broj);
+		int popust = broj*5;
+		clanska.setPopust(clanska.getPopust() - popust);
+		clanskaKartaService.update(clanska);
+		response.sendRedirect(bURL + "korisnik");
+		
 	}
 	@GetMapping(value="/logout")
 	@ResponseBody

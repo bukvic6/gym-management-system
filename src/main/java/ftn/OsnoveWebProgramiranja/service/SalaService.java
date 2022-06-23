@@ -13,4 +13,6 @@ public interface SalaService {
 
 	Sala findOne(Long salaId);
 
+	Sala update(Sala sala);
+
 }
